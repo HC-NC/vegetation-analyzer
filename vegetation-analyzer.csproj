@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net10.0-windows</TargetFramework>
+		<PlatformTarget>x64</PlatformTarget>
+		<RootNamespace>vegetation_analyzer</RootNamespace>
+		<Nullable>enable</Nullable>
+		<UseWindowsForms>true</UseWindowsForms>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<PublishSelfContained>true</PublishSelfContained>
+		<SatelliteResourceLanguages>en-EN;ru-RU</SatelliteResourceLanguages>
+
+
+		<MinVerTagPrefix>v</MinVerTagPrefix>
+
+		<DateSuffix>$([System.DateTime]::Now.ToString('yyMMdd'))</DateSuffix>
+		<MinVerBuildMetadata>$(DateSuffix)</MinVerBuildMetadata>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="MaxRev.Gdal.Core" Version="3.12.3.496" />
+		<PackageReference Include="MaxRev.Gdal.WindowsRuntime.Minimal" Version="3.12.3.496" />
+		<PackageReference Include="MinVer" Version="7.0.0">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
+
+</Project>
