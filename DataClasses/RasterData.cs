@@ -13,6 +13,9 @@ namespace vegetation_analyzer.DataClasses
         private int _width;
         private int _height;
 
+        private string _projection;
+        private double[] _geoTransform;
+
         private bool _ignoreZero;
 
         private List<BandData> _bands;
@@ -28,26 +31,26 @@ namespace vegetation_analyzer.DataClasses
 
         public string Name => _name;
         public string Path => _path;
-
         public int Width => _width;
         public int Height => _height;
-
+        public string Projection => _projection;
+        public double[] GeoTransform => _geoTransform;
         public bool IgnoreZero => _ignoreZero;
-
         public int BandsCount => _bands.Count;
-
         public int RedID => _redID;
         public int GreenID => _greenID;
         public int BlueID => _blueID;
 
         public InterpolationMode InterpolationMode { get; set; } = InterpolationMode.NearestNeighbor;
 
-        public RasterData(string name, string path, int width, int height, bool ignoreZero)
+        public RasterData(string name, string path, int width, int height, string projection, double[] geoTransform, bool ignoreZero)
         {
             _name = name;
             _path = path;
             _width = width;
             _height = height;
+            _projection = projection;
+            _geoTransform = geoTransform;
 
             _bitmap = new Bitmap(width > 0 ? width : 1, height > 0 ? height : 1);
             _ignoreZero = ignoreZero;
@@ -74,7 +77,11 @@ namespace vegetation_analyzer.DataClasses
                     int width = ds.RasterXSize;
                     int height = ds.RasterYSize;
 
-                    rasterData = new RasterData(fileName, filePath, width, height, ignoreZero);
+                    string projection = ds.GetProjection();
+                    double[] geoTransform = new double[6];
+                    ds.GetGeoTransform(geoTransform);
+
+                    rasterData = new RasterData(fileName, filePath, width, height, projection, geoTransform, ignoreZero);
 
                     for (int i = 1; i <= ds.RasterCount; i++)
                     {
@@ -117,9 +124,89 @@ namespace vegetation_analyzer.DataClasses
             }
         }
 
-        public static RasterData LoadFolder(string folderPath, string fileName, bool ignoreZero)
+        public static RasterData LoadFolder(List<string> filePaths, string fileName, string folderPath, bool ignoreZero)
         {
-            throw new NotImplementedException();
+            if (filePaths.Count == 0)
+                throw new ArgumentException($"Not finding files in {folderPath}");
+
+            foreach (string filePath in filePaths)
+                if (!File.Exists(filePath))
+                    throw new FileNotFoundException($"Error GDAL {filePath}");
+
+            Gdal.AllRegister();
+
+            RasterData? rasterData = null;
+
+            try
+            {
+                foreach (string filePath in filePaths)
+                {
+                    using (Dataset ds = Gdal.Open(filePath, Access.GA_ReadOnly))
+                    {
+                        if (ds == null)
+                            throw new Exception($"Error GDAL {filePath}");
+
+                        int width = ds.RasterXSize;
+                        int height = ds.RasterYSize;
+
+                        string projection = ds.GetProjection();
+                        double[] geoTransform = new double[6];
+                        ds.GetGeoTransform(geoTransform);
+
+                        if (rasterData == null)
+                            rasterData = new RasterData(fileName, folderPath, width, height, projection, geoTransform, ignoreZero);
+                        else if (rasterData.Width != width || rasterData.Height != height)
+                            throw new Exception($"File sizes do not match: {rasterData.Width} -> {width}");
+                        else if (rasterData.Height != height)
+                            throw new Exception($"File sizes do not match: {rasterData.Height} -> {height}");
+                        else if (rasterData.Projection != projection)
+                            throw new Exception($"Files projection do not match: {rasterData.Projection} -> {projection}");
+                        else if (rasterData.GeoTransform != geoTransform)
+                            throw new Exception($"Geotransform do not match: {rasterData.GeoTransform} -> {geoTransform}");
+
+                        for (int i = 1; i <= ds.RasterCount; i++)
+                        {
+                            using (Band gdalBand = ds.GetRasterBand(i))
+                            {
+                                string bandName = gdalBand.GetDescription();
+
+                                if (string.IsNullOrWhiteSpace(bandName))
+                                {
+                                    ColorInterp colorInterp = gdalBand.GetRasterColorInterpretation();
+
+                                    bandName = colorInterp switch
+                                    {
+                                        ColorInterp.GCI_RedBand => "Red",
+                                        ColorInterp.GCI_GreenBand => "Green",
+                                        ColorInterp.GCI_BlueBand => "Blue",
+                                        ColorInterp.GCI_AlphaBand => "Alpha",
+                                        ColorInterp.GCI_GrayIndex => "Grayscale",
+                                        _ => $"Band {i}"
+                                    };
+                                }
+
+                                BandData bandData = new BandData(bandName, filePath, i, width, height, ignoreZero);
+                                rasterData.AddBand(bandData);
+                            }
+                        }
+
+                        if (rasterData.BandsCount > 0 && rasterData.BandsCount < 3)
+                            rasterData.SetViewBands(0, 0, 0);
+                        else if (rasterData.BandsCount >= 3)
+                            rasterData.SetViewBands(0, 1, 2);
+                    }
+                }
+
+                if (rasterData == null)
+                    throw new Exception($"Data doesn't load {folderPath}");
+
+                return rasterData;
+            }
+            catch (Exception ex)
+            {
+                rasterData?.Dispose();
+                throw new ApplicationException($"Error band load {fileName}: {ex.Message}", ex);
+            }
         }
 
         public void AddBand(BandData band)
