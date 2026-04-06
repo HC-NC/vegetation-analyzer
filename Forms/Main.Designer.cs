@@ -30,17 +30,23 @@
         {
             menuStrip1 = new MenuStrip();
             fileToolStripMenuItem = new ToolStripMenuItem();
-            exitToolStripMenuItem = new ToolStripMenuItem();
-            aboutToolStripMenuItem = new ToolStripMenuItem();
-            statusStrip1 = new StatusStrip();
-            splitContainer1 = new SplitContainer();
-            treeView1 = new TreeView();
-            viewport = new Viewport();
             openFileToolStripMenuItem = new ToolStripMenuItem();
             openFolderToolStripMenuItem = new ToolStripMenuItem();
             toolStripSeparator1 = new ToolStripSeparator();
+            exitToolStripMenuItem = new ToolStripMenuItem();
             classificationToolStripMenuItem = new ToolStripMenuItem();
+            aboutToolStripMenuItem = new ToolStripMenuItem();
+            statusStrip1 = new StatusStrip();
+            toolStripStatusLabel1 = new ToolStripStatusLabel();
+            toolStripProgressBar1 = new ToolStripProgressBar();
+            splitContainer1 = new SplitContainer();
+            treeView1 = new TreeView();
+            viewport = new Viewport();
+            openFileDialog1 = new OpenFileDialog();
+            folderBrowserDialog1 = new FolderBrowserDialog();
+            openBackgroundWorker = new System.ComponentModel.BackgroundWorker();
             menuStrip1.SuspendLayout();
+            statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -64,6 +70,27 @@
             fileToolStripMenuItem.Size = new Size(54, 29);
             fileToolStripMenuItem.Text = "File";
             // 
+            // openFileToolStripMenuItem
+            // 
+            openFileToolStripMenuItem.Name = "openFileToolStripMenuItem";
+            openFileToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.O;
+            openFileToolStripMenuItem.Size = new Size(326, 34);
+            openFileToolStripMenuItem.Text = "Open File";
+            openFileToolStripMenuItem.Click += openFileToolStripMenuItem_Click;
+            // 
+            // openFolderToolStripMenuItem
+            // 
+            openFolderToolStripMenuItem.Name = "openFolderToolStripMenuItem";
+            openFolderToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.Shift | Keys.O;
+            openFolderToolStripMenuItem.Size = new Size(326, 34);
+            openFolderToolStripMenuItem.Text = "Open Folder";
+            openFolderToolStripMenuItem.Click += openFolderToolStripMenuItem_Click;
+            // 
+            // toolStripSeparator1
+            // 
+            toolStripSeparator1.Name = "toolStripSeparator1";
+            toolStripSeparator1.Size = new Size(323, 6);
+            // 
             // exitToolStripMenuItem
             // 
             exitToolStripMenuItem.Name = "exitToolStripMenuItem";
@@ -71,6 +98,12 @@
             exitToolStripMenuItem.Size = new Size(326, 34);
             exitToolStripMenuItem.Text = "Exit";
             exitToolStripMenuItem.Click += exitToolStripMenuItem_Click;
+            // 
+            // classificationToolStripMenuItem
+            // 
+            classificationToolStripMenuItem.Name = "classificationToolStripMenuItem";
+            classificationToolStripMenuItem.Size = new Size(130, 29);
+            classificationToolStripMenuItem.Text = "Classification";
             // 
             // aboutToolStripMenuItem
             // 
@@ -82,11 +115,23 @@
             // statusStrip1
             // 
             statusStrip1.ImageScalingSize = new Size(24, 24);
-            statusStrip1.Location = new Point(0, 428);
+            statusStrip1.Items.AddRange(new ToolStripItem[] { toolStripStatusLabel1, toolStripProgressBar1 });
+            statusStrip1.Location = new Point(0, 418);
             statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new Size(800, 22);
+            statusStrip1.Size = new Size(800, 32);
             statusStrip1.TabIndex = 1;
             statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel1
+            // 
+            toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            toolStripStatusLabel1.Size = new Size(60, 25);
+            toolStripStatusLabel1.Text = "Status";
+            // 
+            // toolStripProgressBar1
+            // 
+            toolStripProgressBar1.Name = "toolStripProgressBar1";
+            toolStripProgressBar1.Size = new Size(100, 24);
             // 
             // splitContainer1
             // 
@@ -101,7 +146,7 @@
             // splitContainer1.Panel2
             // 
             splitContainer1.Panel2.Controls.Add(viewport);
-            splitContainer1.Size = new Size(800, 395);
+            splitContainer1.Size = new Size(800, 385);
             splitContainer1.SplitterDistance = 266;
             splitContainer1.TabIndex = 2;
             // 
@@ -110,41 +155,24 @@
             treeView1.Dock = DockStyle.Fill;
             treeView1.Location = new Point(0, 0);
             treeView1.Name = "treeView1";
-            treeView1.Size = new Size(266, 395);
+            treeView1.Size = new Size(266, 385);
             treeView1.TabIndex = 0;
+            treeView1.AfterSelect += treeView_AfterSelect;
             // 
             // viewport
             // 
             viewport.Dock = DockStyle.Fill;
             viewport.Location = new Point(0, 0);
             viewport.Name = "viewport";
-            viewport.Size = new Size(530, 395);
+            viewport.Size = new Size(530, 385);
             viewport.TabIndex = 0;
             // 
-            // openFileToolStripMenuItem
+            // openBackgroundWorker
             // 
-            openFileToolStripMenuItem.Name = "openFileToolStripMenuItem";
-            openFileToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.O;
-            openFileToolStripMenuItem.Size = new Size(326, 34);
-            openFileToolStripMenuItem.Text = "Open File";
-            // 
-            // openFolderToolStripMenuItem
-            // 
-            openFolderToolStripMenuItem.Name = "openFolderToolStripMenuItem";
-            openFolderToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.Shift | Keys.O;
-            openFolderToolStripMenuItem.Size = new Size(326, 34);
-            openFolderToolStripMenuItem.Text = "Open Folder";
-            // 
-            // toolStripSeparator1
-            // 
-            toolStripSeparator1.Name = "toolStripSeparator1";
-            toolStripSeparator1.Size = new Size(323, 6);
-            // 
-            // classificationToolStripMenuItem
-            // 
-            classificationToolStripMenuItem.Name = "classificationToolStripMenuItem";
-            classificationToolStripMenuItem.Size = new Size(130, 29);
-            classificationToolStripMenuItem.Text = "Classification";
+            openBackgroundWorker.WorkerReportsProgress = true;
+            openBackgroundWorker.DoWork += openBackgroundWorker_DoWork;
+            openBackgroundWorker.ProgressChanged += BackgroundWorker_ProgressChanged;
+            openBackgroundWorker.RunWorkerCompleted += openBackgroundWorker_RunWorkerCompleted;
             // 
             // Main
             // 
@@ -157,8 +185,11 @@
             MainMenuStrip = menuStrip1;
             Name = "Main";
             Text = "Form1";
+            Load += Main_Load;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
+            statusStrip1.ResumeLayout(false);
+            statusStrip1.PerformLayout();
             splitContainer1.Panel1.ResumeLayout(false);
             splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
@@ -181,5 +212,10 @@
         private ToolStripMenuItem openFolderToolStripMenuItem;
         private ToolStripSeparator toolStripSeparator1;
         private ToolStripMenuItem classificationToolStripMenuItem;
+        private ToolStripStatusLabel toolStripStatusLabel1;
+        private ToolStripProgressBar toolStripProgressBar1;
+        private OpenFileDialog openFileDialog1;
+        private FolderBrowserDialog folderBrowserDialog1;
+        private System.ComponentModel.BackgroundWorker openBackgroundWorker;
     }
 }

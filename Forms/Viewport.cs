@@ -35,7 +35,10 @@ namespace vegetation_analyzer.Forms
         private void ResetImage(object sender, EventArgs e)
         {
             if (_img == null)
+            {
+                pictureBox.Refresh();
                 return;
+            }
 
             _zoom = Math.Min(
              ((float)pictureBox.Height / (float)_img.Height) * (_img.VerticalResolution / _graphics.DpiY),
