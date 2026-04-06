@@ -1,3 +1,6 @@
+using MaxRev.Gdal.Core;
+using vegetation_analyzer.Forms;
+
 namespace vegetation_analyzer
 {
     internal static class Program
@@ -8,6 +11,8 @@ namespace vegetation_analyzer
         [STAThread]
         static void Main()
         {
+            GdalBase.ConfigureAll();
+
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
