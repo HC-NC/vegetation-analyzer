@@ -10,7 +10,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<PublishSelfContained>true</PublishSelfContained>
 		<SatelliteResourceLanguages>en-EN;ru-RU</SatelliteResourceLanguages>
-
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 
 		<MinVerTagPrefix>v</MinVerTagPrefix>
 
@@ -25,10 +25,6 @@
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="DataClasses\" />
 	</ItemGroup>
 
 </Project>
