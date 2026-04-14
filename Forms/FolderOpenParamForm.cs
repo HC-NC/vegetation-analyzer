@@ -92,7 +92,7 @@ namespace vegetation_analyzer.Forms
                 row.Tag = info;
             }
 
-            selectAllCheckBox.Checked = true;
+            selectAllCheckBox.Checked = false;
 
             if (fileInfos.Count == 0)
             {
@@ -145,10 +145,12 @@ namespace vegetation_analyzer.Forms
 
         private bool IsDefaultBandSelected(string bandName)
         {
-            // По умолчанию выбираем RGB каналы (Red, Green, Blue) - Bands 4, 3, 2 для Landsat 8/9
-            return bandName.Contains("Red", StringComparison.OrdinalIgnoreCase) ||
-                   bandName.Contains("Green", StringComparison.OrdinalIgnoreCase) ||
-                   bandName.Contains("Blue", StringComparison.OrdinalIgnoreCase);
+            return bandName.Contains("Band 2", StringComparison.OrdinalIgnoreCase) ||
+                   bandName.Contains("Band 3", StringComparison.OrdinalIgnoreCase) ||
+                   bandName.Contains("Band 4", StringComparison.OrdinalIgnoreCase) ||
+                   bandName.Contains("Band 5", StringComparison.OrdinalIgnoreCase) ||
+                   bandName.Contains("Band 6", StringComparison.OrdinalIgnoreCase) ||
+                   bandName.Contains("Band 7", StringComparison.OrdinalIgnoreCase);
         }
 
         private void selectAllCheckBox_CheckedChanged(object sender, EventArgs e)

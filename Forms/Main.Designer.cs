@@ -59,7 +59,7 @@
             menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, classificationToolStripMenuItem, aboutToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(800, 33);
+            menuStrip1.Size = new Size(1178, 33);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -116,9 +116,9 @@
             // 
             statusStrip1.ImageScalingSize = new Size(24, 24);
             statusStrip1.Items.AddRange(new ToolStripItem[] { toolStripStatusLabel1, toolStripProgressBar1 });
-            statusStrip1.Location = new Point(0, 418);
+            statusStrip1.Location = new Point(0, 712);
             statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new Size(800, 32);
+            statusStrip1.Size = new Size(1178, 32);
             statusStrip1.TabIndex = 1;
             statusStrip1.Text = "statusStrip1";
             // 
@@ -146,8 +146,8 @@
             // splitContainer1.Panel2
             // 
             splitContainer1.Panel2.Controls.Add(viewport);
-            splitContainer1.Size = new Size(800, 385);
-            splitContainer1.SplitterDistance = 266;
+            splitContainer1.Size = new Size(1178, 679);
+            splitContainer1.SplitterDistance = 391;
             splitContainer1.TabIndex = 2;
             // 
             // treeView1
@@ -155,7 +155,7 @@
             treeView1.Dock = DockStyle.Fill;
             treeView1.Location = new Point(0, 0);
             treeView1.Name = "treeView1";
-            treeView1.Size = new Size(266, 385);
+            treeView1.Size = new Size(391, 679);
             treeView1.TabIndex = 0;
             treeView1.AfterSelect += treeView_AfterSelect;
             // 
@@ -164,7 +164,7 @@
             viewport.Dock = DockStyle.Fill;
             viewport.Location = new Point(0, 0);
             viewport.Name = "viewport";
-            viewport.Size = new Size(530, 385);
+            viewport.Size = new Size(783, 679);
             viewport.TabIndex = 0;
             // 
             // openBackgroundWorker
@@ -178,7 +178,7 @@
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(1178, 744);
             Controls.Add(splitContainer1);
             Controls.Add(statusStrip1);
             Controls.Add(menuStrip1);

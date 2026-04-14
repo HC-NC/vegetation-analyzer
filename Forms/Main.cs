@@ -86,10 +86,14 @@ namespace vegetation_analyzer.Forms
 
                 if (openParamForm.ShowDialog() == DialogResult.OK)
                 {
+                    worker.ReportProgress(50, string.Format("Opening: {0}", safeName));
+
                     bool ignoreZero = openParamForm.IgnoreZero;
 
                     RasterData raster = RasterData.LoadFile(args.Item2, safeName, ignoreZero);
                     e.Result = raster;
+
+                    worker.ReportProgress(100);
                 }
             }
             else
@@ -103,11 +107,15 @@ namespace vegetation_analyzer.Forms
 
                 if (folderParamForm.ShowDialog() == DialogResult.OK)
                 {
+                    worker.ReportProgress(50, string.Format("Opening: {0}", folderName));
+
                     bool ignoreZero = folderParamForm.IgnoreZero;
                     List<BandFileInfo> selectedBands = folderParamForm.SelectedBands;
 
                     RasterData raster = RasterData.LoadFolder(selectedBands, folderName, folderPath, ignoreZero);
                     e.Result = raster;
+
+                    worker.ReportProgress(100);
                 }
             }
         }
@@ -117,6 +125,7 @@ namespace vegetation_analyzer.Forms
             if (e.Error == null && e.Result != null)
                 AddTreeNode(e.Result);
 
+            toolStripProgressBar1.Value = 0;
             toolStripProgressBar1.Visible = false;
             toolStripStatusLabel1.Visible = false;
         }
