@@ -57,7 +57,12 @@ namespace vegetation_analyzer.Forms
 
             if (folderBrowserDialog1.ShowDialog(this) == DialogResult.OK)
             {
-                return;
+                toolStripStatusLabel1.Text = string.Format("Analyzing folder: {0}", Path.GetFileName(folderBrowserDialog1.SelectedPath));
+
+                toolStripProgressBar1.Visible = true;
+                toolStripStatusLabel1.Visible = true;
+
+                openBackgroundWorker.RunWorkerAsync(Tuple.Create(false, folderBrowserDialog1.SelectedPath));
             }
         }
 
@@ -73,6 +78,7 @@ namespace vegetation_analyzer.Forms
 
             if (args.Item1)
             {
+                // Открытие одного файла
                 string safeName = Path.GetFileName(args.Item2);
 
                 FileOpenParamForm openParamForm = new FileOpenParamForm(safeName, Path.GetDirectoryName(args.Item2) ?? "");
@@ -83,6 +89,24 @@ namespace vegetation_analyzer.Forms
                     bool ignoreZero = openParamForm.IgnoreZero;
 
                     RasterData raster = RasterData.LoadFile(args.Item2, safeName, ignoreZero);
+                    e.Result = raster;
+                }
+            }
+            else
+            {
+                // Открытие папки с каналами
+                string folderPath = args.Item2;
+                string folderName = Path.GetFileName(folderPath);
+
+                FolderOpenParamForm folderParamForm = new FolderOpenParamForm(folderPath);
+                folderParamForm.Location = Point.Subtract(Point.Add(Location, Size / 2), folderParamForm.Size / 2);
+
+                if (folderParamForm.ShowDialog() == DialogResult.OK)
+                {
+                    bool ignoreZero = folderParamForm.IgnoreZero;
+                    List<BandFileInfo> selectedBands = folderParamForm.SelectedBands;
+
+                    RasterData raster = RasterData.LoadFolder(selectedBands, folderName, folderPath, ignoreZero);
                     e.Result = raster;
                 }
             }
@@ -133,6 +157,10 @@ namespace vegetation_analyzer.Forms
                 {
                     case RasterData rasterData:
                         viewport.UpdateImage(rasterData.GetBitmap(), rasterData.InterpolationMode);
+                        break;
+                    case BandData _:
+                        if (node.Parent?.Tag is RasterData rData)
+                            viewport.UpdateImage(rData.GetBitmap(), rData.InterpolationMode);
                         break;
                     default:
                         viewport.UpdateImage(null);

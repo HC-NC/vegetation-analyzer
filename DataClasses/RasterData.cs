@@ -5,6 +5,12 @@ using System.Drawing.Imaging;
 
 namespace vegetation_analyzer.DataClasses
 {
+    public class BandFileInfo
+    {
+        public string FilePath { get; set; } = "";
+        public string BandName { get; set; } = "";
+    }
+
     internal class RasterData : IDisposable
     {
         private string _name;
@@ -112,7 +118,7 @@ namespace vegetation_analyzer.DataClasses
                     if (rasterData.BandsCount > 0 && rasterData.BandsCount < 3)
                         rasterData.SetViewBands(0, 0, 0);
                     else if (rasterData.BandsCount >= 3)
-                        rasterData.SetViewBands(0, 1, 2);
+                        rasterData.SetViewBands(2, 1, 0);
 
                     return rasterData;
                 }
@@ -124,14 +130,14 @@ namespace vegetation_analyzer.DataClasses
             }
         }
 
-        public static RasterData LoadFolder(List<string> filePaths, string fileName, string folderPath, bool ignoreZero)
+        public static RasterData LoadFolder(List<BandFileInfo> bandFiles, string fileName, string folderPath, bool ignoreZero)
         {
-            if (filePaths.Count == 0)
+            if (bandFiles.Count == 0)
                 throw new ArgumentException($"Not finding files in {folderPath}");
 
-            foreach (string filePath in filePaths)
-                if (!File.Exists(filePath))
-                    throw new FileNotFoundException($"Error GDAL {filePath}");
+            foreach (var bf in bandFiles)
+                if (!File.Exists(bf.FilePath))
+                    throw new FileNotFoundException($"Error GDAL {bf.FilePath}");
 
             Gdal.AllRegister();
 
@@ -139,12 +145,12 @@ namespace vegetation_analyzer.DataClasses
 
             try
             {
-                foreach (string filePath in filePaths)
+                foreach (var bf in bandFiles)
                 {
-                    using (Dataset ds = Gdal.Open(filePath, Access.GA_ReadOnly))
+                    using (Dataset ds = Gdal.Open(bf.FilePath, Access.GA_ReadOnly))
                     {
                         if (ds == null)
-                            throw new Exception($"Error GDAL {filePath}");
+                            throw new Exception($"Error GDAL {bf.FilePath}");
 
                         int width = ds.RasterXSize;
                         int height = ds.RasterYSize;
@@ -161,14 +167,15 @@ namespace vegetation_analyzer.DataClasses
                             throw new Exception($"File sizes do not match: {rasterData.Height} -> {height}");
                         else if (rasterData.Projection != projection)
                             throw new Exception($"Files projection do not match: {rasterData.Projection} -> {projection}");
-                        else if (rasterData.GeoTransform != geoTransform)
-                            throw new Exception($"Geotransform do not match: {rasterData.GeoTransform} -> {geoTransform}");
+                        else if (!rasterData.GeoTransform.SequenceEqual(geoTransform))
+                            throw new Exception($"Geotransform do not match");
 
                         for (int i = 1; i <= ds.RasterCount; i++)
                         {
                             using (Band gdalBand = ds.GetRasterBand(i))
                             {
-                                string bandName = gdalBand.GetDescription();
+                                // Используем имя канала из BandFileInfo, если оно задано
+                                string bandName = string.IsNullOrWhiteSpace(bf.BandName) ? gdalBand.GetDescription() : bf.BandName;
 
                                 if (string.IsNullOrWhiteSpace(bandName))
                                 {
@@ -180,12 +187,12 @@ namespace vegetation_analyzer.DataClasses
                                         ColorInterp.GCI_GreenBand => "Green",
                                         ColorInterp.GCI_BlueBand => "Blue",
                                         ColorInterp.GCI_AlphaBand => "Alpha",
-                                        ColorInterp.GCI_GrayIndex => "Grayscale",
-                                        _ => $"Band {i}"
+                                        ColorInterp.GCI_GrayIndex => $"Band {rasterData.BandsCount + 1}",
+                                        _ => $"Band {rasterData.BandsCount + 1}"
                                     };
                                 }
 
-                                BandData bandData = new BandData(bandName, filePath, i, width, height, ignoreZero);
+                                BandData bandData = new BandData(bandName, bf.FilePath, i, width, height, ignoreZero);
                                 rasterData.AddBand(bandData);
                             }
                         }
