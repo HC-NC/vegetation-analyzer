@@ -182,14 +182,15 @@ namespace vegetation_analyzer.Forms
 
         private void contextMenuStrip1_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            // Показываем контекстное меню только если выбран RasterData
+            // Показываем контекстное меню только если выбран RasterData или его дочерний узел
             if (treeView1.SelectedNode?.Tag is RasterData)
             {
                 propertiesToolStripMenuItem.Visible = true;
+                toolStripSeparator2.Visible = true;
+                removeToolStripMenuItem.Visible = true;
             }
             else
             {
-                propertiesToolStripMenuItem.Visible = false;
                 e.Cancel = true;
             }
         }
@@ -209,6 +210,32 @@ namespace vegetation_analyzer.Forms
                 // Обновляем имена узлов в дереве, если каналы изменились
                 RefreshTreeNodeNames(treeView1.SelectedNode);
             }
+        }
+
+        private void removeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (treeView1.SelectedNode?.Tag is not RasterData raster) return;
+
+            var result = MessageBox.Show(this, $"Удалить растр \"{raster.Name}\"?", "Подтверждение",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result != DialogResult.Yes) return;
+
+            // Если удаляемый растр сейчас отображается — очищаем viewport
+            viewport.UpdateImage(null);
+
+            // Освобождаем ресурсы
+            raster.Dispose();
+
+            // Удаляем узел из дерева
+            TreeNode node = treeView1.SelectedNode;
+            treeView1.Nodes.Remove(node);
+
+            // Сбрасываем выделение
+            if (treeView1.Nodes.Count > 0)
+                treeView1.SelectedNode = treeView1.Nodes[0];
+            else
+                viewport.UpdateImage(null);
         }
 
         private void RefreshTreeNodeNames(TreeNode node)

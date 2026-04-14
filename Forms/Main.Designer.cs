@@ -44,6 +44,8 @@
             treeView1 = new TreeView();
             contextMenuStrip1 = new ContextMenuStrip(components);
             propertiesToolStripMenuItem = new ToolStripMenuItem();
+            toolStripSeparator2 = new ToolStripSeparator();
+            removeToolStripMenuItem = new ToolStripMenuItem();
             viewport = new Viewport();
             openFileDialog1 = new OpenFileDialog();
             folderBrowserDialog1 = new FolderBrowserDialog();
@@ -167,9 +169,9 @@
             // contextMenuStrip1
             //
             contextMenuStrip1.ImageScalingSize = new Size(24, 24);
-            contextMenuStrip1.Items.AddRange(new ToolStripItem[] { propertiesToolStripMenuItem });
+            contextMenuStrip1.Items.AddRange(new ToolStripItem[] { propertiesToolStripMenuItem, toolStripSeparator2, removeToolStripMenuItem });
             contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new Size(287, 42);
+            contextMenuStrip1.Size = new Size(287, 84);
             contextMenuStrip1.Opening += contextMenuStrip1_Opening;
             //
             // propertiesToolStripMenuItem
@@ -178,6 +180,18 @@
             propertiesToolStripMenuItem.Size = new Size(286, 38);
             propertiesToolStripMenuItem.Text = "Properties";
             propertiesToolStripMenuItem.Click += propertiesToolStripMenuItem_Click;
+            //
+            // toolStripSeparator2
+            //
+            toolStripSeparator2.Name = "toolStripSeparator2";
+            toolStripSeparator2.Size = new Size(283, 6);
+            //
+            // removeToolStripMenuItem
+            //
+            removeToolStripMenuItem.Name = "removeToolStripMenuItem";
+            removeToolStripMenuItem.Size = new Size(286, 38);
+            removeToolStripMenuItem.Text = "Remove";
+            removeToolStripMenuItem.Click += removeToolStripMenuItem_Click;
             //
             // viewport
             //
@@ -240,5 +254,7 @@
         private System.ComponentModel.BackgroundWorker openBackgroundWorker;
         private ContextMenuStrip contextMenuStrip1;
         private ToolStripMenuItem propertiesToolStripMenuItem;
+        private ToolStripSeparator toolStripSeparator2;
+        private ToolStripMenuItem removeToolStripMenuItem;
     }
 }
