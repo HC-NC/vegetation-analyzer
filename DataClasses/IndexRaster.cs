@@ -98,44 +98,50 @@ namespace vegetation_analyzer.DataClasses
             int height = sourceRaster.Height;
             float[] values = new float[width * height];
 
-            // Загружаем данные всех требуемых каналов
-            var bandDatas = new Dictionary<SpectralBandRole, BandData>();
+            // Загружаем данные всех требуемых каналов ЗАРАНЕЕ (до Parallel.For)
+            var bandDatas = new Dictionary<SpectralBandRole, float[]>();
+            var bandIgnoreZero = new Dictionary<SpectralBandRole, bool>();
+            var loadedBands = new List<BandData>();
             foreach (var kvp in bandMapping)
             {
                 var band = sourceRaster.GetBand(kvp.Value);
                 if (band == null)
                     throw new ArgumentException($"Канал с индексом {kvp.Value} не найден");
-                bandDatas[kvp.Key] = band;
+
+                float[]? bandValues = band.Values;
+                if (bandValues == null)
+                    throw new ArgumentException($"Не удалось загрузить данные канала {band.Name}");
+
+                bandDatas[kvp.Key] = bandValues;
+                bandIgnoreZero[kvp.Key] = band.IgnoreZero;
+                loadedBands.Add(band);
             }
 
-            unsafe
+            // Вычисляем индекс
+            Parallel.For(0, height, y =>
             {
-                Parallel.For(0, height, y =>
+                for (int x = 0; x < width; x++)
                 {
-                    for (int x = 0; x < width; x++)
+                    int idx = y * width + x;
+                    var pixelBands = new Dictionary<SpectralBandRole, float>();
+
+                    bool allValid = true;
+                    foreach (var kvp in bandDatas)
                     {
-                        int idx = y * width + x;
-                        var bandValues = new Dictionary<SpectralBandRole, float>();
-
-                        bool allValid = true;
-                        foreach (var kvp in bandDatas)
-                        {
-                            float? val = kvp.Value.Values?[idx];
-                            if (val == null) { allValid = false; break; }
-                            // Если IgnoreZero = true, нулевые значения = no data
-                            if (kvp.Value.IgnoreZero && val.Value == 0) { allValid = false; break; }
-                            bandValues[kvp.Key] = val.Value;
-                        }
-
-                        values[idx] = allValid
-                            ? IndexDefinition.Compute(indexType, bandValues)
-                            : float.NaN;
+                        float val = kvp.Value[idx];
+                        // Если IgnoreZero = true, нулевые значения = no data
+                        if (bandIgnoreZero[kvp.Key] && val == 0) { allValid = false; break; }
+                        pixelBands[kvp.Key] = val;
                     }
-                });
-            }
+
+                    values[idx] = allValid
+                        ? IndexDefinition.Compute(indexType, pixelBands)
+                        : float.NaN;
+                }
+            });
 
             // Освобождаем загруженные каналы
-            foreach (var band in bandDatas.Values)
+            foreach (var band in loadedBands)
                 band.Unload();
 
             string indexName = IndexDefinition.GetName(indexType);
@@ -169,14 +175,15 @@ namespace vegetation_analyzer.DataClasses
                 {
                     byte* scan0 = (byte*)bmpData.Scan0;
                     int stride = bmpData.Stride;
+                    int width = _width;
 
                     Parallel.For(0, _height, y =>
                     {
-                        byte* row = scan0 + (y * stride);
+                        byte* row = scan0 + y * stride;
 
-                        for (int x = 0; x < _width; x++)
+                        for (int x = 0; x < width; x++)
                         {
-                            int idx = y * _width + x;
+                            int idx = y * width + x;
                             float v = _values[idx];
                             int offset = x * 4;
 
