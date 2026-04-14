@@ -167,9 +167,14 @@ namespace vegetation_analyzer.Forms
                     case RasterData rasterData:
                         viewport.UpdateImage(rasterData.GetBitmap(), rasterData.InterpolationMode);
                         break;
+                    case IndexRaster indexRaster:
+                        viewport.UpdateImage(indexRaster.GetBitmap(), indexRaster.InterpolationMode);
+                        break;
                     case BandData _:
                         if (node.Parent?.Tag is RasterData rData)
                             viewport.UpdateImage(rData.GetBitmap(), rData.InterpolationMode);
+                        else if (node.Parent?.Tag is IndexRaster idxRaster)
+                            viewport.UpdateImage(idxRaster.GetBitmap(), idxRaster.InterpolationMode);
                         break;
                     default:
                         viewport.UpdateImage(null);
@@ -182,11 +187,21 @@ namespace vegetation_analyzer.Forms
 
         private void contextMenuStrip1_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            // Показываем контекстное меню только если выбран RasterData или его дочерний узел
+            // Показываем контекстное меню только если выбран RasterData или IndexRaster
             if (treeView1.SelectedNode?.Tag is RasterData)
             {
-                propertiesToolStripMenuItem.Visible = true;
+                computeIndexToolStripMenuItem.Visible = true;
                 toolStripSeparator2.Visible = true;
+                propertiesToolStripMenuItem.Visible = true;
+                toolStripSeparator3.Visible = true;
+                removeToolStripMenuItem.Visible = true;
+            }
+            else if (treeView1.SelectedNode?.Tag is IndexRaster)
+            {
+                computeIndexToolStripMenuItem.Visible = false;
+                toolStripSeparator2.Visible = true;
+                propertiesToolStripMenuItem.Visible = true;
+                toolStripSeparator3.Visible = true;
                 removeToolStripMenuItem.Visible = true;
             }
             else
@@ -195,47 +210,153 @@ namespace vegetation_analyzer.Forms
             }
         }
 
-        private void propertiesToolStripMenuItem_Click(object sender, EventArgs e)
+        private void computeIndexToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (treeView1.SelectedNode?.Tag is not RasterData raster) return;
 
-            RasterProperties propsForm = new RasterProperties(raster);
-            propsForm.Location = Point.Subtract(Point.Add(Location, Size / 2), propsForm.Size / 2);
+            ComputeIndexForm computeForm = new ComputeIndexForm(raster);
+            computeForm.Location = Point.Subtract(Point.Add(Location, Size / 2), computeForm.Size / 2);
 
-            if (propsForm.ShowDialog() == DialogResult.OK)
+            if (computeForm.ShowDialog() == DialogResult.OK)
             {
-                // Обновляем viewport с новыми настройками
-                viewport.UpdateImage(raster.GetBitmap(), raster.InterpolationMode);
+                VegetationIndex indexType = computeForm.SelectedIndex;
+                Dictionary<SpectralBandRole, int> bandMapping = computeForm.GetBandMapping();
 
-                // Обновляем имена узлов в дереве, если каналы изменились
-                RefreshTreeNodeNames(treeView1.SelectedNode);
+                toolStripStatusLabel1.Text = $"Computing: {IndexDefinition.GetName(indexType)}";
+                toolStripProgressBar1.Visible = true;
+                toolStripStatusLabel1.Visible = true;
+
+                computeIndexBackgroundWorker.RunWorkerAsync(Tuple.Create(raster, indexType, bandMapping));
+            }
+        }
+
+        private void computeIndexBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            if (e.Argument is not Tuple<RasterData, VegetationIndex, Dictionary<SpectralBandRole, int>> args) return;
+
+            var (raster, indexType, bandMapping) = args;
+            IndexRaster indexRaster = IndexRaster.Compute(raster, indexType, bandMapping);
+            e.Result = Tuple.Create(indexRaster, raster);
+        }
+
+        private void computeIndexBackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (e.Error != null)
+            {
+                MessageBox.Show(this, $"Ошибка вычисления индекса: {e.Error.Message}", "Ошибка",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if (e.Result is Tuple<IndexRaster, RasterData> result)
+            {
+                var (indexRaster, sourceRaster) = result;
+                AddIndexNode(indexRaster, sourceRaster);
+            }
+
+            toolStripProgressBar1.Value = 0;
+            toolStripProgressBar1.Visible = false;
+            toolStripStatusLabel1.Visible = false;
+        }
+
+        private void AddIndexNode(IndexRaster indexRaster, RasterData sourceRaster)
+        {
+            foreach (TreeNode node in treeView1.Nodes)
+            {
+                if (node.Tag == sourceRaster)
+                {
+                    TreeNode? existingNode = null;
+                    foreach (TreeNode child in node.Nodes)
+                    {
+                        if (child.Tag is IndexRaster ir && ir.IndexType == indexRaster.IndexType)
+                        {
+                            existingNode = child;
+                            break;
+                        }
+                    }
+
+                    // Если есть — заменяем
+                    if (existingNode != null)
+                    {
+                        ((IndexRaster)existingNode.Tag).Dispose();
+                        existingNode.Tag = indexRaster;
+                        existingNode.Text = indexRaster.ToString();
+                        treeView1.SelectedNode = existingNode;
+                        return;
+                    }
+
+                    // Создаём новый узел
+                    TreeNode indexNode = new TreeNode(indexRaster.ToString())
+                    {
+                        Tag = indexRaster,
+                        ToolTipText = $"{IndexDefinition.GetName(indexRaster.IndexType)}: [{indexRaster.Minimum:F3} ... {indexRaster.Maximum:F3}]"
+                    };
+                    node.Nodes.Add(indexNode);
+                    treeView1.SelectedNode = indexNode;
+                    return;
+                }
+            }
+        }
+
+        private void propertiesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (treeView1.SelectedNode?.Tag is RasterData raster)
+            {
+                RasterProperties propsForm = new RasterProperties(raster);
+                propsForm.Location = Point.Subtract(Point.Add(Location, Size / 2), propsForm.Size / 2);
+
+                if (propsForm.ShowDialog() == DialogResult.OK)
+                {
+                    viewport.UpdateImage(raster.GetBitmap(), raster.InterpolationMode);
+                    RefreshTreeNodeNames(treeView1.SelectedNode);
+                }
+            }
+            else if (treeView1.SelectedNode?.Tag is IndexRaster indexRaster)
+            {
+                IndexRasterProperties propsForm = new IndexRasterProperties(indexRaster);
+                propsForm.Location = Point.Subtract(Point.Add(Location, Size / 2), propsForm.Size / 2);
+
+                if (propsForm.ShowDialog() == DialogResult.OK)
+                {
+                    viewport.UpdateImage(indexRaster.GetBitmap(), indexRaster.InterpolationMode);
+                }
             }
         }
 
         private void removeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (treeView1.SelectedNode?.Tag is not RasterData raster) return;
+            TreeNode? node = treeView1.SelectedNode;
+            if (node?.Tag is RasterData raster)
+            {
+                var result = MessageBox.Show(this, $"Удалить растр \"{raster.Name}\"?", "Подтверждение",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-            var result = MessageBox.Show(this, $"Удалить растр \"{raster.Name}\"?", "Подтверждение",
-                MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result != DialogResult.Yes) return;
 
-            if (result != DialogResult.Yes) return;
-
-            // Если удаляемый растр сейчас отображается — очищаем viewport
-            viewport.UpdateImage(null);
-
-            // Освобождаем ресурсы
-            raster.Dispose();
-
-            // Удаляем узел из дерева
-            TreeNode node = treeView1.SelectedNode;
-            treeView1.Nodes.Remove(node);
-
-            // Сбрасываем выделение
-            if (treeView1.Nodes.Count > 0)
-                treeView1.SelectedNode = treeView1.Nodes[0];
-            else
                 viewport.UpdateImage(null);
+                raster.Dispose();
+                treeView1.Nodes.Remove(node);
+
+                if (treeView1.Nodes.Count > 0)
+                    treeView1.SelectedNode = treeView1.Nodes[0];
+                else
+                    viewport.UpdateImage(null);
+            }
+            else if (node?.Tag is IndexRaster indexRaster)
+            {
+                var result = MessageBox.Show(this, $"Удалить индекс \"{indexRaster.Name}\"?", "Подтверждение",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (result != DialogResult.Yes) return;
+
+                viewport.UpdateImage(null);
+
+                indexRaster.Dispose();
+                treeView1.Nodes.Remove(node);
+
+                if (treeView1.Nodes.Count > 0)
+                    treeView1.SelectedNode = treeView1.Nodes[0];
+                else
+                    viewport.UpdateImage(null);
+            }
         }
 
         private void RefreshTreeNodeNames(TreeNode node)
