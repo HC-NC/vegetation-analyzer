@@ -179,5 +179,52 @@ namespace vegetation_analyzer.Forms
             else
                 viewport.UpdateImage(null);
         }
+
+        private void contextMenuStrip1_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            // Показываем контекстное меню только если выбран RasterData
+            if (treeView1.SelectedNode?.Tag is RasterData)
+            {
+                propertiesToolStripMenuItem.Visible = true;
+            }
+            else
+            {
+                propertiesToolStripMenuItem.Visible = false;
+                e.Cancel = true;
+            }
+        }
+
+        private void propertiesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (treeView1.SelectedNode?.Tag is not RasterData raster) return;
+
+            RasterProperties propsForm = new RasterProperties(raster);
+            propsForm.Location = Point.Subtract(Point.Add(Location, Size / 2), propsForm.Size / 2);
+
+            if (propsForm.ShowDialog() == DialogResult.OK)
+            {
+                // Обновляем viewport с новыми настройками
+                viewport.UpdateImage(raster.GetBitmap(), raster.InterpolationMode);
+
+                // Обновляем имена узлов в дереве, если каналы изменились
+                RefreshTreeNodeNames(treeView1.SelectedNode);
+            }
+        }
+
+        private void RefreshTreeNodeNames(TreeNode node)
+        {
+            if (node.Tag is not RasterData raster) return;
+
+            // Обновляем текст родительского узла
+            node.Text = raster.ToString();
+
+            // Обновляем имена дочерних узлов (каналов)
+            for (int i = 0; i < raster.BandsCount && i < node.Nodes.Count; i++)
+            {
+                BandData? band = raster.GetBand(i);
+                if (band != null)
+                    node.Nodes[i].Text = band.Name;
+            }
+        }
     }
 }

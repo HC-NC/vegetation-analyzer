@@ -11,7 +11,7 @@ namespace vegetation_analyzer.DataClasses
         public string BandName { get; set; } = "";
     }
 
-    internal class RasterData : IDisposable
+    public class RasterData : IDisposable
     {
         private string _name;
         private string _path;

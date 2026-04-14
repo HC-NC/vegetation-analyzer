@@ -18,6 +18,8 @@ namespace vegetation_analyzer.Forms
 
         private void FolderOpenParamForm_Load(object sender, EventArgs e)
         {
+            selectAllCheckBox.Checked = false;
+
             AnalyzeFolder();
         }
 
@@ -91,8 +93,6 @@ namespace vegetation_analyzer.Forms
                 row.Cells["colDescription"].Value = info.Description;
                 row.Tag = info;
             }
-
-            selectAllCheckBox.Checked = false;
 
             if (fileInfos.Count == 0)
             {

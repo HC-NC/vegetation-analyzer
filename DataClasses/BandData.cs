@@ -4,7 +4,7 @@ using System.Resources;
 
 namespace vegetation_analyzer.DataClasses
 {
-    internal class BandData : IDisposable
+    public class BandData : IDisposable
     {
         private readonly object _lockObj = new object();
 
