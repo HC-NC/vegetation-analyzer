@@ -194,6 +194,7 @@ namespace vegetation_analyzer.Forms
             {
                 computeIndexToolStripMenuItem.Visible = true;
                 classifyToolStripMenuItem.Visible = false;
+                exportToolStripMenuItem.Visible = true;
                 toolStripSeparator2.Visible = true;
                 propertiesToolStripMenuItem.Visible = true;
                 toolStripSeparator3.Visible = true;
@@ -203,6 +204,7 @@ namespace vegetation_analyzer.Forms
             {
                 computeIndexToolStripMenuItem.Visible = false;
                 classifyToolStripMenuItem.Visible = true;
+                exportToolStripMenuItem.Visible = true;
                 toolStripSeparator2.Visible = true;
                 propertiesToolStripMenuItem.Visible = true;
                 toolStripSeparator3.Visible = true;
@@ -212,7 +214,8 @@ namespace vegetation_analyzer.Forms
             {
                 computeIndexToolStripMenuItem.Visible = false;
                 classifyToolStripMenuItem.Visible = false;
-                toolStripSeparator2.Visible = false;
+                exportToolStripMenuItem.Visible = true;
+                toolStripSeparator2.Visible = true;
                 propertiesToolStripMenuItem.Visible = true;
                 toolStripSeparator3.Visible = true;
                 removeToolStripMenuItem.Visible = true;
@@ -502,6 +505,80 @@ namespace vegetation_analyzer.Forms
                 if (band != null)
                     node.Nodes[i].Text = band.Name;
             }
+        }
+
+        private void exportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var selectedTag = treeView1.SelectedNode?.Tag;
+            ExportForm.ExportTarget target;
+            object data;
+
+            if (selectedTag is RasterData raster)
+            {
+                target = ExportForm.ExportTarget.RasterData;
+                data = raster;
+            }
+            else if (selectedTag is IndexRaster indexRaster)
+            {
+                target = ExportForm.ExportTarget.IndexRaster;
+                data = indexRaster;
+            }
+            else if (selectedTag is ClassifiedRaster classified)
+            {
+                target = ExportForm.ExportTarget.ClassifiedRaster;
+                data = classified;
+            }
+            else return;
+
+            ExportForm exportForm = new ExportForm(data, target);
+            exportForm.Location = Point.Subtract(Point.Add(Location, Size / 2), exportForm.Size / 2);
+
+            if (exportForm.ShowDialog() == DialogResult.OK)
+            {
+                toolStripStatusLabel1.Text = $"Exporting: {Path.GetFileName(exportForm.FilePath)}";
+                toolStripProgressBar1.Visible = true;
+                toolStripStatusLabel1.Visible = true;
+
+                exportBackgroundWorker.RunWorkerAsync(Tuple.Create(data, target, exportForm.FilePath, exportForm.Compression, exportForm.ExportAsByte));
+            }
+        }
+
+        private void exportBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            if (e.Argument is not Tuple<object, ExportForm.ExportTarget, string, string, bool> args) return;
+
+            var (data, target, filePath, compression, exportAsByte) = args;
+
+            switch (target)
+            {
+                case ExportForm.ExportTarget.RasterData:
+                    ExportService.ExportRasterData((RasterData)data, filePath, compression);
+                    break;
+                case ExportForm.ExportTarget.IndexRaster:
+                    ExportService.ExportIndexRaster((IndexRaster)data, filePath, compression, exportAsByte);
+                    break;
+                case ExportForm.ExportTarget.ClassifiedRaster:
+                    ExportService.ExportClassifiedRaster((ClassifiedRaster)data, filePath, compression);
+                    break;
+            }
+        }
+
+        private void exportBackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (e.Error != null)
+            {
+                MessageBox.Show(this, $"Ошибка экспорта: {e.Error.Message}", "Ошибка",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                MessageBox.Show(this, "Экспорт завершён успешно.", "Готово",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
+            toolStripProgressBar1.Value = 0;
+            toolStripProgressBar1.Visible = false;
+            toolStripStatusLabel1.Visible = false;
         }
     }
 }

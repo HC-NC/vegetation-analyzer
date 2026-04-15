@@ -168,7 +168,6 @@ namespace vegetation_analyzer.DataClasses
                         colorTable.SetColorEntry(i + 1, entry);
                     }
 
-                    band.SetRasterColorInterpretation(ColorInterp.GCI_PaletteIndex);
                     band.SetColorTable(colorTable);
                 }
 

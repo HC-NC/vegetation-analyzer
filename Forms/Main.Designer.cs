@@ -44,6 +44,7 @@
             contextMenuStrip1 = new ContextMenuStrip(components);
             computeIndexToolStripMenuItem = new ToolStripMenuItem();
             classifyToolStripMenuItem = new ToolStripMenuItem();
+            exportToolStripMenuItem = new ToolStripMenuItem();
             toolStripSeparator2 = new ToolStripSeparator();
             propertiesToolStripMenuItem = new ToolStripMenuItem();
             toolStripSeparator3 = new ToolStripSeparator();
@@ -54,6 +55,7 @@
             openBackgroundWorker = new System.ComponentModel.BackgroundWorker();
             computeIndexBackgroundWorker = new System.ComponentModel.BackgroundWorker();
             classifyBackgroundWorker = new System.ComponentModel.BackgroundWorker();
+            exportBackgroundWorker = new System.ComponentModel.BackgroundWorker();
             menuStrip1.SuspendLayout();
             statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
@@ -167,9 +169,9 @@
             // contextMenuStrip1
             // 
             contextMenuStrip1.ImageScalingSize = new Size(24, 24);
-            contextMenuStrip1.Items.AddRange(new ToolStripItem[] { computeIndexToolStripMenuItem, classifyToolStripMenuItem, toolStripSeparator2, propertiesToolStripMenuItem, toolStripSeparator3, removeToolStripMenuItem });
+            contextMenuStrip1.Items.AddRange(new ToolStripItem[] { computeIndexToolStripMenuItem, classifyToolStripMenuItem, exportToolStripMenuItem, toolStripSeparator2, propertiesToolStripMenuItem, toolStripSeparator3, removeToolStripMenuItem });
             contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new Size(297, 154);
+            contextMenuStrip1.Size = new Size(297, 216);
             contextMenuStrip1.Opening += contextMenuStrip1_Opening;
             //
             // computeIndexToolStripMenuItem
@@ -185,6 +187,13 @@
             classifyToolStripMenuItem.Size = new Size(296, 32);
             classifyToolStripMenuItem.Text = "Classify...";
             classifyToolStripMenuItem.Click += classifyToolStripMenuItem_Click;
+            //
+            // exportToolStripMenuItem
+            //
+            exportToolStripMenuItem.Name = "exportToolStripMenuItem";
+            exportToolStripMenuItem.Size = new Size(296, 32);
+            exportToolStripMenuItem.Text = "Export to File...";
+            exportToolStripMenuItem.Click += exportToolStripMenuItem_Click;
             //
             // toolStripSeparator2
             //
@@ -234,6 +243,11 @@
             //
             classifyBackgroundWorker.DoWork += classifyBackgroundWorker_DoWork;
             classifyBackgroundWorker.RunWorkerCompleted += classifyBackgroundWorker_RunWorkerCompleted;
+            //
+            // exportBackgroundWorker
+            //
+            exportBackgroundWorker.DoWork += exportBackgroundWorker_DoWork;
+            exportBackgroundWorker.RunWorkerCompleted += exportBackgroundWorker_RunWorkerCompleted;
             // 
             // Main
             // 
@@ -280,9 +294,11 @@
         private System.ComponentModel.BackgroundWorker openBackgroundWorker;
         private System.ComponentModel.BackgroundWorker computeIndexBackgroundWorker;
         private System.ComponentModel.BackgroundWorker classifyBackgroundWorker;
+        private System.ComponentModel.BackgroundWorker exportBackgroundWorker;
         private ContextMenuStrip contextMenuStrip1;
         private ToolStripMenuItem computeIndexToolStripMenuItem;
         private ToolStripMenuItem classifyToolStripMenuItem;
+        private ToolStripMenuItem exportToolStripMenuItem;
         private ToolStripSeparator toolStripSeparator2;
         private ToolStripMenuItem propertiesToolStripMenuItem;
         private ToolStripSeparator toolStripSeparator3;
