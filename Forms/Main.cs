@@ -136,22 +136,6 @@ namespace vegetation_analyzer.Forms
 
             TreeNode node = new TreeNode(obj.ToString());
             node.Tag = obj;
-
-            if (obj is RasterData rasterData)
-            {
-                node.ToolTipText = string.Format("{0}\\{1}", rasterData.Path, rasterData.Name);
-
-                for (int i = 0; i < rasterData.BandsCount; i++)
-                {
-                    BandData? band = rasterData.GetBand(i);
-                    if (band == null) continue;
-
-                    TreeNode bandNode = new TreeNode(band.Name);
-                    bandNode.Tag = band;
-                    node.Nodes.Add(bandNode);
-                }
-            }
-
             treeView1.Nodes.Add(node);
             treeView1.SelectedNode = node;
         }
@@ -172,12 +156,6 @@ namespace vegetation_analyzer.Forms
                         break;
                     case ClassifiedRaster classified:
                         viewport.UpdateImage(classified.GetBitmap(), classified.InterpolationMode);
-                        break;
-                    case BandData _:
-                        if (node.Parent?.Tag is RasterData rData)
-                            viewport.UpdateImage(rData.GetBitmap(), rData.InterpolationMode);
-                        else if (node.Parent?.Tag is IndexRaster idxRaster)
-                            viewport.UpdateImage(idxRaster.GetBitmap(), idxRaster.InterpolationMode);
                         break;
                     default:
                         viewport.UpdateImage(null);
@@ -497,14 +475,6 @@ namespace vegetation_analyzer.Forms
 
             // Обновляем текст родительского узла
             node.Text = raster.ToString();
-
-            // Обновляем имена дочерних узлов (каналов)
-            for (int i = 0; i < raster.BandsCount && i < node.Nodes.Count; i++)
-            {
-                BandData? band = raster.GetBand(i);
-                if (band != null)
-                    node.Nodes[i].Text = band.Name;
-            }
         }
 
         private void exportToolStripMenuItem_Click(object sender, EventArgs e)
