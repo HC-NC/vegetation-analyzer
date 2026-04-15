@@ -170,6 +170,9 @@ namespace vegetation_analyzer.Forms
                     case IndexRaster indexRaster:
                         viewport.UpdateImage(indexRaster.GetBitmap(), indexRaster.InterpolationMode);
                         break;
+                    case ClassifiedRaster classified:
+                        viewport.UpdateImage(classified.GetBitmap(), classified.InterpolationMode);
+                        break;
                     case BandData _:
                         if (node.Parent?.Tag is RasterData rData)
                             viewport.UpdateImage(rData.GetBitmap(), rData.InterpolationMode);
@@ -185,12 +188,12 @@ namespace vegetation_analyzer.Forms
                 viewport.UpdateImage(null);
         }
 
-        private void contextMenuStrip1_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
         {
-            // Показываем контекстное меню только если выбран RasterData или IndexRaster
             if (treeView1.SelectedNode?.Tag is RasterData)
             {
                 computeIndexToolStripMenuItem.Visible = true;
+                classifyToolStripMenuItem.Visible = false;
                 toolStripSeparator2.Visible = true;
                 propertiesToolStripMenuItem.Visible = true;
                 toolStripSeparator3.Visible = true;
@@ -199,7 +202,17 @@ namespace vegetation_analyzer.Forms
             else if (treeView1.SelectedNode?.Tag is IndexRaster)
             {
                 computeIndexToolStripMenuItem.Visible = false;
+                classifyToolStripMenuItem.Visible = true;
                 toolStripSeparator2.Visible = true;
+                propertiesToolStripMenuItem.Visible = true;
+                toolStripSeparator3.Visible = true;
+                removeToolStripMenuItem.Visible = true;
+            }
+            else if (treeView1.SelectedNode?.Tag is ClassifiedRaster)
+            {
+                computeIndexToolStripMenuItem.Visible = false;
+                classifyToolStripMenuItem.Visible = false;
+                toolStripSeparator2.Visible = false;
                 propertiesToolStripMenuItem.Visible = true;
                 toolStripSeparator3.Visible = true;
                 removeToolStripMenuItem.Visible = true;
@@ -208,6 +221,97 @@ namespace vegetation_analyzer.Forms
             {
                 e.Cancel = true;
             }
+        }
+
+        private void classifyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (treeView1.SelectedNode?.Tag is not IndexRaster indexRaster) return;
+
+            ClassifyForm classifyForm = new ClassifyForm(indexRaster);
+            classifyForm.Location = Point.Subtract(Point.Add(Location, Size / 2), classifyForm.Size / 2);
+
+            if (classifyForm.ShowDialog() == DialogResult.OK)
+            {
+                var scheme = classifyForm.GetScheme();
+
+                toolStripStatusLabel1.Text = $"Classifying: {scheme.Name}";
+                toolStripProgressBar1.Visible = true;
+                toolStripStatusLabel1.Visible = true;
+
+                classifyBackgroundWorker.RunWorkerAsync(Tuple.Create(indexRaster, scheme));
+            }
+        }
+
+        private void classifyBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            if (e.Argument is not Tuple<IndexRaster, ClassificationScheme> args) return;
+
+            var (indexRaster, scheme) = args;
+            var classified = ClassifiedRaster.Classify(indexRaster, scheme);
+            e.Result = Tuple.Create(classified, indexRaster, scheme);
+        }
+
+        private void classifyBackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (e.Error != null)
+            {
+                MessageBox.Show(this, $"Ошибка классификации: {e.Error.Message}", "Ошибка",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if (e.Result is Tuple<ClassifiedRaster, IndexRaster, ClassificationScheme> result)
+            {
+                var (classified, sourceIndex, scheme) = result;
+                AddClassifiedNode(classified, sourceIndex);
+            }
+
+            toolStripProgressBar1.Value = 0;
+            toolStripProgressBar1.Visible = false;
+            toolStripStatusLabel1.Visible = false;
+        }
+
+        private void AddClassifiedNode(ClassifiedRaster classified, IndexRaster sourceIndex)
+        {
+            // Ищем узел IndexRaster рекурсивно по всему дереву
+            TreeNode? FindIndexNode(TreeNodeCollection nodes)
+            {
+                foreach (TreeNode n in nodes)
+                {
+                    if (n.Tag == sourceIndex) return n;
+                    var found = FindIndexNode(n.Nodes);
+                    if (found != null) return found;
+                }
+                return null;
+            }
+
+            var parentNode = FindIndexNode(treeView1.Nodes);
+            if (parentNode == null) return;
+
+            TreeNode? existingNode = null;
+            foreach (TreeNode child in parentNode.Nodes)
+            {
+                if (child.Tag is ClassifiedRaster cr && cr.Scheme.Name == classified.Scheme.Name)
+                {
+                    existingNode = child;
+                    break;
+                }
+            }
+
+            if (existingNode != null)
+            {
+                ((ClassifiedRaster)existingNode.Tag).Dispose();
+                existingNode.Tag = classified;
+                existingNode.Text = classified.ToString();
+                treeView1.SelectedNode = existingNode;
+                return;
+            }
+
+            TreeNode classNode = new TreeNode(classified.ToString())
+            {
+                Tag = classified,
+                ToolTipText = $"{classified.Scheme.Name} ({classified.Scheme.Classes.Count} classes)"
+            };
+            parentNode.Nodes.Add(classNode);
+            treeView1.SelectedNode = classNode;
         }
 
         private void computeIndexToolStripMenuItem_Click(object sender, EventArgs e)
@@ -319,6 +423,16 @@ namespace vegetation_analyzer.Forms
                     viewport.UpdateImage(indexRaster.GetBitmap(), indexRaster.InterpolationMode);
                 }
             }
+            else if (treeView1.SelectedNode?.Tag is ClassifiedRaster classified)
+            {
+                ClassifiedRasterProperties propsForm = new ClassifiedRasterProperties(classified);
+                propsForm.Location = Point.Subtract(Point.Add(Location, Size / 2), propsForm.Size / 2);
+
+                if (propsForm.ShowDialog() == DialogResult.OK)
+                {
+                    viewport.UpdateImage(classified.GetBitmap(), classified.InterpolationMode);
+                }
+            }
         }
 
         private void removeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -348,8 +462,23 @@ namespace vegetation_analyzer.Forms
                 if (result != DialogResult.Yes) return;
 
                 viewport.UpdateImage(null);
-
                 indexRaster.Dispose();
+                treeView1.Nodes.Remove(node);
+
+                if (treeView1.Nodes.Count > 0)
+                    treeView1.SelectedNode = treeView1.Nodes[0];
+                else
+                    viewport.UpdateImage(null);
+            }
+            else if (node?.Tag is ClassifiedRaster classifiedRaster)
+            {
+                var result = MessageBox.Show(this, $"Удалить классификацию \"{classifiedRaster.Name}\"?", "Подтверждение",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (result != DialogResult.Yes) return;
+
+                viewport.UpdateImage(null);
+                classifiedRaster.Dispose();
                 treeView1.Nodes.Remove(node);
 
                 if (treeView1.Nodes.Count > 0)

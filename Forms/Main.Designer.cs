@@ -43,6 +43,7 @@
             treeView1 = new TreeView();
             contextMenuStrip1 = new ContextMenuStrip(components);
             computeIndexToolStripMenuItem = new ToolStripMenuItem();
+            classifyToolStripMenuItem = new ToolStripMenuItem();
             toolStripSeparator2 = new ToolStripSeparator();
             propertiesToolStripMenuItem = new ToolStripMenuItem();
             toolStripSeparator3 = new ToolStripSeparator();
@@ -52,6 +53,7 @@
             folderBrowserDialog1 = new FolderBrowserDialog();
             openBackgroundWorker = new System.ComponentModel.BackgroundWorker();
             computeIndexBackgroundWorker = new System.ComponentModel.BackgroundWorker();
+            classifyBackgroundWorker = new System.ComponentModel.BackgroundWorker();
             menuStrip1.SuspendLayout();
             statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
@@ -165,25 +167,32 @@
             // contextMenuStrip1
             // 
             contextMenuStrip1.ImageScalingSize = new Size(24, 24);
-            contextMenuStrip1.Items.AddRange(new ToolStripItem[] { computeIndexToolStripMenuItem, toolStripSeparator2, propertiesToolStripMenuItem, toolStripSeparator3, removeToolStripMenuItem });
+            contextMenuStrip1.Items.AddRange(new ToolStripItem[] { computeIndexToolStripMenuItem, classifyToolStripMenuItem, toolStripSeparator2, propertiesToolStripMenuItem, toolStripSeparator3, removeToolStripMenuItem });
             contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new Size(297, 112);
+            contextMenuStrip1.Size = new Size(297, 154);
             contextMenuStrip1.Opening += contextMenuStrip1_Opening;
-            // 
+            //
             // computeIndexToolStripMenuItem
-            // 
+            //
             computeIndexToolStripMenuItem.Name = "computeIndexToolStripMenuItem";
             computeIndexToolStripMenuItem.Size = new Size(296, 32);
             computeIndexToolStripMenuItem.Text = "Compute Vegetation Index";
             computeIndexToolStripMenuItem.Click += computeIndexToolStripMenuItem_Click;
-            // 
+            //
+            // classifyToolStripMenuItem
+            //
+            classifyToolStripMenuItem.Name = "classifyToolStripMenuItem";
+            classifyToolStripMenuItem.Size = new Size(296, 32);
+            classifyToolStripMenuItem.Text = "Classify...";
+            classifyToolStripMenuItem.Click += classifyToolStripMenuItem_Click;
+            //
             // toolStripSeparator2
-            // 
+            //
             toolStripSeparator2.Name = "toolStripSeparator2";
             toolStripSeparator2.Size = new Size(293, 6);
-            // 
+            //
             // propertiesToolStripMenuItem
-            // 
+            //
             propertiesToolStripMenuItem.Name = "propertiesToolStripMenuItem";
             propertiesToolStripMenuItem.Size = new Size(296, 32);
             propertiesToolStripMenuItem.Text = "Properties";
@@ -215,11 +224,16 @@
             openBackgroundWorker.DoWork += openBackgroundWorker_DoWork;
             openBackgroundWorker.ProgressChanged += BackgroundWorker_ProgressChanged;
             openBackgroundWorker.RunWorkerCompleted += openBackgroundWorker_RunWorkerCompleted;
-            // 
+            //
             // computeIndexBackgroundWorker
-            // 
+            //
             computeIndexBackgroundWorker.DoWork += computeIndexBackgroundWorker_DoWork;
             computeIndexBackgroundWorker.RunWorkerCompleted += computeIndexBackgroundWorker_RunWorkerCompleted;
+            //
+            // classifyBackgroundWorker
+            //
+            classifyBackgroundWorker.DoWork += classifyBackgroundWorker_DoWork;
+            classifyBackgroundWorker.RunWorkerCompleted += classifyBackgroundWorker_RunWorkerCompleted;
             // 
             // Main
             // 
@@ -265,8 +279,10 @@
         private FolderBrowserDialog folderBrowserDialog1;
         private System.ComponentModel.BackgroundWorker openBackgroundWorker;
         private System.ComponentModel.BackgroundWorker computeIndexBackgroundWorker;
+        private System.ComponentModel.BackgroundWorker classifyBackgroundWorker;
         private ContextMenuStrip contextMenuStrip1;
         private ToolStripMenuItem computeIndexToolStripMenuItem;
+        private ToolStripMenuItem classifyToolStripMenuItem;
         private ToolStripSeparator toolStripSeparator2;
         private ToolStripMenuItem propertiesToolStripMenuItem;
         private ToolStripSeparator toolStripSeparator3;
