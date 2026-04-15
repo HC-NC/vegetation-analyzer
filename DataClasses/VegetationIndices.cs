@@ -133,8 +133,10 @@ namespace vegetation_analyzer.DataClasses
             float red = v[SpectralBandRole.Red];
             float blue = v[SpectralBandRole.Blue];
             float denom = nir + 6 * red - 7.5f * blue + 1;
-            if (denom == 0) return 0;
-            return 2.5f * (nir - red) / denom;
+            if (denom <= 0) return 0;
+            float result = 2.5f * (nir - red) / denom;
+            // Ограничиваем EVI разумным диапазоном — знаменатель может быть мал
+            return Math.Clamp(result, -1f, 1f);
         }
 
         private static float ComputeEVI2(Dictionary<SpectralBandRole, float> v)
@@ -142,8 +144,9 @@ namespace vegetation_analyzer.DataClasses
             float nir = v[SpectralBandRole.NIR];
             float red = v[SpectralBandRole.Red];
             float denom = nir + 2.4f * red + 1;
-            if (denom == 0) return 0;
-            return 2.5f * (nir - red) / denom;
+            if (denom <= 0) return 0;
+            float result = 2.5f * (nir - red) / denom;
+            return Math.Clamp(result, -1f, 1f);
         }
 
         private static float ComputeSAVI(Dictionary<SpectralBandRole, float> v)
@@ -210,7 +213,9 @@ namespace vegetation_analyzer.DataClasses
             float rb = 2 * red - blue;
             float denom = nir + rb;
             if (denom == 0) return 0;
-            return (nir - rb) / denom;
+            float result = (nir - rb) / denom;
+            // ARVI обычно в пределах -1..+1
+            return Math.Clamp(result, -1f, 1f);
         }
 
         /// <summary>
