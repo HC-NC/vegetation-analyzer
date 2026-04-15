@@ -1,7 +1,22 @@
 using System.Drawing;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace vegetation_analyzer.DataClasses
 {
+    public class ColorJsonConverter : JsonConverter<Color>
+    {
+        public override Color Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        {
+            return ColorTranslator.FromHtml(reader.GetString() ?? "#FFFFFF");
+        }
+
+        public override void Write(Utf8JsonWriter writer, Color value, JsonSerializerOptions options)
+        {
+            writer.WriteStringValue(ColorTranslator.ToHtml(value));
+        }
+    }
+
     /// <summary>
     /// Один класс классификации (название, диапазон, цвет).
     /// </summary>
@@ -71,6 +86,94 @@ namespace vegetation_analyzer.DataClasses
     /// </summary>
     public static class ClassificationPresets
     {
+        private static readonly JsonSerializerOptions JsonOptions = new JsonSerializerOptions
+        {
+            WriteIndented = true,
+            Converters = { new ColorJsonConverter() }
+        };
+
+        private static readonly string PresetsFilePath = Path.Combine(
+            Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+            "VegetationAnalyzer", "custom_presets.json");
+
+        private static List<ClassificationScheme>? _customPresets;
+
+        /// <summary>
+        /// Загрузка пользовательских пресетов из файла.
+        /// </summary>
+        public static List<ClassificationScheme> LoadCustomPresets()
+        {
+            if (_customPresets != null) return _customPresets;
+
+            try
+            {
+                if (File.Exists(PresetsFilePath))
+                {
+                    var json = File.ReadAllText(PresetsFilePath);
+                    _customPresets = JsonSerializer.Deserialize<List<ClassificationScheme>>(json, JsonOptions) ?? new();
+                    foreach (var p in _customPresets) p.IsCustom = true;
+                }
+                else
+                {
+                    _customPresets = new();
+                }
+            }
+            catch
+            {
+                _customPresets = new();
+            }
+
+            return _customPresets;
+        }
+
+        /// <summary>
+        /// Сохранение пользовательского пресета.
+        /// </summary>
+        public static void SaveCustomPreset(ClassificationScheme scheme)
+        {
+            var custom = LoadCustomPresets();
+
+            // Удаляем существующий с таким же именем
+            var existing = custom.FirstOrDefault(p => p.Name == scheme.Name);
+            if (existing != null) custom.Remove(existing);
+
+            scheme.IsCustom = true;
+            custom.Add(scheme);
+
+            // Сохраняем
+            string dir = Path.GetDirectoryName(PresetsFilePath)!;
+            if (!Directory.Exists(dir)) Directory.CreateDirectory(dir);
+
+            var json = JsonSerializer.Serialize(custom, JsonOptions);
+            File.WriteAllText(PresetsFilePath, json);
+            _customPresets = custom;
+        }
+
+        /// <summary>
+        /// Удаление пользовательского пресета.
+        /// </summary>
+        public static void DeleteCustomPreset(string name)
+        {
+            var custom = LoadCustomPresets();
+            var existing = custom.FirstOrDefault(p => p.Name == name);
+            if (existing != null)
+            {
+                custom.Remove(existing);
+
+                string dir = Path.GetDirectoryName(PresetsFilePath)!;
+                if (custom.Count == 0 && Directory.Exists(dir))
+                {
+                    File.Delete(PresetsFilePath);
+                }
+                else
+                {
+                    var json = JsonSerializer.Serialize(custom, JsonOptions);
+                    File.WriteAllText(PresetsFilePath, json);
+                }
+                _customPresets = custom;
+            }
+        }
+
         public static List<ClassificationScheme> GetDefaultPresets()
         {
             var presets = new List<ClassificationScheme>
@@ -250,11 +353,13 @@ namespace vegetation_analyzer.DataClasses
         }
 
         /// <summary>
-        /// Получить пресеты для конкретного индекса.
+        /// Получить пресеты для конкретного индекса (встроенные + пользовательские).
         /// </summary>
         public static List<ClassificationScheme> GetPresetsForIndex(VegetationIndex index)
         {
-            return GetDefaultPresets().Where(p => p.IndexType == index).ToList();
+            var defaults = GetDefaultPresets().Where(p => p.IndexType == index).ToList();
+            var custom = LoadCustomPresets().Where(p => p.IndexType == index).ToList();
+            return defaults.Concat(custom).ToList();
         }
 
         /// <summary>

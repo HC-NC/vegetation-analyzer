@@ -16,6 +16,7 @@ namespace vegetation_analyzer.Forms
         private void InitializeComponent()
         {
             presetComboBox = new ComboBox();
+            createEmptyButton = new Button();
             label1 = new Label();
             classTable = new DataGridView();
             colColor = new DataGridViewImageColumn();
@@ -24,6 +25,7 @@ namespace vegetation_analyzer.Forms
             colMax = new DataGridViewTextBoxColumn();
             previewPictureBox = new PictureBox();
             previewButton = new Button();
+            savePresetButton = new Button();
             applyButton = new Button();
             cancelButton = new Button();
             addClassButton = new Button();
@@ -46,9 +48,20 @@ namespace vegetation_analyzer.Forms
             presetComboBox.Size = new Size(380, 33);
             presetComboBox.TabIndex = 0;
             presetComboBox.SelectedIndexChanged += presetComboBox_SelectedIndexChanged;
-            // 
+            //
+            // createEmptyButton
+            //
+            createEmptyButton.Location = new Point(410, 68);
+            createEmptyButton.Margin = new Padding(4, 5, 4, 5);
+            createEmptyButton.Name = "createEmptyButton";
+            createEmptyButton.Size = new Size(200, 33);
+            createEmptyButton.TabIndex = 12;
+            createEmptyButton.Text = "+ Создать пустой пресет";
+            createEmptyButton.UseVisualStyleBackColor = true;
+            createEmptyButton.Click += createEmptyButton_Click;
+            //
             // label1
-            // 
+            //
             label1.AutoSize = true;
             label1.Location = new Point(20, 25);
             label1.Margin = new Padding(4, 0, 4, 0);
@@ -115,8 +128,8 @@ namespace vegetation_analyzer.Forms
             previewPictureBox.TabStop = false;
             // 
             // previewButton
-            // 
-            previewButton.Location = new Point(540, 567);
+            //
+            previewButton.Location = new Point(380, 567);
             previewButton.Margin = new Padding(4, 5, 4, 5);
             previewButton.Name = "previewButton";
             previewButton.Size = new Size(143, 38);
@@ -124,7 +137,18 @@ namespace vegetation_analyzer.Forms
             previewButton.Text = "Preview";
             previewButton.UseVisualStyleBackColor = true;
             previewButton.Click += previewButton_Click;
-            // 
+            //
+            // savePresetButton
+            //
+            savePresetButton.Location = new Point(4, 4);
+            savePresetButton.Margin = new Padding(4, 5, 4, 5);
+            savePresetButton.Name = "savePresetButton";
+            savePresetButton.Size = new Size(130, 38);
+            savePresetButton.TabIndex = 11;
+            savePresetButton.Text = "Save Preset";
+            savePresetButton.UseVisualStyleBackColor = true;
+            savePresetButton.Click += savePresetButton_Click;
+            //
             // applyButton
             // 
             applyButton.Location = new Point(737, 9);
@@ -194,6 +218,7 @@ namespace vegetation_analyzer.Forms
             // flowLayoutPanel1
             // 
             flowLayoutPanel1.AutoSize = true;
+            flowLayoutPanel1.Controls.Add(savePresetButton);
             flowLayoutPanel1.Controls.Add(applyButton);
             flowLayoutPanel1.Controls.Add(cancelButton);
             flowLayoutPanel1.Dock = DockStyle.Bottom;
@@ -212,6 +237,7 @@ namespace vegetation_analyzer.Forms
             CancelButton = cancelButton;
             ClientSize = new Size(856, 693);
             Controls.Add(flowLayoutPanel1);
+            Controls.Add(createEmptyButton);
             Controls.Add(moveDownButton);
             Controls.Add(moveUpButton);
             Controls.Add(removeClassButton);
@@ -241,6 +267,7 @@ namespace vegetation_analyzer.Forms
         #endregion
 
         private ComboBox presetComboBox;
+        private Button createEmptyButton;
         private Label label1;
         private DataGridView classTable;
         private DataGridViewImageColumn colColor;
@@ -249,6 +276,7 @@ namespace vegetation_analyzer.Forms
         private DataGridViewTextBoxColumn colMax;
         private PictureBox previewPictureBox;
         private Button previewButton;
+        private Button savePresetButton;
         private Button applyButton;
         private Button cancelButton;
         private Button addClassButton;

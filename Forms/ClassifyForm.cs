@@ -23,25 +23,41 @@ namespace vegetation_analyzer.Forms
 
         private void PopulatePresets()
         {
-            var presets = ClassificationPresets.GetPresetsForIndex(_indexRaster.IndexType);
             presetComboBox.Items.Clear();
 
-            foreach (var preset in presets)
+            // Встроенные пресеты
+            var builtinPresets = ClassificationPresets.GetDefaultPresets()
+                .Where(p => p.IndexType == _indexRaster.IndexType).ToList();
+
+            foreach (var preset in builtinPresets)
                 presetComboBox.Items.Add(preset.Name);
 
-            if (presets.Count > 0)
-                presetComboBox.SelectedIndex = 0;
-            else
-                MessageBox.Show(this, "Нет пресетов для данного индекса. Создайте пользовательскую схему.",
-                    "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            // Пользовательские пресеты (с префиксом)
+            var customPresets = ClassificationPresets.LoadCustomPresets()
+                .Where(p => p.IndexType == _indexRaster.IndexType).ToList();
+
+            if (customPresets.Count > 0)
+                presetComboBox.Items.Add("---"); // Разделитель
+
+            foreach (var preset in customPresets)
+                presetComboBox.Items.Add($"★ {preset.Name}");
+
+            if (builtinPresets.Count + customPresets.Count == 0)
+                presetComboBox.SelectedIndex = -1;
         }
 
         private void presetComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (presetComboBox.SelectedItem is not string presetName) return;
 
+            // Пропускаем разделитель
+            if (presetName == "---") return;
+
+            // Убираем префикс ★ для пользовательских
+            string cleanName = presetName.StartsWith("★ ") ? presetName.Substring(2) : presetName;
+
             var presets = ClassificationPresets.GetPresetsForIndex(_indexRaster.IndexType);
-            _currentScheme = presets.FirstOrDefault(p => p.Name == presetName)?.Clone()
+            _currentScheme = presets.FirstOrDefault(p => p.Name == cleanName)?.Clone()
                 ?? ClassificationPresets.GetDefaultForIndex(_indexRaster.IndexType)?.Clone();
 
             if (_currentScheme != null)
@@ -68,6 +84,64 @@ namespace vegetation_analyzer.Forms
                 row.Cells["colMin"].Value = cls.Min;
                 row.Cells["colMax"].Value = cls.Max;
                 row.Tag = cls;
+            }
+        }
+
+        private void createEmptyButton_Click(object sender, EventArgs e)
+        {
+            using (var inputForm = new Form
+            {
+                Text = "Новый пресет",
+                FormBorderStyle = FormBorderStyle.FixedDialog,
+                StartPosition = FormStartPosition.CenterParent,
+                Size = new Size(350, 130),
+                MaximizeBox = false,
+                MinimizeBox = false
+            })
+            {
+                var label = new Label { Text = "Имя пресета:", Location = new Point(14, 15), AutoSize = true };
+                var textBox = new TextBox { Location = new Point(14, 40), Width = 300 };
+                var okBtn = new Button { Text = "Создать", DialogResult = DialogResult.OK, Location = new Point(170, 70) };
+                var cancelBtn = new Button { Text = "Отмена", DialogResult = DialogResult.Cancel, Location = new Point(250, 70) };
+
+                inputForm.Controls.AddRange(new Control[] { label, textBox, okBtn, cancelBtn });
+                inputForm.AcceptButton = okBtn;
+                inputForm.CancelButton = cancelBtn;
+
+                if (inputForm.ShowDialog() == DialogResult.OK)
+                {
+                    string name = textBox.Text.Trim();
+                    if (string.IsNullOrEmpty(name))
+                    {
+                        MessageBox.Show(this, "Имя не может быть пустым.", "Ошибка",
+                            MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+
+                    var existing = ClassificationPresets.LoadCustomPresets()
+                        .FirstOrDefault(p => p.Name == name);
+                    if (existing != null)
+                    {
+                        MessageBox.Show(this, $"Пресет с именем \"{name}\" уже существует.", "Ошибка",
+                            MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+
+                    // Создаём пустую схему
+                    _currentScheme = new ClassificationScheme
+                    {
+                        Name = name,
+                        IndexType = _indexRaster.IndexType,
+                        Region = "Custom",
+                        Classes = new List<ClassificationClass>(),
+                        IsCustom = true
+                    };
+
+                    ClassificationPresets.SaveCustomPreset(_currentScheme);
+                    PopulatePresets();
+                    presetComboBox.SelectedItem = $"★ {name}";
+                    UpdateClassTable();
+                }
             }
         }
 
@@ -103,8 +177,12 @@ namespace vegetation_analyzer.Forms
             if (row.Tag is ClassificationClass cls)
             {
                 if (row.Cells["colClassName"].Value is string name) cls.Name = name;
-                if (row.Cells["colMin"].Value is float min) cls.Min = min;
-                if (row.Cells["colMax"].Value is float max) cls.Max = max;
+
+                // Значения могут прийти как double, decimal или float
+                if (row.Cells["colMin"].Value != null)
+                    cls.Min = Convert.ToSingle(row.Cells["colMin"].Value);
+                if (row.Cells["colMax"].Value != null)
+                    cls.Max = Convert.ToSingle(row.Cells["colMax"].Value);
             }
         }
 
@@ -167,6 +245,72 @@ namespace vegetation_analyzer.Forms
             _previewBitmap = classified.GetBitmap();
             previewPictureBox.Image = new Bitmap(_previewBitmap);
             classified.Dispose();
+        }
+
+        private void savePresetButton_Click(object sender, EventArgs e)
+        {
+            if (_currentScheme == null || _currentScheme.Classes.Count == 0)
+            {
+                MessageBox.Show(this, "Невозможно сохранить пустую схему.", "Ошибка",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            using (var inputForm = new Form
+            {
+                Text = "Сохранить пресет",
+                FormBorderStyle = FormBorderStyle.FixedDialog,
+                StartPosition = FormStartPosition.CenterParent,
+                Size = new Size(350, 130),
+                MaximizeBox = false,
+                MinimizeBox = false,
+                AcceptButton = null,
+                CancelButton = null
+            })
+            {
+                var label = new Label { Text = "Имя пресета:", Location = new Point(14, 15), AutoSize = true };
+                var textBox = new TextBox { Location = new Point(14, 40), Width = 300, Text = _currentScheme.Name };
+                var saveBtn = new Button { Text = "Сохранить", DialogResult = DialogResult.OK, Location = new Point(170, 70) };
+                var cancelBtn = new Button { Text = "Отмена", DialogResult = DialogResult.Cancel, Location = new Point(250, 70) };
+
+                inputForm.Controls.AddRange(new Control[] { label, textBox, saveBtn, cancelBtn });
+                inputForm.AcceptButton = saveBtn;
+                inputForm.CancelButton = cancelBtn;
+
+                if (inputForm.ShowDialog() == DialogResult.OK)
+                {
+                    string newName = textBox.Text.Trim();
+                    if (string.IsNullOrEmpty(newName))
+                    {
+                        MessageBox.Show(this, "Имя пресета не может быть пустым.", "Ошибка",
+                            MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+
+                    // Проверяем на дубликат
+                    var existing = ClassificationPresets.LoadCustomPresets()
+                        .FirstOrDefault(p => p.Name == newName);
+                    if (existing != null && !_currentScheme.IsCustom)
+                    {
+                        var result = MessageBox.Show(this, $"Пресет с именем \"{newName}\" уже существует. Заменить?",
+                            "Подтверждение", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        if (result != DialogResult.Yes) return;
+
+                        ClassificationPresets.DeleteCustomPreset(newName);
+                    }
+
+                    _currentScheme.Name = newName;
+                    _currentScheme.IsCustom = true;
+                    ClassificationPresets.SaveCustomPreset(_currentScheme);
+                    PopulatePresets();
+
+                    // Выбираем только что сохранённый пресет
+                    presetComboBox.SelectedItem = $"★ {newName}";
+
+                    MessageBox.Show(this, $"Пресет \"{newName}\" сохранён.", "Готово",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
         }
 
         private void applyButton_Click(object sender, EventArgs e)
