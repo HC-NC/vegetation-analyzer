@@ -59,5 +59,41 @@ namespace vegetation_analyzer.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Error.
+        /// </summary>
+        internal static string Error {
+            get {
+                return ResourceManager.GetString("Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на No files selected..
+        /// </summary>
+        internal static string ErrorFileSelect {
+            get {
+                return ResourceManager.GetString("ErrorFileSelect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на No TIFF files were found in the specified folder..
+        /// </summary>
+        internal static string ErrorTiffsFolder {
+            get {
+                return ResourceManager.GetString("ErrorTiffsFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Warning.
+        /// </summary>
+        internal static string Warning {
+            get {
+                return ResourceManager.GetString("Warning", resourceCulture);
+            }
+        }
     }
 }

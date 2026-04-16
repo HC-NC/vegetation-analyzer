@@ -34,6 +34,8 @@
             ignoreZeroCheckBox = new CheckBox();
             nameTextBox = new TextBox();
             pathTextBox = new TextBox();
+            flowLayoutPanel1 = new FlowLayoutPanel();
+            flowLayoutPanel1.SuspendLayout();
             SuspendLayout();
             // 
             // acceptButton
@@ -70,17 +72,23 @@
             pathTextBox.Name = "pathTextBox";
             pathTextBox.ReadOnly = true;
             // 
+            // flowLayoutPanel1
+            // 
+            resources.ApplyResources(flowLayoutPanel1, "flowLayoutPanel1");
+            flowLayoutPanel1.Controls.Add(cancelButton);
+            flowLayoutPanel1.Controls.Add(acceptButton);
+            flowLayoutPanel1.Name = "flowLayoutPanel1";
+            // 
             // FileOpenParamForm
             // 
             AcceptButton = acceptButton;
             resources.ApplyResources(this, "$this");
             AutoScaleMode = AutoScaleMode.Font;
             CancelButton = cancelButton;
+            Controls.Add(flowLayoutPanel1);
             Controls.Add(pathTextBox);
             Controls.Add(nameTextBox);
             Controls.Add(ignoreZeroCheckBox);
-            Controls.Add(cancelButton);
-            Controls.Add(acceptButton);
             FormBorderStyle = FormBorderStyle.FixedDialog;
             MaximizeBox = false;
             MinimizeBox = false;
@@ -88,6 +96,7 @@
             ShowIcon = false;
             ShowInTaskbar = false;
             TopMost = true;
+            flowLayoutPanel1.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -99,5 +108,6 @@
         private CheckBox ignoreZeroCheckBox;
         private TextBox nameTextBox;
         private TextBox pathTextBox;
+        private FlowLayoutPanel flowLayoutPanel1;
     }
 }

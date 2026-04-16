@@ -1,6 +1,7 @@
 using OSGeo.GDAL;
 using System.ComponentModel;
 using vegetation_analyzer.DataClasses;
+using vegetation_analyzer.Properties;
 
 namespace vegetation_analyzer.Forms
 {
@@ -96,7 +97,7 @@ namespace vegetation_analyzer.Forms
 
             if (fileInfos.Count == 0)
             {
-                MessageBox.Show(this, "В указанной папке не найдено TIFF файлов.", "Внимание",
+                MessageBox.Show(this, Resources.ErrorTiffsFolder, Resources.Warning,
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
@@ -184,7 +185,7 @@ namespace vegetation_analyzer.Forms
         {
             if (SelectedBands.Count == 0)
             {
-                MessageBox.Show(this, "Не выбрано ни одного файла.", "Ошибка",
+                MessageBox.Show(this, Resources.ErrorFileSelect, Resources.Error,
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 DialogResult = DialogResult.None;
             }
