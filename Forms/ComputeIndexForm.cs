@@ -1,4 +1,5 @@
 using vegetation_analyzer.DataClasses;
+using vegetation_analyzer.Properties;
 
 namespace vegetation_analyzer.Forms
 {
@@ -37,13 +38,13 @@ namespace vegetation_analyzer.Forms
 
             // Описание
             descriptionTextBox.Text =
-                $"Формула: {IndexDefinition.GetFormula(selectedIndex)}\r\n\r\n" +
+                $"{Resources.Formula}\r\n{IndexDefinition.GetFormula(selectedIndex)}\r\n\r\n" +
                 $"{IndexDefinition.GetDescription(selectedIndex)}";
 
             // Заполняем маппинг
             bandMappingPanel.Controls.Clear();
 
-            int y = 0;
+            int y = 16;
             foreach (var role in requiredBands)
             {
                 var label = new Label
@@ -142,7 +143,7 @@ namespace vegetation_analyzer.Forms
             {
                 if (!mapping.ContainsKey(role))
                 {
-                    MessageBox.Show(this, $"Не выбран канал для {role}.", "Ошибка",
+                    MessageBox.Show(this, string.Format(Resources.ErrorBandSelect, role), Resources.Error,
                         MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     DialogResult = DialogResult.None;
                     return;

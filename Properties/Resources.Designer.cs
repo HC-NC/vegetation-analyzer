@@ -79,6 +79,15 @@ namespace vegetation_analyzer.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на No band selected for {0}..
+        /// </summary>
+        internal static string ErrorBandSelect {
+            get {
+                return ResourceManager.GetString("ErrorBandSelect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Specify the export path..
         /// </summary>
         internal static string ErrorExportPath {
@@ -102,6 +111,15 @@ namespace vegetation_analyzer.Properties {
         internal static string ErrorTiffsFolder {
             get {
                 return ResourceManager.GetString("ErrorTiffsFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Formula:.
+        /// </summary>
+        internal static string Formula {
+            get {
+                return ResourceManager.GetString("Formula", resourceCulture);
             }
         }
         

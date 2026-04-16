@@ -123,6 +123,9 @@
   <data name="Error" xml:space="preserve">
     <value>Ошибка</value>
   </data>
+  <data name="ErrorBandSelect" xml:space="preserve">
+    <value>Не выбран канал для {0}.</value>
+  </data>
   <data name="ErrorExportPath" xml:space="preserve">
     <value>Укажите путь для экспорта.</value>
   </data>
@@ -131,6 +134,9 @@
   </data>
   <data name="ErrorTiffsFolder" xml:space="preserve">
     <value>В указанной папке не найдено TIFF файлов.</value>
+  </data>
+  <data name="Formula" xml:space="preserve">
+    <value>Формула:</value>
   </data>
   <data name="IndexToGTIFF" xml:space="preserve">
     <value>Экспорт индекса в GeoTIFF (Float32 или Byte)</value>

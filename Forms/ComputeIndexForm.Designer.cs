@@ -17,127 +17,105 @@ namespace vegetation_analyzer.Forms
 
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ComputeIndexForm));
             indexListBox = new ListBox();
             descriptionTextBox = new TextBox();
             bandMappingPanel = new Panel();
             acceptButton = new Button();
             cancelButton = new Button();
-            label1 = new Label();
-            label2 = new Label();
-            label3 = new Label();
+            groupBox1 = new GroupBox();
+            groupBox2 = new GroupBox();
+            groupBox3 = new GroupBox();
+            flowLayoutPanel1 = new FlowLayoutPanel();
+            groupBox1.SuspendLayout();
+            groupBox2.SuspendLayout();
+            groupBox3.SuspendLayout();
+            flowLayoutPanel1.SuspendLayout();
             SuspendLayout();
             // 
             // indexListBox
             // 
-            indexListBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
+            resources.ApplyResources(indexListBox, "indexListBox");
             indexListBox.FormattingEnabled = true;
-            indexListBox.Location = new Point(20, 68);
-            indexListBox.Margin = new Padding(4, 5, 4, 5);
             indexListBox.Name = "indexListBox";
-            indexListBox.Size = new Size(227, 454);
-            indexListBox.TabIndex = 0;
             indexListBox.SelectedIndexChanged += indexListBox_SelectedIndexChanged;
             // 
             // descriptionTextBox
             // 
-            descriptionTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            descriptionTextBox.Location = new Point(271, 68);
-            descriptionTextBox.Margin = new Padding(4, 5, 4, 5);
-            descriptionTextBox.Multiline = true;
+            resources.ApplyResources(descriptionTextBox, "descriptionTextBox");
             descriptionTextBox.Name = "descriptionTextBox";
             descriptionTextBox.ReadOnly = true;
-            descriptionTextBox.ScrollBars = ScrollBars.Vertical;
-            descriptionTextBox.Size = new Size(498, 164);
-            descriptionTextBox.TabIndex = 1;
             // 
             // bandMappingPanel
             // 
-            bandMappingPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            bandMappingPanel.AutoScroll = true;
+            resources.ApplyResources(bandMappingPanel, "bandMappingPanel");
             bandMappingPanel.BorderStyle = BorderStyle.FixedSingle;
-            bandMappingPanel.Location = new Point(271, 267);
-            bandMappingPanel.Margin = new Padding(4, 5, 4, 5);
             bandMappingPanel.Name = "bandMappingPanel";
-            bandMappingPanel.Size = new Size(499, 258);
-            bandMappingPanel.TabIndex = 2;
             // 
             // acceptButton
             // 
-            acceptButton.Location = new Point(663, 542);
-            acceptButton.Margin = new Padding(4, 5, 4, 5);
+            resources.ApplyResources(acceptButton, "acceptButton");
             acceptButton.Name = "acceptButton";
-            acceptButton.Size = new Size(107, 38);
-            acceptButton.TabIndex = 3;
-            acceptButton.Text = "Вычислить";
             acceptButton.UseVisualStyleBackColor = true;
             acceptButton.Click += acceptButton_Click;
             // 
             // cancelButton
             // 
             cancelButton.DialogResult = DialogResult.Cancel;
-            cancelButton.Location = new Point(548, 542);
-            cancelButton.Margin = new Padding(4, 5, 4, 5);
+            resources.ApplyResources(cancelButton, "cancelButton");
             cancelButton.Name = "cancelButton";
-            cancelButton.Size = new Size(107, 38);
-            cancelButton.TabIndex = 4;
-            cancelButton.Text = "Отмена";
             cancelButton.UseVisualStyleBackColor = true;
             // 
-            // label1
+            // groupBox1
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(20, 25);
-            label1.Margin = new Padding(4, 0, 4, 0);
-            label1.Name = "label1";
-            label1.Size = new Size(199, 25);
-            label1.TabIndex = 5;
-            label1.Text = "Вегетационный индекс";
+            groupBox1.Controls.Add(indexListBox);
+            resources.ApplyResources(groupBox1, "groupBox1");
+            groupBox1.Name = "groupBox1";
+            groupBox1.TabStop = false;
             // 
-            // label2
+            // groupBox2
             // 
-            label2.AutoSize = true;
-            label2.Location = new Point(271, 25);
-            label2.Margin = new Padding(4, 0, 4, 0);
-            label2.Name = "label2";
-            label2.Size = new Size(92, 25);
-            label2.TabIndex = 6;
-            label2.Text = "Описание";
+            groupBox2.Controls.Add(descriptionTextBox);
+            resources.ApplyResources(groupBox2, "groupBox2");
+            groupBox2.Name = "groupBox2";
+            groupBox2.TabStop = false;
             // 
-            // label3
+            // groupBox3
             // 
-            label3.AutoSize = true;
-            label3.Location = new Point(271, 237);
-            label3.Margin = new Padding(4, 0, 4, 0);
-            label3.Name = "label3";
-            label3.Size = new Size(194, 25);
-            label3.TabIndex = 7;
-            label3.Text = "Соответствие каналов";
+            groupBox3.Controls.Add(bandMappingPanel);
+            resources.ApplyResources(groupBox3, "groupBox3");
+            groupBox3.Name = "groupBox3";
+            groupBox3.TabStop = false;
+            // 
+            // flowLayoutPanel1
+            // 
+            resources.ApplyResources(flowLayoutPanel1, "flowLayoutPanel1");
+            flowLayoutPanel1.Controls.Add(cancelButton);
+            flowLayoutPanel1.Controls.Add(acceptButton);
+            flowLayoutPanel1.Name = "flowLayoutPanel1";
             // 
             // ComputeIndexForm
             // 
             AcceptButton = acceptButton;
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            resources.ApplyResources(this, "$this");
             AutoScaleMode = AutoScaleMode.Font;
             CancelButton = cancelButton;
-            ClientSize = new Size(791, 600);
-            Controls.Add(label3);
-            Controls.Add(label2);
-            Controls.Add(label1);
-            Controls.Add(cancelButton);
-            Controls.Add(acceptButton);
-            Controls.Add(bandMappingPanel);
-            Controls.Add(descriptionTextBox);
-            Controls.Add(indexListBox);
+            Controls.Add(groupBox3);
+            Controls.Add(groupBox2);
+            Controls.Add(groupBox1);
+            Controls.Add(flowLayoutPanel1);
             FormBorderStyle = FormBorderStyle.FixedDialog;
-            Margin = new Padding(4, 5, 4, 5);
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "ComputeIndexForm";
             ShowIcon = false;
             ShowInTaskbar = false;
-            StartPosition = FormStartPosition.CenterParent;
-            Text = "Вычисление вегетационного индекса";
             Load += ComputeIndexForm_Load;
+            groupBox1.ResumeLayout(false);
+            groupBox2.ResumeLayout(false);
+            groupBox2.PerformLayout();
+            groupBox3.ResumeLayout(false);
+            flowLayoutPanel1.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -149,8 +127,9 @@ namespace vegetation_analyzer.Forms
         private Panel bandMappingPanel;
         private Button acceptButton;
         private Button cancelButton;
-        private Label label1;
-        private Label label2;
-        private Label label3;
+        private GroupBox groupBox1;
+        private GroupBox groupBox2;
+        private GroupBox groupBox3;
+        private FlowLayoutPanel flowLayoutPanel1;
     }
 }
