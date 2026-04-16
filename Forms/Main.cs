@@ -2,6 +2,7 @@ using Histogram_Contrast_Corrector;
 using OSGeo.GDAL;
 using System.ComponentModel;
 using vegetation_analyzer.DataClasses;
+using vegetation_analyzer.Properties;
 
 namespace vegetation_analyzer.Forms
 {
@@ -13,7 +14,7 @@ namespace vegetation_analyzer.Forms
 
             Gdal.SetCacheMax(128 * 1024 * 1024);
 
-            openFileDialog1.Filter = "All files|*.tif;*.img;*.png;*.jpg;*.gif|TIFF|*.tif|IMG|*.img|PNG|*.png|JPEG|*.jpg|GIF|*.gif";
+            openFileDialog1.Filter = "All files|*.tif;*.img;*.png;*.jpg;*.gif|TIFF|*.tif;*.tiff|IMG|*.img|PNG|*.png|JPEG|*.jpg|GIF|*.gif";
         }
 
         private void Main_Load(object sender, EventArgs e)
@@ -41,7 +42,7 @@ namespace vegetation_analyzer.Forms
 
             if (openFileDialog1.ShowDialog(this) == DialogResult.OK)
             {
-                toolStripStatusLabel1.Text = string.Format("Opening: {0}", openFileDialog1.SafeFileName);
+                toolStripStatusLabel1.Text = string.Format(Resources.Opening, openFileDialog1.SafeFileName);
 
                 toolStripProgressBar1.Visible = true;
                 toolStripStatusLabel1.Visible = true;
@@ -56,7 +57,7 @@ namespace vegetation_analyzer.Forms
 
             if (folderBrowserDialog1.ShowDialog(this) == DialogResult.OK)
             {
-                toolStripStatusLabel1.Text = string.Format("Analyzing folder: {0}", Path.GetFileName(folderBrowserDialog1.SelectedPath));
+                toolStripStatusLabel1.Text = string.Format(Resources.AnalyzingFolder, Path.GetFileName(folderBrowserDialog1.SelectedPath));
 
                 toolStripProgressBar1.Visible = true;
                 toolStripStatusLabel1.Visible = true;
@@ -85,7 +86,7 @@ namespace vegetation_analyzer.Forms
 
                 if (openParamForm.ShowDialog() == DialogResult.OK)
                 {
-                    worker.ReportProgress(50, string.Format("Opening: {0}", safeName));
+                    worker.ReportProgress(50, string.Format(Resources.Opening, safeName));
 
                     bool ignoreZero = openParamForm.IgnoreZero;
 
@@ -106,7 +107,7 @@ namespace vegetation_analyzer.Forms
 
                 if (folderParamForm.ShowDialog() == DialogResult.OK)
                 {
-                    worker.ReportProgress(50, string.Format("Opening: {0}", folderName));
+                    worker.ReportProgress(50, string.Format(Resources.Opening, folderName));
 
                     bool ignoreZero = folderParamForm.IgnoreZero;
                     List<BandFileInfo> selectedBands = folderParamForm.SelectedBands;
@@ -214,7 +215,7 @@ namespace vegetation_analyzer.Forms
             {
                 var scheme = classifyForm.GetScheme();
 
-                toolStripStatusLabel1.Text = $"Classifying: {scheme.Name}";
+                toolStripStatusLabel1.Text = string.Format(Resources.Classifying, scheme.Name);
                 toolStripProgressBar1.Visible = true;
                 toolStripStatusLabel1.Visible = true;
 
@@ -235,7 +236,7 @@ namespace vegetation_analyzer.Forms
         {
             if (e.Error != null)
             {
-                MessageBox.Show(this, $"Ошибка классификации: {e.Error.Message}", "Ошибка",
+                MessageBox.Show(this, string.Format(Resources.ErrorClassification, e.Error.Message), Resources.Error,
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else if (e.Result is Tuple<ClassifiedRaster, IndexRaster, ClassificationScheme> result)
@@ -288,7 +289,7 @@ namespace vegetation_analyzer.Forms
             TreeNode classNode = new TreeNode(classified.ToString())
             {
                 Tag = classified,
-                ToolTipText = $"{classified.Scheme.Name} ({classified.Scheme.Classes.Count} classes)"
+                ToolTipText = $"{classified.Scheme.Name} ({classified.Scheme.Classes.Count} {Resources.Classes})"
             };
             parentNode.Nodes.Add(classNode);
             treeView1.SelectedNode = classNode;
@@ -306,7 +307,7 @@ namespace vegetation_analyzer.Forms
                 VegetationIndex indexType = computeForm.SelectedIndex;
                 Dictionary<SpectralBandRole, int> bandMapping = computeForm.GetBandMapping();
 
-                toolStripStatusLabel1.Text = $"Computing: {IndexDefinition.GetName(indexType)}";
+                toolStripStatusLabel1.Text = string.Format(Resources.Computing, IndexDefinition.GetName(indexType));
                 toolStripProgressBar1.Visible = true;
                 toolStripStatusLabel1.Visible = true;
 
@@ -327,7 +328,7 @@ namespace vegetation_analyzer.Forms
         {
             if (e.Error != null)
             {
-                MessageBox.Show(this, $"Ошибка вычисления индекса: {e.Error.Message}", "Ошибка",
+                MessageBox.Show(this, string.Format(Resources.ErrorCalculatingIndex, e.Error.Message), Resources.Error,
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else if (e.Result is Tuple<IndexRaster, RasterData> result)
@@ -420,7 +421,7 @@ namespace vegetation_analyzer.Forms
             TreeNode? node = treeView1.SelectedNode;
             if (node?.Tag is RasterData raster)
             {
-                var result = MessageBox.Show(this, $"Удалить растр \"{raster.Name}\"?", "Подтверждение",
+                var result = MessageBox.Show(this, string.Format(Resources.DeleteRaster, raster.Name), Resources.Confirmation,
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                 if (result != DialogResult.Yes) return;
@@ -436,7 +437,7 @@ namespace vegetation_analyzer.Forms
             }
             else if (node?.Tag is IndexRaster indexRaster)
             {
-                var result = MessageBox.Show(this, $"Удалить индекс \"{indexRaster.Name}\"?", "Подтверждение",
+                var result = MessageBox.Show(this, string.Format(Resources.DeleteIndex, indexRaster.Name), Resources.Confirmation,
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                 if (result != DialogResult.Yes) return;
@@ -452,7 +453,7 @@ namespace vegetation_analyzer.Forms
             }
             else if (node?.Tag is ClassifiedRaster classifiedRaster)
             {
-                var result = MessageBox.Show(this, $"Удалить классификацию \"{classifiedRaster.Name}\"?", "Подтверждение",
+                var result = MessageBox.Show(this, string.Format(Resources.DeleteClassification, classifiedRaster.Name), Resources.Confirmation,
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                 if (result != DialogResult.Yes) return;
@@ -504,7 +505,7 @@ namespace vegetation_analyzer.Forms
 
             if (exportForm.ShowDialog() == DialogResult.OK)
             {
-                toolStripStatusLabel1.Text = $"Exporting: {Path.GetFileName(exportForm.FilePath)}";
+                toolStripStatusLabel1.Text = string.Format(Resources.Exporting, Path.GetFileName(exportForm.FilePath));
                 toolStripProgressBar1.Visible = true;
                 toolStripStatusLabel1.Visible = true;
 
@@ -536,12 +537,12 @@ namespace vegetation_analyzer.Forms
         {
             if (e.Error != null)
             {
-                MessageBox.Show(this, $"Ошибка экспорта: {e.Error.Message}", "Ошибка",
+                MessageBox.Show(this, string.Format(Resources.ErrorExport, e.Error.Message), Resources.Error,
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
-                MessageBox.Show(this, "Экспорт завершён успешно.", "Готово",
+                MessageBox.Show(this, Resources.ExportCompleted, Resources.Ready,
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 

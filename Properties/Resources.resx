@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AnalyzingFolder" xml:space="preserve">
+    <value>Analyzing folder: {0}</value>
+  </data>
   <data name="Bands" xml:space="preserve">
     <value>Bands</value>
   </data>
@@ -141,11 +144,26 @@
   <data name="ClassifiedToGTIFF" xml:space="preserve">
     <value>Export classification to GeoTIFF with palette</value>
   </data>
+  <data name="Classifying" xml:space="preserve">
+    <value>Classifying: {0}</value>
+  </data>
+  <data name="Computing" xml:space="preserve">
+    <value>Computing: {0}</value>
+  </data>
   <data name="Confirmation" xml:space="preserve">
     <value>Confirmation</value>
   </data>
   <data name="Create" xml:space="preserve">
     <value>Create</value>
+  </data>
+  <data name="DeleteClassification" xml:space="preserve">
+    <value>Delete classification "{0}"?</value>
+  </data>
+  <data name="DeleteIndex" xml:space="preserve">
+    <value>Delete index "{0}"?</value>
+  </data>
+  <data name="DeleteRaster" xml:space="preserve">
+    <value>Delete raster "{0}"?</value>
   </data>
   <data name="Error" xml:space="preserve">
     <value>Error</value>
@@ -153,14 +171,23 @@
   <data name="ErrorBandSelect" xml:space="preserve">
     <value>No band selected for {0}.</value>
   </data>
+  <data name="ErrorCalculatingIndex" xml:space="preserve">
+    <value>Error calculating index: {0}</value>
+  </data>
   <data name="ErrorClassDefined" xml:space="preserve">
     <value>No classes defined.</value>
+  </data>
+  <data name="ErrorClassification" xml:space="preserve">
+    <value>Classification error: {0}</value>
   </data>
   <data name="ErrorEmptyPresetName" xml:space="preserve">
     <value>Preset name cannot be empty.</value>
   </data>
   <data name="ErrorEmptyScheme" xml:space="preserve">
     <value>Cannot save empty schema.</value>
+  </data>
+  <data name="ErrorExport" xml:space="preserve">
+    <value>Export error: {0}</value>
   </data>
   <data name="ErrorExportPath" xml:space="preserve">
     <value>Specify the export path.</value>
@@ -179,6 +206,12 @@
   </data>
   <data name="ErrorTiffsFolder" xml:space="preserve">
     <value>No TIFF files were found in the specified folder.</value>
+  </data>
+  <data name="ExportCompleted" xml:space="preserve">
+    <value>Export completed successfully.</value>
+  </data>
+  <data name="Exporting" xml:space="preserve">
+    <value>Exporting: {0}</value>
   </data>
   <data name="Formula" xml:space="preserve">
     <value>Formula:</value>
@@ -215,6 +248,9 @@
   </data>
   <data name="NumberClasses" xml:space="preserve">
     <value>Number of Classes</value>
+  </data>
+  <data name="Opening" xml:space="preserve">
+    <value>Opening: {0}</value>
   </data>
   <data name="Path" xml:space="preserve">
     <value>Path</value>

@@ -29,16 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            menuStrip1 = new MenuStrip();
-            fileToolStripMenuItem = new ToolStripMenuItem();
-            openFileToolStripMenuItem = new ToolStripMenuItem();
-            openFolderToolStripMenuItem = new ToolStripMenuItem();
-            toolStripSeparator1 = new ToolStripSeparator();
-            exitToolStripMenuItem = new ToolStripMenuItem();
-            aboutToolStripMenuItem = new ToolStripMenuItem();
-            statusStrip1 = new StatusStrip();
-            toolStripStatusLabel1 = new ToolStripStatusLabel();
-            toolStripProgressBar1 = new ToolStripProgressBar();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             splitContainer1 = new SplitContainer();
             treeView1 = new TreeView();
             contextMenuStrip1 = new ContextMenuStrip(components);
@@ -50,183 +41,173 @@
             toolStripSeparator3 = new ToolStripSeparator();
             removeToolStripMenuItem = new ToolStripMenuItem();
             viewport = new Viewport();
+            menuStrip1 = new MenuStrip();
+            fileToolStripMenuItem = new ToolStripMenuItem();
+            openFileToolStripMenuItem = new ToolStripMenuItem();
+            openFolderToolStripMenuItem = new ToolStripMenuItem();
+            toolStripSeparator1 = new ToolStripSeparator();
+            exitToolStripMenuItem = new ToolStripMenuItem();
+            aboutToolStripMenuItem = new ToolStripMenuItem();
+            statusStrip1 = new StatusStrip();
+            toolStripStatusLabel1 = new ToolStripStatusLabel();
+            toolStripProgressBar1 = new ToolStripProgressBar();
             openFileDialog1 = new OpenFileDialog();
             folderBrowserDialog1 = new FolderBrowserDialog();
             openBackgroundWorker = new System.ComponentModel.BackgroundWorker();
             computeIndexBackgroundWorker = new System.ComponentModel.BackgroundWorker();
             classifyBackgroundWorker = new System.ComponentModel.BackgroundWorker();
             exportBackgroundWorker = new System.ComponentModel.BackgroundWorker();
-            menuStrip1.SuspendLayout();
-            statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
             splitContainer1.SuspendLayout();
             contextMenuStrip1.SuspendLayout();
+            menuStrip1.SuspendLayout();
+            statusStrip1.SuspendLayout();
             SuspendLayout();
-            // 
-            // menuStrip1
-            // 
-            menuStrip1.ImageScalingSize = new Size(24, 24);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, aboutToolStripMenuItem });
-            menuStrip1.Location = new Point(0, 0);
-            menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(1178, 33);
-            menuStrip1.TabIndex = 0;
-            menuStrip1.Text = "menuStrip1";
-            // 
-            // fileToolStripMenuItem
-            // 
-            fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { openFileToolStripMenuItem, openFolderToolStripMenuItem, toolStripSeparator1, exitToolStripMenuItem });
-            fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            fileToolStripMenuItem.Size = new Size(54, 29);
-            fileToolStripMenuItem.Text = "File";
-            // 
-            // openFileToolStripMenuItem
-            // 
-            openFileToolStripMenuItem.Name = "openFileToolStripMenuItem";
-            openFileToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.O;
-            openFileToolStripMenuItem.Size = new Size(326, 34);
-            openFileToolStripMenuItem.Text = "Open File";
-            openFileToolStripMenuItem.Click += openFileToolStripMenuItem_Click;
-            // 
-            // openFolderToolStripMenuItem
-            // 
-            openFolderToolStripMenuItem.Name = "openFolderToolStripMenuItem";
-            openFolderToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.Shift | Keys.O;
-            openFolderToolStripMenuItem.Size = new Size(326, 34);
-            openFolderToolStripMenuItem.Text = "Open Folder";
-            openFolderToolStripMenuItem.Click += openFolderToolStripMenuItem_Click;
-            // 
-            // toolStripSeparator1
-            // 
-            toolStripSeparator1.Name = "toolStripSeparator1";
-            toolStripSeparator1.Size = new Size(323, 6);
-            // 
-            // exitToolStripMenuItem
-            // 
-            exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            exitToolStripMenuItem.ShortcutKeys = Keys.Alt | Keys.F4;
-            exitToolStripMenuItem.Size = new Size(326, 34);
-            exitToolStripMenuItem.Text = "Exit";
-            exitToolStripMenuItem.Click += exitToolStripMenuItem_Click;
-            // 
-            // aboutToolStripMenuItem
-            // 
-            aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            aboutToolStripMenuItem.Size = new Size(78, 29);
-            aboutToolStripMenuItem.Text = "About";
-            aboutToolStripMenuItem.Click += aboutToolStripMenuItem_Click;
-            // 
-            // statusStrip1
-            // 
-            statusStrip1.ImageScalingSize = new Size(24, 24);
-            statusStrip1.Items.AddRange(new ToolStripItem[] { toolStripStatusLabel1, toolStripProgressBar1 });
-            statusStrip1.Location = new Point(0, 712);
-            statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new Size(1178, 32);
-            statusStrip1.TabIndex = 1;
-            statusStrip1.Text = "statusStrip1";
-            // 
-            // toolStripStatusLabel1
-            // 
-            toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            toolStripStatusLabel1.Size = new Size(60, 25);
-            toolStripStatusLabel1.Text = "Status";
-            // 
-            // toolStripProgressBar1
-            // 
-            toolStripProgressBar1.Name = "toolStripProgressBar1";
-            toolStripProgressBar1.Size = new Size(100, 24);
             // 
             // splitContainer1
             // 
-            splitContainer1.Dock = DockStyle.Fill;
-            splitContainer1.Location = new Point(0, 33);
+            resources.ApplyResources(splitContainer1, "splitContainer1");
             splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
             // 
+            resources.ApplyResources(splitContainer1.Panel1, "splitContainer1.Panel1");
             splitContainer1.Panel1.Controls.Add(treeView1);
             // 
             // splitContainer1.Panel2
             // 
+            resources.ApplyResources(splitContainer1.Panel2, "splitContainer1.Panel2");
             splitContainer1.Panel2.Controls.Add(viewport);
-            splitContainer1.Size = new Size(1178, 679);
-            splitContainer1.SplitterDistance = 391;
-            splitContainer1.TabIndex = 2;
             // 
             // treeView1
             // 
+            resources.ApplyResources(treeView1, "treeView1");
             treeView1.ContextMenuStrip = contextMenuStrip1;
-            treeView1.Dock = DockStyle.Fill;
-            treeView1.Location = new Point(0, 0);
             treeView1.Name = "treeView1";
-            treeView1.Size = new Size(391, 679);
-            treeView1.TabIndex = 0;
             treeView1.AfterSelect += treeView_AfterSelect;
             treeView1.NodeMouseClick += treeView1_NodeMouseClick;
             // 
             // contextMenuStrip1
             // 
+            resources.ApplyResources(contextMenuStrip1, "contextMenuStrip1");
             contextMenuStrip1.ImageScalingSize = new Size(24, 24);
             contextMenuStrip1.Items.AddRange(new ToolStripItem[] { computeIndexToolStripMenuItem, classifyToolStripMenuItem, exportToolStripMenuItem, toolStripSeparator2, propertiesToolStripMenuItem, toolStripSeparator3, removeToolStripMenuItem });
             contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new Size(297, 176);
             contextMenuStrip1.Opening += contextMenuStrip1_Opening;
             // 
             // computeIndexToolStripMenuItem
             // 
+            resources.ApplyResources(computeIndexToolStripMenuItem, "computeIndexToolStripMenuItem");
             computeIndexToolStripMenuItem.Name = "computeIndexToolStripMenuItem";
-            computeIndexToolStripMenuItem.Size = new Size(296, 32);
-            computeIndexToolStripMenuItem.Text = "Compute Vegetation Index";
             computeIndexToolStripMenuItem.Click += computeIndexToolStripMenuItem_Click;
             // 
             // classifyToolStripMenuItem
             // 
+            resources.ApplyResources(classifyToolStripMenuItem, "classifyToolStripMenuItem");
             classifyToolStripMenuItem.Name = "classifyToolStripMenuItem";
-            classifyToolStripMenuItem.Size = new Size(296, 32);
-            classifyToolStripMenuItem.Text = "Classify...";
             classifyToolStripMenuItem.Click += classifyToolStripMenuItem_Click;
             // 
             // exportToolStripMenuItem
             // 
+            resources.ApplyResources(exportToolStripMenuItem, "exportToolStripMenuItem");
             exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-            exportToolStripMenuItem.Size = new Size(296, 32);
-            exportToolStripMenuItem.Text = "Export to File...";
             exportToolStripMenuItem.Click += exportToolStripMenuItem_Click;
             // 
             // toolStripSeparator2
             // 
+            resources.ApplyResources(toolStripSeparator2, "toolStripSeparator2");
             toolStripSeparator2.Name = "toolStripSeparator2";
-            toolStripSeparator2.Size = new Size(293, 6);
             // 
             // propertiesToolStripMenuItem
             // 
+            resources.ApplyResources(propertiesToolStripMenuItem, "propertiesToolStripMenuItem");
             propertiesToolStripMenuItem.Name = "propertiesToolStripMenuItem";
-            propertiesToolStripMenuItem.Size = new Size(296, 32);
-            propertiesToolStripMenuItem.Text = "Properties";
             propertiesToolStripMenuItem.Click += propertiesToolStripMenuItem_Click;
             // 
             // toolStripSeparator3
             // 
+            resources.ApplyResources(toolStripSeparator3, "toolStripSeparator3");
             toolStripSeparator3.Name = "toolStripSeparator3";
-            toolStripSeparator3.Size = new Size(293, 6);
             // 
             // removeToolStripMenuItem
             // 
+            resources.ApplyResources(removeToolStripMenuItem, "removeToolStripMenuItem");
             removeToolStripMenuItem.Name = "removeToolStripMenuItem";
-            removeToolStripMenuItem.Size = new Size(296, 32);
-            removeToolStripMenuItem.Text = "Remove";
             removeToolStripMenuItem.Click += removeToolStripMenuItem_Click;
             // 
             // viewport
             // 
-            viewport.Dock = DockStyle.Fill;
-            viewport.Location = new Point(0, 0);
+            resources.ApplyResources(viewport, "viewport");
             viewport.Name = "viewport";
-            viewport.Size = new Size(783, 679);
-            viewport.TabIndex = 0;
+            // 
+            // menuStrip1
+            // 
+            resources.ApplyResources(menuStrip1, "menuStrip1");
+            menuStrip1.ImageScalingSize = new Size(24, 24);
+            menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, aboutToolStripMenuItem });
+            menuStrip1.Name = "menuStrip1";
+            // 
+            // fileToolStripMenuItem
+            // 
+            resources.ApplyResources(fileToolStripMenuItem, "fileToolStripMenuItem");
+            fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { openFileToolStripMenuItem, openFolderToolStripMenuItem, toolStripSeparator1, exitToolStripMenuItem });
+            fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            // 
+            // openFileToolStripMenuItem
+            // 
+            resources.ApplyResources(openFileToolStripMenuItem, "openFileToolStripMenuItem");
+            openFileToolStripMenuItem.Name = "openFileToolStripMenuItem";
+            openFileToolStripMenuItem.Click += openFileToolStripMenuItem_Click;
+            // 
+            // openFolderToolStripMenuItem
+            // 
+            resources.ApplyResources(openFolderToolStripMenuItem, "openFolderToolStripMenuItem");
+            openFolderToolStripMenuItem.Name = "openFolderToolStripMenuItem";
+            openFolderToolStripMenuItem.Click += openFolderToolStripMenuItem_Click;
+            // 
+            // toolStripSeparator1
+            // 
+            resources.ApplyResources(toolStripSeparator1, "toolStripSeparator1");
+            toolStripSeparator1.Name = "toolStripSeparator1";
+            // 
+            // exitToolStripMenuItem
+            // 
+            resources.ApplyResources(exitToolStripMenuItem, "exitToolStripMenuItem");
+            exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            exitToolStripMenuItem.Click += exitToolStripMenuItem_Click;
+            // 
+            // aboutToolStripMenuItem
+            // 
+            resources.ApplyResources(aboutToolStripMenuItem, "aboutToolStripMenuItem");
+            aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            aboutToolStripMenuItem.Click += aboutToolStripMenuItem_Click;
+            // 
+            // statusStrip1
+            // 
+            resources.ApplyResources(statusStrip1, "statusStrip1");
+            statusStrip1.ImageScalingSize = new Size(24, 24);
+            statusStrip1.Items.AddRange(new ToolStripItem[] { toolStripStatusLabel1, toolStripProgressBar1 });
+            statusStrip1.Name = "statusStrip1";
+            // 
+            // toolStripStatusLabel1
+            // 
+            resources.ApplyResources(toolStripStatusLabel1, "toolStripStatusLabel1");
+            toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            // 
+            // toolStripProgressBar1
+            // 
+            resources.ApplyResources(toolStripProgressBar1, "toolStripProgressBar1");
+            toolStripProgressBar1.Name = "toolStripProgressBar1";
+            // 
+            // openFileDialog1
+            // 
+            resources.ApplyResources(openFileDialog1, "openFileDialog1");
+            // 
+            // folderBrowserDialog1
+            // 
+            resources.ApplyResources(folderBrowserDialog1, "folderBrowserDialog1");
             // 
             // openBackgroundWorker
             // 
@@ -252,25 +233,23 @@
             // 
             // Main
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            resources.ApplyResources(this, "$this");
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1178, 744);
             Controls.Add(splitContainer1);
             Controls.Add(statusStrip1);
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
             Name = "Main";
-            Text = "Vegetation Analyzer";
             Load += Main_Load;
-            menuStrip1.ResumeLayout(false);
-            menuStrip1.PerformLayout();
-            statusStrip1.ResumeLayout(false);
-            statusStrip1.PerformLayout();
             splitContainer1.Panel1.ResumeLayout(false);
             splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
             splitContainer1.ResumeLayout(false);
             contextMenuStrip1.ResumeLayout(false);
+            menuStrip1.ResumeLayout(false);
+            menuStrip1.PerformLayout();
+            statusStrip1.ResumeLayout(false);
+            statusStrip1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }

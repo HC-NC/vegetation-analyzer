@@ -61,6 +61,15 @@ namespace vegetation_analyzer.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Analyzing folder: {0}.
+        /// </summary>
+        internal static string AnalyzingFolder {
+            get {
+                return ResourceManager.GetString("AnalyzingFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Bands.
         /// </summary>
         internal static string Bands {
@@ -133,6 +142,24 @@ namespace vegetation_analyzer.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Classifying: {0}.
+        /// </summary>
+        internal static string Classifying {
+            get {
+                return ResourceManager.GetString("Classifying", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Computing: {0}.
+        /// </summary>
+        internal static string Computing {
+            get {
+                return ResourceManager.GetString("Computing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Confirmation.
         /// </summary>
         internal static string Confirmation {
@@ -147,6 +174,33 @@ namespace vegetation_analyzer.Properties {
         internal static string Create {
             get {
                 return ResourceManager.GetString("Create", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Delete classification &quot;{0}&quot;?.
+        /// </summary>
+        internal static string DeleteClassification {
+            get {
+                return ResourceManager.GetString("DeleteClassification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Delete index &quot;{0}&quot;?.
+        /// </summary>
+        internal static string DeleteIndex {
+            get {
+                return ResourceManager.GetString("DeleteIndex", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Delete raster &quot;{0}&quot;?.
+        /// </summary>
+        internal static string DeleteRaster {
+            get {
+                return ResourceManager.GetString("DeleteRaster", resourceCulture);
             }
         }
         
@@ -169,11 +223,29 @@ namespace vegetation_analyzer.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Error calculating index: {0}.
+        /// </summary>
+        internal static string ErrorCalculatingIndex {
+            get {
+                return ResourceManager.GetString("ErrorCalculatingIndex", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на No classes defined..
         /// </summary>
         internal static string ErrorClassDefined {
             get {
                 return ResourceManager.GetString("ErrorClassDefined", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Classification error: {0}.
+        /// </summary>
+        internal static string ErrorClassification {
+            get {
+                return ResourceManager.GetString("ErrorClassification", resourceCulture);
             }
         }
         
@@ -192,6 +264,15 @@ namespace vegetation_analyzer.Properties {
         internal static string ErrorEmptyScheme {
             get {
                 return ResourceManager.GetString("ErrorEmptyScheme", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Export error: {0}.
+        /// </summary>
+        internal static string ErrorExport {
+            get {
+                return ResourceManager.GetString("ErrorExport", resourceCulture);
             }
         }
         
@@ -246,6 +327,24 @@ namespace vegetation_analyzer.Properties {
         internal static string ErrorTiffsFolder {
             get {
                 return ResourceManager.GetString("ErrorTiffsFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Export completed successfully..
+        /// </summary>
+        internal static string ExportCompleted {
+            get {
+                return ResourceManager.GetString("ExportCompleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Exporting: {0}.
+        /// </summary>
+        internal static string Exporting {
+            get {
+                return ResourceManager.GetString("Exporting", resourceCulture);
             }
         }
         
@@ -354,6 +453,15 @@ namespace vegetation_analyzer.Properties {
         internal static string NumberClasses {
             get {
                 return ResourceManager.GetString("NumberClasses", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Opening: {0}.
+        /// </summary>
+        internal static string Opening {
+            get {
+                return ResourceManager.GetString("Opening", resourceCulture);
             }
         }
         

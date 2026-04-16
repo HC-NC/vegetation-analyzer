@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AnalyzingFolder" xml:space="preserve">
+    <value>Анализ папки: {0}</value>
+  </data>
   <data name="Bands" xml:space="preserve">
     <value>Каналы</value>
   </data>
@@ -141,11 +144,26 @@
   <data name="ClassifiedToGTIFF" xml:space="preserve">
     <value>Экспорт классификации в GeoTIFF с палитрой</value>
   </data>
+  <data name="Classifying" xml:space="preserve">
+    <value>Классификация: {0}</value>
+  </data>
+  <data name="Computing" xml:space="preserve">
+    <value>Вычисления: {0}</value>
+  </data>
   <data name="Confirmation" xml:space="preserve">
     <value>Подтверждение</value>
   </data>
   <data name="Create" xml:space="preserve">
     <value>Создать</value>
+  </data>
+  <data name="DeleteClassification" xml:space="preserve">
+    <value>Удалить классификацию "{0}"?</value>
+  </data>
+  <data name="DeleteIndex" xml:space="preserve">
+    <value>Удалить индекс "{0}"?</value>
+  </data>
+  <data name="DeleteRaster" xml:space="preserve">
+    <value>Удалить растр "{0}"?</value>
   </data>
   <data name="Error" xml:space="preserve">
     <value>Ошибка</value>
@@ -153,14 +171,23 @@
   <data name="ErrorBandSelect" xml:space="preserve">
     <value>Не выбран канал для {0}.</value>
   </data>
+  <data name="ErrorCalculatingIndex" xml:space="preserve">
+    <value>Ошибка вычисления индекса: {0}</value>
+  </data>
   <data name="ErrorClassDefined" xml:space="preserve">
     <value>Не определено ни одного класса.</value>
+  </data>
+  <data name="ErrorClassification" xml:space="preserve">
+    <value>Ошибка классификации: {0}</value>
   </data>
   <data name="ErrorEmptyPresetName" xml:space="preserve">
     <value>Имя пресета не может быть пустым.</value>
   </data>
   <data name="ErrorEmptyScheme" xml:space="preserve">
     <value>Невозможно сохранить пустую схему.</value>
+  </data>
+  <data name="ErrorExport" xml:space="preserve">
+    <value>Ошибка экспорта: {0}</value>
   </data>
   <data name="ErrorExportPath" xml:space="preserve">
     <value>Укажите путь для экспорта.</value>
@@ -179,6 +206,12 @@
   </data>
   <data name="ErrorTiffsFolder" xml:space="preserve">
     <value>В указанной папке не найдено TIFF файлов.</value>
+  </data>
+  <data name="ExportCompleted" xml:space="preserve">
+    <value>Экспорт завершён успешно.</value>
+  </data>
+  <data name="Exporting" xml:space="preserve">
+    <value>Экспорт: {0}</value>
   </data>
   <data name="Formula" xml:space="preserve">
     <value>Формула:</value>
@@ -215,6 +248,9 @@
   </data>
   <data name="NumberClasses" xml:space="preserve">
     <value>Классов</value>
+  </data>
+  <data name="Opening" xml:space="preserve">
+    <value>Открытие: {0}</value>
   </data>
   <data name="Path" xml:space="preserve">
     <value>Путь</value>
