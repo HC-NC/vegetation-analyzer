@@ -165,43 +165,44 @@
             treeView1.Size = new Size(391, 679);
             treeView1.TabIndex = 0;
             treeView1.AfterSelect += treeView_AfterSelect;
+            treeView1.NodeMouseClick += treeView1_NodeMouseClick;
             // 
             // contextMenuStrip1
             // 
             contextMenuStrip1.ImageScalingSize = new Size(24, 24);
             contextMenuStrip1.Items.AddRange(new ToolStripItem[] { computeIndexToolStripMenuItem, classifyToolStripMenuItem, exportToolStripMenuItem, toolStripSeparator2, propertiesToolStripMenuItem, toolStripSeparator3, removeToolStripMenuItem });
             contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new Size(297, 216);
+            contextMenuStrip1.Size = new Size(297, 176);
             contextMenuStrip1.Opening += contextMenuStrip1_Opening;
-            //
+            // 
             // computeIndexToolStripMenuItem
-            //
+            // 
             computeIndexToolStripMenuItem.Name = "computeIndexToolStripMenuItem";
             computeIndexToolStripMenuItem.Size = new Size(296, 32);
             computeIndexToolStripMenuItem.Text = "Compute Vegetation Index";
             computeIndexToolStripMenuItem.Click += computeIndexToolStripMenuItem_Click;
-            //
+            // 
             // classifyToolStripMenuItem
-            //
+            // 
             classifyToolStripMenuItem.Name = "classifyToolStripMenuItem";
             classifyToolStripMenuItem.Size = new Size(296, 32);
             classifyToolStripMenuItem.Text = "Classify...";
             classifyToolStripMenuItem.Click += classifyToolStripMenuItem_Click;
-            //
+            // 
             // exportToolStripMenuItem
-            //
+            // 
             exportToolStripMenuItem.Name = "exportToolStripMenuItem";
             exportToolStripMenuItem.Size = new Size(296, 32);
             exportToolStripMenuItem.Text = "Export to File...";
             exportToolStripMenuItem.Click += exportToolStripMenuItem_Click;
-            //
+            // 
             // toolStripSeparator2
-            //
+            // 
             toolStripSeparator2.Name = "toolStripSeparator2";
             toolStripSeparator2.Size = new Size(293, 6);
-            //
+            // 
             // propertiesToolStripMenuItem
-            //
+            // 
             propertiesToolStripMenuItem.Name = "propertiesToolStripMenuItem";
             propertiesToolStripMenuItem.Size = new Size(296, 32);
             propertiesToolStripMenuItem.Text = "Properties";
@@ -233,19 +234,19 @@
             openBackgroundWorker.DoWork += openBackgroundWorker_DoWork;
             openBackgroundWorker.ProgressChanged += BackgroundWorker_ProgressChanged;
             openBackgroundWorker.RunWorkerCompleted += openBackgroundWorker_RunWorkerCompleted;
-            //
+            // 
             // computeIndexBackgroundWorker
-            //
+            // 
             computeIndexBackgroundWorker.DoWork += computeIndexBackgroundWorker_DoWork;
             computeIndexBackgroundWorker.RunWorkerCompleted += computeIndexBackgroundWorker_RunWorkerCompleted;
-            //
+            // 
             // classifyBackgroundWorker
-            //
+            // 
             classifyBackgroundWorker.DoWork += classifyBackgroundWorker_DoWork;
             classifyBackgroundWorker.RunWorkerCompleted += classifyBackgroundWorker_RunWorkerCompleted;
-            //
+            // 
             // exportBackgroundWorker
-            //
+            // 
             exportBackgroundWorker.DoWork += exportBackgroundWorker_DoWork;
             exportBackgroundWorker.RunWorkerCompleted += exportBackgroundWorker_RunWorkerCompleted;
             // 
@@ -259,7 +260,7 @@
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
             Name = "Main";
-            Text = "Form1";
+            Text = "Vegetation Analyzer";
             Load += Main_Load;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();

@@ -1,7 +1,6 @@
 using Histogram_Contrast_Corrector;
 using OSGeo.GDAL;
 using System.ComponentModel;
-using System.Resources;
 using vegetation_analyzer.DataClasses;
 
 namespace vegetation_analyzer.Forms
@@ -549,6 +548,11 @@ namespace vegetation_analyzer.Forms
             toolStripProgressBar1.Value = 0;
             toolStripProgressBar1.Visible = false;
             toolStripStatusLabel1.Visible = false;
+        }
+
+        private void treeView1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            treeView1.SelectedNode = e.Node;
         }
     }
 }
