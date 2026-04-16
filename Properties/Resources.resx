@@ -117,14 +117,26 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ClassifiedToGTIFF" xml:space="preserve">
+    <value>Export classification to GeoTIFF with palette</value>
+  </data>
   <data name="Error" xml:space="preserve">
     <value>Error</value>
+  </data>
+  <data name="ErrorExportPath" xml:space="preserve">
+    <value>Specify the export path.</value>
   </data>
   <data name="ErrorFileSelect" xml:space="preserve">
     <value>No files selected.</value>
   </data>
   <data name="ErrorTiffsFolder" xml:space="preserve">
     <value>No TIFF files were found in the specified folder.</value>
+  </data>
+  <data name="IndexToGTIFF" xml:space="preserve">
+    <value>Export index to GeoTIFF (Float32 or Byte)</value>
+  </data>
+  <data name="RasterToGTIFF" xml:space="preserve">
+    <value>Exporting a raster to GeoTIFF</value>
   </data>
   <data name="Warning" xml:space="preserve">
     <value>Warning</value>

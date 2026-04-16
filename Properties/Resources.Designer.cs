@@ -61,11 +61,29 @@ namespace vegetation_analyzer.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Export classification to GeoTIFF with palette.
+        /// </summary>
+        internal static string ClassifiedToGTIFF {
+            get {
+                return ResourceManager.GetString("ClassifiedToGTIFF", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Error.
         /// </summary>
         internal static string Error {
             get {
                 return ResourceManager.GetString("Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Specify the export path..
+        /// </summary>
+        internal static string ErrorExportPath {
+            get {
+                return ResourceManager.GetString("ErrorExportPath", resourceCulture);
             }
         }
         
@@ -84,6 +102,24 @@ namespace vegetation_analyzer.Properties {
         internal static string ErrorTiffsFolder {
             get {
                 return ResourceManager.GetString("ErrorTiffsFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Export index to GeoTIFF (Float32 or Byte).
+        /// </summary>
+        internal static string IndexToGTIFF {
+            get {
+                return ResourceManager.GetString("IndexToGTIFF", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Exporting a raster to GeoTIFF.
+        /// </summary>
+        internal static string RasterToGTIFF {
+            get {
+                return ResourceManager.GetString("RasterToGTIFF", resourceCulture);
             }
         }
         

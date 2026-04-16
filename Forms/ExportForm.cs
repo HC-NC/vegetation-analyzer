@@ -1,4 +1,5 @@
 using vegetation_analyzer.DataClasses;
+using vegetation_analyzer.Properties;
 
 namespace vegetation_analyzer.Forms
 {
@@ -15,13 +16,13 @@ namespace vegetation_analyzer.Forms
 
             _data = data;
             _target = target;
+
+            saveFileDialog1.Filter = "GeoTIFF|*.tif;*.tiff";
+            saveFileDialog1.DefaultExt = "tif";
         }
 
         private void ExportForm_Load(object sender, EventArgs e)
         {
-            formatComboBox.Items.Clear();
-            formatComboBox.Items.Add("GeoTIFF");
-
             compressionComboBox.Items.Clear();
             compressionComboBox.Items.Add("None");
             compressionComboBox.Items.Add("LZW");
@@ -38,44 +39,43 @@ namespace vegetation_analyzer.Forms
             exportAsByteCheckBox.Visible = _target == ExportTarget.IndexRaster;
             exportAsByteCheckBox.Enabled = _target == ExportTarget.IndexRaster;
 
-            // Обновляем описание
-            string info = _target switch
+            string fileName = _data.ToString() + ".tif";
+            saveFileDialog1.FileName = fileName;
+
+            string info = "";
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+
+            switch (_data)
             {
-                ExportTarget.RasterData => "Экспорт растра в GeoTIFF",
-                ExportTarget.IndexRaster => "Экспорт индекса в GeoTIFF (Float32 или Byte)",
-                ExportTarget.ClassifiedRaster => "Экспорт классификации в GeoTIFF с палитрой",
-                _ => ""
-            };
+                case RasterData rasterData:
+                    info = Resources.RasterToGTIFF;
+                    path = Path.Combine(Path.GetDirectoryName(rasterData.Path) ?? path, fileName);
+                    break;
+                case IndexRaster indexRaster:
+                    info = Resources.IndexToGTIFF;
+                    path = Path.Combine(Path.GetDirectoryName(indexRaster.SourceRaster.Path) ?? path, fileName);
+                    break;
+                case ClassifiedRaster classifiedRaster:
+                    info = Resources.ClassifiedToGTIFF;
+                    path = Path.Combine(Path.GetDirectoryName(classifiedRaster.SourceIndex.SourceRaster.Path) ?? path, fileName);
+                    break;
+            }
+
             infoLabel.Text = info;
+            pathTextBox.Text = path;
         }
 
         private void browseButton_Click(object sender, EventArgs e)
         {
-            string ext = "tif";
-            saveFileDialog1.Filter = "GeoTIFF|*.tif;*.tiff|All files|*.*";
-            saveFileDialog1.DefaultExt = ext;
-            saveFileDialog1.FileName = GetDefaultFileName();
-
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
                 pathTextBox.Text = saveFileDialog1.FileName;
-        }
-
-        private string GetDefaultFileName()
-        {
-            return _target switch
-            {
-                ExportTarget.RasterData => ((RasterData)_data).Name + ".tif",
-                ExportTarget.IndexRaster => ((IndexRaster)_data).Name + ".tif",
-                ExportTarget.ClassifiedRaster => ((ClassifiedRaster)_data).Name + ".tif",
-                _ => "export.tif"
-            };
         }
 
         private void exportButton_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(pathTextBox.Text))
             {
-                MessageBox.Show(this, "Укажите путь для экспорта.", "Ошибка",
+                MessageBox.Show(this, Resources.ErrorExportPath, Resources.Error,
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 DialogResult = DialogResult.None;
                 return;
