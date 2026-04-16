@@ -117,8 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
   <data name="ClassifiedToGTIFF" xml:space="preserve">
     <value>Export classification to GeoTIFF with palette</value>
+  </data>
+  <data name="Confirmation" xml:space="preserve">
+    <value>Confirmation</value>
+  </data>
+  <data name="Create" xml:space="preserve">
+    <value>Create</value>
   </data>
   <data name="Error" xml:space="preserve">
     <value>Error</value>
@@ -126,11 +135,26 @@
   <data name="ErrorBandSelect" xml:space="preserve">
     <value>No band selected for {0}.</value>
   </data>
+  <data name="ErrorClassDefined" xml:space="preserve">
+    <value>No classes defined.</value>
+  </data>
+  <data name="ErrorEmptyPresetName" xml:space="preserve">
+    <value>Preset name cannot be empty.</value>
+  </data>
+  <data name="ErrorEmptyScheme" xml:space="preserve">
+    <value>Cannot save empty schema.</value>
+  </data>
   <data name="ErrorExportPath" xml:space="preserve">
     <value>Specify the export path.</value>
   </data>
   <data name="ErrorFileSelect" xml:space="preserve">
     <value>No files selected.</value>
+  </data>
+  <data name="ErrorName" xml:space="preserve">
+    <value>The name cannot be empty.</value>
+  </data>
+  <data name="ErrorPresetExist" xml:space="preserve">
+    <value>A preset with the name "{0}" already exists.</value>
   </data>
   <data name="ErrorTiffsFolder" xml:space="preserve">
     <value>No TIFF files were found in the specified folder.</value>
@@ -141,8 +165,29 @@
   <data name="IndexToGTIFF" xml:space="preserve">
     <value>Export index to GeoTIFF (Float32 or Byte)</value>
   </data>
+  <data name="NewPreset" xml:space="preserve">
+    <value>New preset</value>
+  </data>
+  <data name="PresetName" xml:space="preserve">
+    <value>Preset name:</value>
+  </data>
+  <data name="PresetSaved" xml:space="preserve">
+    <value>Preset "{0}" saved.</value>
+  </data>
+  <data name="QReplacePresetName" xml:space="preserve">
+    <value>A preset named "{0}" already exists. Replace it?</value>
+  </data>
   <data name="RasterToGTIFF" xml:space="preserve">
     <value>Exporting a raster to GeoTIFF</value>
+  </data>
+  <data name="Ready" xml:space="preserve">
+    <value>Ready</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="SavePreset" xml:space="preserve">
+    <value>Save preset</value>
   </data>
   <data name="Warning" xml:space="preserve">
     <value>Warning</value>

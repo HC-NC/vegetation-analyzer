@@ -117,79 +117,26 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Cancel" xml:space="preserve">
+  <data name="colColor.HeaderText" xml:space="preserve">
+    <value>Цвет</value>
+  </data>
+  <data name="colClassName.HeaderText" xml:space="preserve">
+    <value>Название</value>
+  </data>
+  <data name="applyButton.Text" xml:space="preserve">
+    <value>Применить</value>
+  </data>
+  <data name="cancelButton.Text" xml:space="preserve">
     <value>Отмена</value>
   </data>
-  <data name="ClassifiedToGTIFF" xml:space="preserve">
-    <value>Экспорт классификации в GeoTIFF с палитрой</value>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="createEmptyButton.Text" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
   </data>
-  <data name="Confirmation" xml:space="preserve">
-    <value>Подтверждение</value>
+  <data name="groupBox1.Text" xml:space="preserve">
+    <value>Пресет</value>
   </data>
-  <data name="Create" xml:space="preserve">
-    <value>Создать</value>
-  </data>
-  <data name="Error" xml:space="preserve">
-    <value>Ошибка</value>
-  </data>
-  <data name="ErrorBandSelect" xml:space="preserve">
-    <value>Не выбран канал для {0}.</value>
-  </data>
-  <data name="ErrorClassDefined" xml:space="preserve">
-    <value>Не определено ни одного класса.</value>
-  </data>
-  <data name="ErrorEmptyPresetName" xml:space="preserve">
-    <value>Имя пресета не может быть пустым.</value>
-  </data>
-  <data name="ErrorEmptyScheme" xml:space="preserve">
-    <value>Невозможно сохранить пустую схему.</value>
-  </data>
-  <data name="ErrorExportPath" xml:space="preserve">
-    <value>Укажите путь для экспорта.</value>
-  </data>
-  <data name="ErrorFileSelect" xml:space="preserve">
-    <value>Не выбрано ни одного файла.</value>
-  </data>
-  <data name="ErrorName" xml:space="preserve">
-    <value>Имя не может быть пустым.</value>
-  </data>
-  <data name="ErrorPresetExist" xml:space="preserve">
-    <value>Пресет с именем "{0}" уже существует.</value>
-  </data>
-  <data name="ErrorTiffsFolder" xml:space="preserve">
-    <value>В указанной папке не найдено TIFF файлов.</value>
-  </data>
-  <data name="Formula" xml:space="preserve">
-    <value>Формула:</value>
-  </data>
-  <data name="IndexToGTIFF" xml:space="preserve">
-    <value>Экспорт индекса в GeoTIFF (Float32 или Byte)</value>
-  </data>
-  <data name="NewPreset" xml:space="preserve">
-    <value>Новый пресет</value>
-  </data>
-  <data name="PresetName" xml:space="preserve">
-    <value>Имя пресета:</value>
-  </data>
-  <data name="PresetSaved" xml:space="preserve">
-    <value>Пресет "{0}" сохранён.</value>
-  </data>
-  <data name="QReplacePresetName" xml:space="preserve">
-    <value>Пресет с именем "{0}" уже существует. Заменить?</value>
-  </data>
-  <data name="RasterToGTIFF" xml:space="preserve">
-    <value>Экспорт растра в GeoTIFF</value>
-  </data>
-  <data name="Ready" xml:space="preserve">
-    <value>Ready</value>
-  </data>
-  <data name="Save" xml:space="preserve">
-    <value>Сохранить</value>
-  </data>
-  <data name="SavePreset" xml:space="preserve">
-    <value>Сохранить пресет</value>
-  </data>
-  <data name="Warning" xml:space="preserve">
-    <value>Внимание</value>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Классификация</value>
   </data>
 </root>

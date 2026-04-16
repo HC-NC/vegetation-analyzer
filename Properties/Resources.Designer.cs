@@ -61,11 +61,38 @@ namespace vegetation_analyzer.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Cancel.
+        /// </summary>
+        internal static string Cancel {
+            get {
+                return ResourceManager.GetString("Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Export classification to GeoTIFF with palette.
         /// </summary>
         internal static string ClassifiedToGTIFF {
             get {
                 return ResourceManager.GetString("ClassifiedToGTIFF", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Confirmation.
+        /// </summary>
+        internal static string Confirmation {
+            get {
+                return ResourceManager.GetString("Confirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Create.
+        /// </summary>
+        internal static string Create {
+            get {
+                return ResourceManager.GetString("Create", resourceCulture);
             }
         }
         
@@ -88,6 +115,33 @@ namespace vegetation_analyzer.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на No classes defined..
+        /// </summary>
+        internal static string ErrorClassDefined {
+            get {
+                return ResourceManager.GetString("ErrorClassDefined", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Preset name cannot be empty..
+        /// </summary>
+        internal static string ErrorEmptyPresetName {
+            get {
+                return ResourceManager.GetString("ErrorEmptyPresetName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Cannot save empty schema..
+        /// </summary>
+        internal static string ErrorEmptyScheme {
+            get {
+                return ResourceManager.GetString("ErrorEmptyScheme", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Specify the export path..
         /// </summary>
         internal static string ErrorExportPath {
@@ -102,6 +156,24 @@ namespace vegetation_analyzer.Properties {
         internal static string ErrorFileSelect {
             get {
                 return ResourceManager.GetString("ErrorFileSelect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на The name cannot be empty..
+        /// </summary>
+        internal static string ErrorName {
+            get {
+                return ResourceManager.GetString("ErrorName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на A preset with the name &quot;{0}&quot; already exists..
+        /// </summary>
+        internal static string ErrorPresetExist {
+            get {
+                return ResourceManager.GetString("ErrorPresetExist", resourceCulture);
             }
         }
         
@@ -133,11 +205,74 @@ namespace vegetation_analyzer.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на New preset.
+        /// </summary>
+        internal static string NewPreset {
+            get {
+                return ResourceManager.GetString("NewPreset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Preset name:.
+        /// </summary>
+        internal static string PresetName {
+            get {
+                return ResourceManager.GetString("PresetName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Preset &quot;{0}&quot; saved..
+        /// </summary>
+        internal static string PresetSaved {
+            get {
+                return ResourceManager.GetString("PresetSaved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на A preset named &quot;{0}&quot; already exists. Replace it?.
+        /// </summary>
+        internal static string QReplacePresetName {
+            get {
+                return ResourceManager.GetString("QReplacePresetName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Exporting a raster to GeoTIFF.
         /// </summary>
         internal static string RasterToGTIFF {
             get {
                 return ResourceManager.GetString("RasterToGTIFF", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Ready.
+        /// </summary>
+        internal static string Ready {
+            get {
+                return ResourceManager.GetString("Ready", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Save.
+        /// </summary>
+        internal static string Save {
+            get {
+                return ResourceManager.GetString("Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Save preset.
+        /// </summary>
+        internal static string SavePreset {
+            get {
+                return ResourceManager.GetString("SavePreset", resourceCulture);
             }
         }
         

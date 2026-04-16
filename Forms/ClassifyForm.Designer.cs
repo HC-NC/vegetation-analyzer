@@ -15,60 +15,39 @@ namespace vegetation_analyzer.Forms
 
         private void InitializeComponent()
         {
-            presetComboBox = new ComboBox();
-            createEmptyButton = new Button();
-            label1 = new Label();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ClassifyForm));
             classTable = new DataGridView();
             colColor = new DataGridViewImageColumn();
             colClassName = new DataGridViewTextBoxColumn();
             colMin = new DataGridViewTextBoxColumn();
             colMax = new DataGridViewTextBoxColumn();
-            previewPictureBox = new PictureBox();
             previewButton = new Button();
-            savePresetButton = new Button();
             applyButton = new Button();
             cancelButton = new Button();
-            addClassButton = new Button();
-            removeClassButton = new Button();
-            moveUpButton = new Button();
-            moveDownButton = new Button();
             flowLayoutPanel1 = new FlowLayoutPanel();
+            groupBox1 = new GroupBox();
+            tableLayoutPanel1 = new TableLayoutPanel();
+            presetComboBox = new ComboBox();
+            createEmptyButton = new Button();
+            savePresetButton = new Button();
+            toolStrip2 = new ToolStrip();
+            addClassToolStripButton = new ToolStripButton();
+            removeClassToolStripButton = new ToolStripButton();
+            moveDownToolStripButton = new ToolStripButton();
+            moveUpToolStripButton = new ToolStripButton();
+            splitContainer1 = new SplitContainer();
+            previewPictureBox = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)classTable).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)previewPictureBox).BeginInit();
             flowLayoutPanel1.SuspendLayout();
+            groupBox1.SuspendLayout();
+            tableLayoutPanel1.SuspendLayout();
+            toolStrip2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
+            splitContainer1.Panel1.SuspendLayout();
+            splitContainer1.Panel2.SuspendLayout();
+            splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)previewPictureBox).BeginInit();
             SuspendLayout();
-            // 
-            // presetComboBox
-            // 
-            presetComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
-            presetComboBox.FormattingEnabled = true;
-            presetComboBox.Location = new Point(20, 68);
-            presetComboBox.Margin = new Padding(4, 5, 4, 5);
-            presetComboBox.Name = "presetComboBox";
-            presetComboBox.Size = new Size(380, 33);
-            presetComboBox.TabIndex = 0;
-            presetComboBox.SelectedIndexChanged += presetComboBox_SelectedIndexChanged;
-            //
-            // createEmptyButton
-            //
-            createEmptyButton.Location = new Point(410, 68);
-            createEmptyButton.Margin = new Padding(4, 5, 4, 5);
-            createEmptyButton.Name = "createEmptyButton";
-            createEmptyButton.Size = new Size(200, 33);
-            createEmptyButton.TabIndex = 12;
-            createEmptyButton.Text = "+ Создать пустой пресет";
-            createEmptyButton.UseVisualStyleBackColor = true;
-            createEmptyButton.Click += createEmptyButton_Click;
-            //
-            // label1
-            //
-            label1.AutoSize = true;
-            label1.Location = new Point(20, 25);
-            label1.Margin = new Padding(4, 0, 4, 0);
-            label1.Name = "label1";
-            label1.Size = new Size(73, 25);
-            label1.TabIndex = 1;
-            label1.Text = "Пресет:";
             // 
             // classTable
             // 
@@ -77,212 +56,213 @@ namespace vegetation_analyzer.Forms
             classTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             classTable.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             classTable.Columns.AddRange(new DataGridViewColumn[] { colColor, colClassName, colMin, colMax });
-            classTable.Location = new Point(20, 133);
-            classTable.Margin = new Padding(4, 5, 4, 5);
+            resources.ApplyResources(classTable, "classTable");
             classTable.Name = "classTable";
             classTable.RowHeadersVisible = false;
-            classTable.RowHeadersWidth = 62;
             classTable.RowTemplate.Height = 25;
             classTable.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            classTable.Size = new Size(380, 420);
-            classTable.TabIndex = 2;
             classTable.CellContentClick += classTable_CellContentClick;
             classTable.CellEndEdit += classTable_CellEndEdit;
             // 
             // colColor
             // 
-            colColor.HeaderText = "Цвет";
+            resources.ApplyResources(colColor, "colColor");
             colColor.ImageLayout = DataGridViewImageCellLayout.Stretch;
-            colColor.MinimumWidth = 50;
             colColor.Name = "colColor";
             colColor.ReadOnly = true;
             // 
             // colClassName
             // 
-            colClassName.HeaderText = "Название";
-            colClassName.MinimumWidth = 120;
+            resources.ApplyResources(colClassName, "colClassName");
             colClassName.Name = "colClassName";
             // 
             // colMin
             // 
-            colMin.HeaderText = "Min";
-            colMin.MinimumWidth = 70;
+            resources.ApplyResources(colMin, "colMin");
             colMin.Name = "colMin";
             // 
             // colMax
             // 
-            colMax.HeaderText = "Max";
-            colMax.MinimumWidth = 70;
+            resources.ApplyResources(colMax, "colMax");
             colMax.Name = "colMax";
             // 
-            // previewPictureBox
-            // 
-            previewPictureBox.BackColor = Color.White;
-            previewPictureBox.BorderStyle = BorderStyle.FixedSingle;
-            previewPictureBox.Location = new Point(408, 133);
-            previewPictureBox.Margin = new Padding(4, 5, 4, 5);
-            previewPictureBox.Name = "previewPictureBox";
-            previewPictureBox.Size = new Size(420, 420);
-            previewPictureBox.SizeMode = PictureBoxSizeMode.Zoom;
-            previewPictureBox.TabIndex = 3;
-            previewPictureBox.TabStop = false;
-            // 
             // previewButton
-            //
-            previewButton.Location = new Point(380, 567);
-            previewButton.Margin = new Padding(4, 5, 4, 5);
+            // 
+            resources.ApplyResources(previewButton, "previewButton");
             previewButton.Name = "previewButton";
-            previewButton.Size = new Size(143, 38);
-            previewButton.TabIndex = 4;
-            previewButton.Text = "Preview";
             previewButton.UseVisualStyleBackColor = true;
             previewButton.Click += previewButton_Click;
-            //
-            // savePresetButton
-            //
-            savePresetButton.Location = new Point(4, 4);
-            savePresetButton.Margin = new Padding(4, 5, 4, 5);
-            savePresetButton.Name = "savePresetButton";
-            savePresetButton.Size = new Size(130, 38);
-            savePresetButton.TabIndex = 11;
-            savePresetButton.Text = "Save Preset";
-            savePresetButton.UseVisualStyleBackColor = true;
-            savePresetButton.Click += savePresetButton_Click;
-            //
+            // 
             // applyButton
             // 
-            applyButton.Location = new Point(737, 9);
-            applyButton.Margin = new Padding(4, 5, 4, 5);
+            resources.ApplyResources(applyButton, "applyButton");
             applyButton.Name = "applyButton";
-            applyButton.Size = new Size(107, 38);
-            applyButton.TabIndex = 5;
-            applyButton.Text = "Применить";
             applyButton.UseVisualStyleBackColor = true;
             applyButton.Click += applyButton_Click;
             // 
             // cancelButton
             // 
             cancelButton.DialogResult = DialogResult.Cancel;
-            cancelButton.Location = new Point(622, 9);
-            cancelButton.Margin = new Padding(4, 5, 4, 5);
+            resources.ApplyResources(cancelButton, "cancelButton");
             cancelButton.Name = "cancelButton";
-            cancelButton.Size = new Size(107, 38);
-            cancelButton.TabIndex = 6;
-            cancelButton.Text = "Отмена";
             cancelButton.UseVisualStyleBackColor = true;
-            // 
-            // addClassButton
-            // 
-            addClassButton.Location = new Point(20, 567);
-            addClassButton.Margin = new Padding(4, 5, 4, 5);
-            addClassButton.Name = "addClassButton";
-            addClassButton.Size = new Size(71, 38);
-            addClassButton.TabIndex = 7;
-            addClassButton.Text = "+";
-            addClassButton.UseVisualStyleBackColor = true;
-            addClassButton.Click += addClassButton_Click;
-            // 
-            // removeClassButton
-            // 
-            removeClassButton.Location = new Point(100, 567);
-            removeClassButton.Margin = new Padding(4, 5, 4, 5);
-            removeClassButton.Name = "removeClassButton";
-            removeClassButton.Size = new Size(71, 38);
-            removeClassButton.TabIndex = 8;
-            removeClassButton.Text = "−";
-            removeClassButton.UseVisualStyleBackColor = true;
-            removeClassButton.Click += removeClassButton_Click;
-            // 
-            // moveUpButton
-            // 
-            moveUpButton.Location = new Point(200, 567);
-            moveUpButton.Margin = new Padding(4, 5, 4, 5);
-            moveUpButton.Name = "moveUpButton";
-            moveUpButton.Size = new Size(71, 38);
-            moveUpButton.TabIndex = 9;
-            moveUpButton.Text = "↑";
-            moveUpButton.UseVisualStyleBackColor = true;
-            moveUpButton.Click += moveUpButton_Click;
-            // 
-            // moveDownButton
-            // 
-            moveDownButton.Location = new Point(280, 567);
-            moveDownButton.Margin = new Padding(4, 5, 4, 5);
-            moveDownButton.Name = "moveDownButton";
-            moveDownButton.Size = new Size(71, 38);
-            moveDownButton.TabIndex = 10;
-            moveDownButton.Text = "↓";
-            moveDownButton.UseVisualStyleBackColor = true;
-            moveDownButton.Click += moveDownButton_Click;
             // 
             // flowLayoutPanel1
             // 
-            flowLayoutPanel1.AutoSize = true;
-            flowLayoutPanel1.Controls.Add(savePresetButton);
-            flowLayoutPanel1.Controls.Add(applyButton);
+            resources.ApplyResources(flowLayoutPanel1, "flowLayoutPanel1");
             flowLayoutPanel1.Controls.Add(cancelButton);
-            flowLayoutPanel1.Dock = DockStyle.Bottom;
-            flowLayoutPanel1.FlowDirection = FlowDirection.RightToLeft;
-            flowLayoutPanel1.Location = new Point(0, 637);
+            flowLayoutPanel1.Controls.Add(applyButton);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Padding = new Padding(4);
-            flowLayoutPanel1.Size = new Size(856, 56);
-            flowLayoutPanel1.TabIndex = 11;
+            // 
+            // groupBox1
+            // 
+            groupBox1.Controls.Add(classTable);
+            groupBox1.Controls.Add(tableLayoutPanel1);
+            groupBox1.Controls.Add(toolStrip2);
+            resources.ApplyResources(groupBox1, "groupBox1");
+            groupBox1.Name = "groupBox1";
+            groupBox1.TabStop = false;
+            // 
+            // tableLayoutPanel1
+            // 
+            resources.ApplyResources(tableLayoutPanel1, "tableLayoutPanel1");
+            tableLayoutPanel1.Controls.Add(presetComboBox, 0, 0);
+            tableLayoutPanel1.Controls.Add(createEmptyButton, 1, 0);
+            tableLayoutPanel1.Controls.Add(savePresetButton, 2, 0);
+            tableLayoutPanel1.Name = "tableLayoutPanel1";
+            // 
+            // presetComboBox
+            // 
+            resources.ApplyResources(presetComboBox, "presetComboBox");
+            presetComboBox.FormattingEnabled = true;
+            presetComboBox.Name = "presetComboBox";
+            presetComboBox.SelectedIndexChanged += presetComboBox_SelectedIndexChanged;
+            // 
+            // createEmptyButton
+            // 
+            resources.ApplyResources(createEmptyButton, "createEmptyButton");
+            createEmptyButton.Name = "createEmptyButton";
+            createEmptyButton.UseVisualStyleBackColor = true;
+            createEmptyButton.Click += createEmptyButton_Click;
+            // 
+            // savePresetButton
+            // 
+            resources.ApplyResources(savePresetButton, "savePresetButton");
+            savePresetButton.Name = "savePresetButton";
+            savePresetButton.UseVisualStyleBackColor = true;
+            savePresetButton.Click += savePresetButton_Click;
+            // 
+            // toolStrip2
+            // 
+            resources.ApplyResources(toolStrip2, "toolStrip2");
+            toolStrip2.GripStyle = ToolStripGripStyle.Hidden;
+            toolStrip2.ImageScalingSize = new Size(24, 24);
+            toolStrip2.Items.AddRange(new ToolStripItem[] { addClassToolStripButton, removeClassToolStripButton, moveDownToolStripButton, moveUpToolStripButton });
+            toolStrip2.Name = "toolStrip2";
+            // 
+            // addClassToolStripButton
+            // 
+            addClassToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Text;
+            resources.ApplyResources(addClassToolStripButton, "addClassToolStripButton");
+            addClassToolStripButton.Name = "addClassToolStripButton";
+            addClassToolStripButton.Click += addClassButton_Click;
+            // 
+            // removeClassToolStripButton
+            // 
+            removeClassToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Text;
+            resources.ApplyResources(removeClassToolStripButton, "removeClassToolStripButton");
+            removeClassToolStripButton.Name = "removeClassToolStripButton";
+            removeClassToolStripButton.Click += removeClassButton_Click;
+            // 
+            // moveDownToolStripButton
+            // 
+            moveDownToolStripButton.Alignment = ToolStripItemAlignment.Right;
+            moveDownToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Text;
+            resources.ApplyResources(moveDownToolStripButton, "moveDownToolStripButton");
+            moveDownToolStripButton.Name = "moveDownToolStripButton";
+            moveDownToolStripButton.Click += moveDownButton_Click;
+            // 
+            // moveUpToolStripButton
+            // 
+            moveUpToolStripButton.Alignment = ToolStripItemAlignment.Right;
+            moveUpToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Text;
+            resources.ApplyResources(moveUpToolStripButton, "moveUpToolStripButton");
+            moveUpToolStripButton.Name = "moveUpToolStripButton";
+            moveUpToolStripButton.Click += moveUpButton_Click;
+            // 
+            // splitContainer1
+            // 
+            resources.ApplyResources(splitContainer1, "splitContainer1");
+            splitContainer1.FixedPanel = FixedPanel.Panel1;
+            splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel1
+            // 
+            splitContainer1.Panel1.Controls.Add(groupBox1);
+            // 
+            // splitContainer1.Panel2
+            // 
+            splitContainer1.Panel2.Controls.Add(previewPictureBox);
+            splitContainer1.Panel2.Controls.Add(previewButton);
+            // 
+            // previewPictureBox
+            // 
+            resources.ApplyResources(previewPictureBox, "previewPictureBox");
+            previewPictureBox.Name = "previewPictureBox";
+            previewPictureBox.TabStop = false;
             // 
             // ClassifyForm
             // 
             AcceptButton = applyButton;
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            resources.ApplyResources(this, "$this");
             AutoScaleMode = AutoScaleMode.Font;
             CancelButton = cancelButton;
-            ClientSize = new Size(856, 693);
+            Controls.Add(splitContainer1);
             Controls.Add(flowLayoutPanel1);
-            Controls.Add(createEmptyButton);
-            Controls.Add(moveDownButton);
-            Controls.Add(moveUpButton);
-            Controls.Add(removeClassButton);
-            Controls.Add(addClassButton);
-            Controls.Add(previewButton);
-            Controls.Add(previewPictureBox);
-            Controls.Add(classTable);
-            Controls.Add(label1);
-            Controls.Add(presetComboBox);
-            FormBorderStyle = FormBorderStyle.FixedDialog;
-            Margin = new Padding(4, 5, 4, 5);
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "ClassifyForm";
             ShowIcon = false;
             ShowInTaskbar = false;
-            StartPosition = FormStartPosition.CenterParent;
-            Text = "Классификация";
             Load += ClassifyForm_Load;
             ((System.ComponentModel.ISupportInitialize)classTable).EndInit();
-            ((System.ComponentModel.ISupportInitialize)previewPictureBox).EndInit();
             flowLayoutPanel1.ResumeLayout(false);
+            groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
+            tableLayoutPanel1.ResumeLayout(false);
+            toolStrip2.ResumeLayout(false);
+            toolStrip2.PerformLayout();
+            splitContainer1.Panel1.ResumeLayout(false);
+            splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
+            splitContainer1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)previewPictureBox).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-
-        private ComboBox presetComboBox;
-        private Button createEmptyButton;
-        private Label label1;
         private DataGridView classTable;
         private DataGridViewImageColumn colColor;
         private DataGridViewTextBoxColumn colClassName;
         private DataGridViewTextBoxColumn colMin;
         private DataGridViewTextBoxColumn colMax;
-        private PictureBox previewPictureBox;
         private Button previewButton;
-        private Button savePresetButton;
         private Button applyButton;
         private Button cancelButton;
-        private Button addClassButton;
-        private Button removeClassButton;
-        private Button moveUpButton;
-        private Button moveDownButton;
         private FlowLayoutPanel flowLayoutPanel1;
+        private GroupBox groupBox1;
+        private ToolStrip toolStrip2;
+        private ToolStripButton addClassToolStripButton;
+        private ToolStrip toolStrip1;
+        private ToolStripButton removeClassToolStripButton;
+        private ToolStripButton moveDownToolStripButton;
+        private ToolStripButton moveUpToolStripButton;
+        private TableLayoutPanel tableLayoutPanel1;
+        private ComboBox presetComboBox;
+        private Button createEmptyButton;
+        private Button savePresetButton;
+        private SplitContainer splitContainer1;
+        private PictureBox previewPictureBox;
     }
 }

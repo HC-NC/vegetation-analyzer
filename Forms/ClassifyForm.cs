@@ -1,5 +1,6 @@
 using System.Drawing;
 using vegetation_analyzer.DataClasses;
+using vegetation_analyzer.Properties;
 
 namespace vegetation_analyzer.Forms
 {
@@ -44,6 +45,8 @@ namespace vegetation_analyzer.Forms
 
             if (builtinPresets.Count + customPresets.Count == 0)
                 presetComboBox.SelectedIndex = -1;
+            else 
+                presetComboBox.SelectedIndex = 0;
         }
 
         private void presetComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -91,7 +94,7 @@ namespace vegetation_analyzer.Forms
         {
             using (var inputForm = new Form
             {
-                Text = "Новый пресет",
+                Text = Resources.NewPreset,
                 FormBorderStyle = FormBorderStyle.FixedDialog,
                 StartPosition = FormStartPosition.CenterParent,
                 Size = new Size(350, 130),
@@ -99,10 +102,10 @@ namespace vegetation_analyzer.Forms
                 MinimizeBox = false
             })
             {
-                var label = new Label { Text = "Имя пресета:", Location = new Point(14, 15), AutoSize = true };
+                var label = new Label { Text = Resources.PresetName, Location = new Point(14, 15), AutoSize = true };
                 var textBox = new TextBox { Location = new Point(14, 40), Width = 300 };
-                var okBtn = new Button { Text = "Создать", DialogResult = DialogResult.OK, Location = new Point(170, 70) };
-                var cancelBtn = new Button { Text = "Отмена", DialogResult = DialogResult.Cancel, Location = new Point(250, 70) };
+                var okBtn = new Button { Text = Resources.Create, DialogResult = DialogResult.OK, Location = new Point(170, 70) };
+                var cancelBtn = new Button { Text = Resources.Cancel, DialogResult = DialogResult.Cancel, Location = new Point(250, 70) };
 
                 inputForm.Controls.AddRange(new Control[] { label, textBox, okBtn, cancelBtn });
                 inputForm.AcceptButton = okBtn;
@@ -113,7 +116,7 @@ namespace vegetation_analyzer.Forms
                     string name = textBox.Text.Trim();
                     if (string.IsNullOrEmpty(name))
                     {
-                        MessageBox.Show(this, "Имя не может быть пустым.", "Ошибка",
+                        MessageBox.Show(this, Resources.ErrorName, Resources.Error,
                             MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
@@ -122,7 +125,7 @@ namespace vegetation_analyzer.Forms
                         .FirstOrDefault(p => p.Name == name);
                     if (existing != null)
                     {
-                        MessageBox.Show(this, $"Пресет с именем \"{name}\" уже существует.", "Ошибка",
+                        MessageBox.Show(this, string.Format(Resources.ErrorPresetExist, name), Resources.Error,
                             MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
@@ -251,14 +254,14 @@ namespace vegetation_analyzer.Forms
         {
             if (_currentScheme == null || _currentScheme.Classes.Count == 0)
             {
-                MessageBox.Show(this, "Невозможно сохранить пустую схему.", "Ошибка",
+                MessageBox.Show(this, Resources.ErrorEmptyScheme, Resources.Error,
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             using (var inputForm = new Form
             {
-                Text = "Сохранить пресет",
+                Text = Resources.SavePreset,
                 FormBorderStyle = FormBorderStyle.FixedDialog,
                 StartPosition = FormStartPosition.CenterParent,
                 Size = new Size(350, 130),
@@ -268,10 +271,10 @@ namespace vegetation_analyzer.Forms
                 CancelButton = null
             })
             {
-                var label = new Label { Text = "Имя пресета:", Location = new Point(14, 15), AutoSize = true };
+                var label = new Label { Text = Resources.PresetName, Location = new Point(14, 15), AutoSize = true };
                 var textBox = new TextBox { Location = new Point(14, 40), Width = 300, Text = _currentScheme.Name };
-                var saveBtn = new Button { Text = "Сохранить", DialogResult = DialogResult.OK, Location = new Point(170, 70) };
-                var cancelBtn = new Button { Text = "Отмена", DialogResult = DialogResult.Cancel, Location = new Point(250, 70) };
+                var saveBtn = new Button { Text = Resources.Save, DialogResult = DialogResult.OK, Location = new Point(170, 70) };
+                var cancelBtn = new Button { Text = Resources.Cancel, DialogResult = DialogResult.Cancel, Location = new Point(250, 70) };
 
                 inputForm.Controls.AddRange(new Control[] { label, textBox, saveBtn, cancelBtn });
                 inputForm.AcceptButton = saveBtn;
@@ -282,7 +285,7 @@ namespace vegetation_analyzer.Forms
                     string newName = textBox.Text.Trim();
                     if (string.IsNullOrEmpty(newName))
                     {
-                        MessageBox.Show(this, "Имя пресета не может быть пустым.", "Ошибка",
+                        MessageBox.Show(this, Resources.ErrorEmptyPresetName, Resources.Error,
                             MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
@@ -292,8 +295,8 @@ namespace vegetation_analyzer.Forms
                         .FirstOrDefault(p => p.Name == newName);
                     if (existing != null && !_currentScheme.IsCustom)
                     {
-                        var result = MessageBox.Show(this, $"Пресет с именем \"{newName}\" уже существует. Заменить?",
-                            "Подтверждение", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        var result = MessageBox.Show(this, string.Format(Resources.QReplacePresetName, newName),
+                            Resources.Confirmation, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                         if (result != DialogResult.Yes) return;
 
                         ClassificationPresets.DeleteCustomPreset(newName);
@@ -307,7 +310,7 @@ namespace vegetation_analyzer.Forms
                     // Выбираем только что сохранённый пресет
                     presetComboBox.SelectedItem = $"★ {newName}";
 
-                    MessageBox.Show(this, $"Пресет \"{newName}\" сохранён.", "Готово",
+                    MessageBox.Show(this, string.Format(Resources.PresetSaved, newName), Resources.Ready,
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
@@ -317,7 +320,7 @@ namespace vegetation_analyzer.Forms
         {
             if (_currentScheme == null || _currentScheme.Classes.Count == 0)
             {
-                MessageBox.Show(this, "Не определено ни одного класса.", "Ошибка",
+                MessageBox.Show(this, Resources.ErrorClassDefined, Resources.Error,
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 DialogResult = DialogResult.None;
                 return;
