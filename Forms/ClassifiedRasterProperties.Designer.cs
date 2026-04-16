@@ -15,93 +15,90 @@ namespace vegetation_analyzer.Forms
 
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ClassifiedRasterProperties));
             infoTextBox = new TextBox();
             label1 = new Label();
             label2 = new Label();
             interpolationComboBox = new ComboBox();
             applyButton = new Button();
             cancelButton = new Button();
+            flowLayoutPanel1 = new FlowLayoutPanel();
+            tableLayoutPanel1 = new TableLayoutPanel();
+            flowLayoutPanel1.SuspendLayout();
+            tableLayoutPanel1.SuspendLayout();
             SuspendLayout();
             // 
             // infoTextBox
             // 
-            infoTextBox.Location = new Point(14, 41);
-            infoTextBox.Multiline = true;
+            resources.ApplyResources(infoTextBox, "infoTextBox");
             infoTextBox.Name = "infoTextBox";
             infoTextBox.ReadOnly = true;
-            infoTextBox.ScrollBars = ScrollBars.Vertical;
-            infoTextBox.Size = new Size(350, 200);
-            infoTextBox.TabIndex = 0;
             // 
             // label1
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(14, 15);
+            resources.ApplyResources(label1, "label1");
             label1.Name = "label1";
-            label1.Size = new Size(130, 15);
-            label1.TabIndex = 1;
-            label1.Text = "Информация о классиф.";
             // 
             // label2
             // 
-            label2.AutoSize = true;
-            label2.Location = new Point(14, 255);
+            resources.ApplyResources(label2, "label2");
             label2.Name = "label2";
-            label2.Size = new Size(76, 15);
-            label2.TabIndex = 2;
-            label2.Text = "Интерполяция";
             // 
             // interpolationComboBox
             // 
+            resources.ApplyResources(interpolationComboBox, "interpolationComboBox");
             interpolationComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             interpolationComboBox.FormattingEnabled = true;
-            interpolationComboBox.Location = new Point(96, 252);
             interpolationComboBox.Name = "interpolationComboBox";
-            interpolationComboBox.Size = new Size(180, 23);
-            interpolationComboBox.TabIndex = 3;
             // 
             // applyButton
             // 
-            applyButton.Location = new Point(208, 285);
+            resources.ApplyResources(applyButton, "applyButton");
             applyButton.Name = "applyButton";
-            applyButton.Size = new Size(75, 23);
-            applyButton.TabIndex = 4;
-            applyButton.Text = "Применить";
             applyButton.UseVisualStyleBackColor = true;
             applyButton.Click += applyButton_Click;
             // 
             // cancelButton
             // 
             cancelButton.DialogResult = DialogResult.Cancel;
-            cancelButton.Location = new Point(289, 285);
+            resources.ApplyResources(cancelButton, "cancelButton");
             cancelButton.Name = "cancelButton";
-            cancelButton.Size = new Size(75, 23);
-            cancelButton.TabIndex = 5;
-            cancelButton.Text = "Отмена";
             cancelButton.UseVisualStyleBackColor = true;
+            // 
+            // flowLayoutPanel1
+            // 
+            resources.ApplyResources(flowLayoutPanel1, "flowLayoutPanel1");
+            flowLayoutPanel1.Controls.Add(cancelButton);
+            flowLayoutPanel1.Controls.Add(applyButton);
+            flowLayoutPanel1.Name = "flowLayoutPanel1";
+            // 
+            // tableLayoutPanel1
+            // 
+            resources.ApplyResources(tableLayoutPanel1, "tableLayoutPanel1");
+            tableLayoutPanel1.Controls.Add(label2, 0, 0);
+            tableLayoutPanel1.Controls.Add(interpolationComboBox, 1, 0);
+            tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // ClassifiedRasterProperties
             // 
             AcceptButton = applyButton;
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            resources.ApplyResources(this, "$this");
             AutoScaleMode = AutoScaleMode.Font;
             CancelButton = cancelButton;
-            ClientSize = new Size(378, 320);
-            Controls.Add(cancelButton);
-            Controls.Add(applyButton);
-            Controls.Add(interpolationComboBox);
-            Controls.Add(label2);
-            Controls.Add(label1);
             Controls.Add(infoTextBox);
+            Controls.Add(tableLayoutPanel1);
+            Controls.Add(flowLayoutPanel1);
+            Controls.Add(label1);
             FormBorderStyle = FormBorderStyle.FixedDialog;
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "ClassifiedRasterProperties";
             ShowIcon = false;
             ShowInTaskbar = false;
-            StartPosition = FormStartPosition.CenterParent;
-            Text = "Свойства классификации";
             Load += ClassifiedRasterProperties_Load;
+            flowLayoutPanel1.ResumeLayout(false);
+            tableLayoutPanel1.ResumeLayout(false);
+            tableLayoutPanel1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -114,5 +111,7 @@ namespace vegetation_analyzer.Forms
         private ComboBox interpolationComboBox;
         private Button applyButton;
         private Button cancelButton;
+        private FlowLayoutPanel flowLayoutPanel1;
+        private TableLayoutPanel tableLayoutPanel1;
     }
 }

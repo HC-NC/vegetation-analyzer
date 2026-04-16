@@ -61,11 +61,65 @@ namespace vegetation_analyzer.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Bands.
+        /// </summary>
+        internal static string Bands {
+            get {
+                return ResourceManager.GetString("Bands", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Bands count.
+        /// </summary>
+        internal static string BandsCount {
+            get {
+                return ResourceManager.GetString("BandsCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Bicubic.
+        /// </summary>
+        internal static string Bicubic {
+            get {
+                return ResourceManager.GetString("Bicubic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Bilinear.
+        /// </summary>
+        internal static string Bilinear {
+            get {
+                return ResourceManager.GetString("Bilinear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Cancel.
         /// </summary>
         internal static string Cancel {
             get {
                 return ResourceManager.GetString("Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Classes.
+        /// </summary>
+        internal static string Classes {
+            get {
+                return ResourceManager.GetString("Classes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Classification.
+        /// </summary>
+        internal static string Classification {
+            get {
+                return ResourceManager.GetString("Classification", resourceCulture);
             }
         }
         
@@ -178,6 +232,15 @@ namespace vegetation_analyzer.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Select channels for red, green and blue..
+        /// </summary>
+        internal static string ErrorRGBBands {
+            get {
+                return ResourceManager.GetString("ErrorRGBBands", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на No TIFF files were found in the specified folder..
         /// </summary>
         internal static string ErrorTiffsFolder {
@@ -196,6 +259,60 @@ namespace vegetation_analyzer.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на GeoTransform.
+        /// </summary>
+        internal static string GeoTransform {
+            get {
+                return ResourceManager.GetString("GeoTransform", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Height.
+        /// </summary>
+        internal static string Height {
+            get {
+                return ResourceManager.GetString("Height", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на High Quality Bicubic.
+        /// </summary>
+        internal static string HighQualityBicubic {
+            get {
+                return ResourceManager.GetString("HighQualityBicubic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на High Quality Bilinear.
+        /// </summary>
+        internal static string HighQualityBilinear {
+            get {
+                return ResourceManager.GetString("HighQualityBilinear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Ignore zero.
+        /// </summary>
+        internal static string IgnoreZero {
+            get {
+                return ResourceManager.GetString("IgnoreZero", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Index.
+        /// </summary>
+        internal static string Index {
+            get {
+                return ResourceManager.GetString("Index", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Export index to GeoTIFF (Float32 or Byte).
         /// </summary>
         internal static string IndexToGTIFF {
@@ -205,11 +322,47 @@ namespace vegetation_analyzer.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Name.
+        /// </summary>
+        internal static string Name {
+            get {
+                return ResourceManager.GetString("Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Nearest Neighbor.
+        /// </summary>
+        internal static string NearestNeighbor {
+            get {
+                return ResourceManager.GetString("NearestNeighbor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на New preset.
         /// </summary>
         internal static string NewPreset {
             get {
                 return ResourceManager.GetString("NewPreset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Number of Classes.
+        /// </summary>
+        internal static string NumberClasses {
+            get {
+                return ResourceManager.GetString("NumberClasses", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Path.
+        /// </summary>
+        internal static string Path {
+            get {
+                return ResourceManager.GetString("Path", resourceCulture);
             }
         }
         
@@ -228,6 +381,15 @@ namespace vegetation_analyzer.Properties {
         internal static string PresetSaved {
             get {
                 return ResourceManager.GetString("PresetSaved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Projection.
+        /// </summary>
+        internal static string Projection {
+            get {
+                return ResourceManager.GetString("Projection", resourceCulture);
             }
         }
         
@@ -277,11 +439,38 @@ namespace vegetation_analyzer.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Scheme.
+        /// </summary>
+        internal static string Scheme {
+            get {
+                return ResourceManager.GetString("Scheme", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Source.
+        /// </summary>
+        internal static string Source {
+            get {
+                return ResourceManager.GetString("Source", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Warning.
         /// </summary>
         internal static string Warning {
             get {
                 return ResourceManager.GetString("Warning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Width.
+        /// </summary>
+        internal static string Width {
+            get {
+                return ResourceManager.GetString("Width", resourceCulture);
             }
         }
     }

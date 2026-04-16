@@ -117,142 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Bands" xml:space="preserve">
-    <value>Bands</value>
+  <data name="label1.Text" xml:space="preserve">
+    <value>Информация об индексе</value>
   </data>
-  <data name="BandsCount" xml:space="preserve">
-    <value>Bands count</value>
+  <data name="label2.Text" xml:space="preserve">
+    <value>Диапазон отображения</value>
   </data>
-  <data name="Bicubic" xml:space="preserve">
-    <value>Bicubic</value>
+  <data name="applyButton.Text" xml:space="preserve">
+    <value>Применить</value>
   </data>
-  <data name="Bilinear" xml:space="preserve">
-    <value>Bilinear</value>
+  <data name="cancelButton.Text" xml:space="preserve">
+    <value>Отмена</value>
   </data>
-  <data name="Cancel" xml:space="preserve">
-    <value>Cancel</value>
+  <data name="resetButton.Text" xml:space="preserve">
+    <value>Сброс</value>
   </data>
-  <data name="Classes" xml:space="preserve">
-    <value>Classes</value>
+  <data name="label5.Text" xml:space="preserve">
+    <value>Интерполяция:</value>
   </data>
-  <data name="Classification" xml:space="preserve">
-    <value>Classification</value>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Свойства индекса</value>
   </data>
-  <data name="ClassifiedToGTIFF" xml:space="preserve">
-    <value>Export classification to GeoTIFF with palette</value>
-  </data>
-  <data name="Confirmation" xml:space="preserve">
-    <value>Confirmation</value>
-  </data>
-  <data name="Create" xml:space="preserve">
-    <value>Create</value>
-  </data>
-  <data name="Error" xml:space="preserve">
-    <value>Error</value>
-  </data>
-  <data name="ErrorBandSelect" xml:space="preserve">
-    <value>No band selected for {0}.</value>
-  </data>
-  <data name="ErrorClassDefined" xml:space="preserve">
-    <value>No classes defined.</value>
-  </data>
-  <data name="ErrorEmptyPresetName" xml:space="preserve">
-    <value>Preset name cannot be empty.</value>
-  </data>
-  <data name="ErrorEmptyScheme" xml:space="preserve">
-    <value>Cannot save empty schema.</value>
-  </data>
-  <data name="ErrorExportPath" xml:space="preserve">
-    <value>Specify the export path.</value>
-  </data>
-  <data name="ErrorFileSelect" xml:space="preserve">
-    <value>No files selected.</value>
-  </data>
-  <data name="ErrorName" xml:space="preserve">
-    <value>The name cannot be empty.</value>
-  </data>
-  <data name="ErrorPresetExist" xml:space="preserve">
-    <value>A preset with the name "{0}" already exists.</value>
-  </data>
-  <data name="ErrorRGBBands" xml:space="preserve">
-    <value>Select channels for red, green and blue.</value>
-  </data>
-  <data name="ErrorTiffsFolder" xml:space="preserve">
-    <value>No TIFF files were found in the specified folder.</value>
-  </data>
-  <data name="Formula" xml:space="preserve">
-    <value>Formula:</value>
-  </data>
-  <data name="GeoTransform" xml:space="preserve">
-    <value>GeoTransform</value>
-  </data>
-  <data name="Height" xml:space="preserve">
-    <value>Height</value>
-  </data>
-  <data name="HighQualityBicubic" xml:space="preserve">
-    <value>High Quality Bicubic</value>
-  </data>
-  <data name="HighQualityBilinear" xml:space="preserve">
-    <value>High Quality Bilinear</value>
-  </data>
-  <data name="IgnoreZero" xml:space="preserve">
-    <value>Ignore zero</value>
-  </data>
-  <data name="Index" xml:space="preserve">
-    <value>Index</value>
-  </data>
-  <data name="IndexToGTIFF" xml:space="preserve">
-    <value>Export index to GeoTIFF (Float32 or Byte)</value>
-  </data>
-  <data name="Name" xml:space="preserve">
-    <value>Name</value>
-  </data>
-  <data name="NearestNeighbor" xml:space="preserve">
-    <value>Nearest Neighbor</value>
-  </data>
-  <data name="NewPreset" xml:space="preserve">
-    <value>New preset</value>
-  </data>
-  <data name="NumberClasses" xml:space="preserve">
-    <value>Number of Classes</value>
-  </data>
-  <data name="Path" xml:space="preserve">
-    <value>Path</value>
-  </data>
-  <data name="PresetName" xml:space="preserve">
-    <value>Preset name:</value>
-  </data>
-  <data name="PresetSaved" xml:space="preserve">
-    <value>Preset "{0}" saved.</value>
-  </data>
-  <data name="Projection" xml:space="preserve">
-    <value>Projection</value>
-  </data>
-  <data name="QReplacePresetName" xml:space="preserve">
-    <value>A preset named "{0}" already exists. Replace it?</value>
-  </data>
-  <data name="RasterToGTIFF" xml:space="preserve">
-    <value>Exporting a raster to GeoTIFF</value>
-  </data>
-  <data name="Ready" xml:space="preserve">
-    <value>Ready</value>
-  </data>
-  <data name="Save" xml:space="preserve">
-    <value>Save</value>
-  </data>
-  <data name="SavePreset" xml:space="preserve">
-    <value>Save preset</value>
-  </data>
-  <data name="Scheme" xml:space="preserve">
-    <value>Scheme</value>
-  </data>
-  <data name="Source" xml:space="preserve">
-    <value>Source</value>
-  </data>
-  <data name="Warning" xml:space="preserve">
-    <value>Warning</value>
-  </data>
-  <data name="Width" xml:space="preserve">
-    <value>Width</value>
+  <data name="groupBox1.Text" xml:space="preserve">
+    <value>Диапазон отображения</value>
   </data>
 </root>

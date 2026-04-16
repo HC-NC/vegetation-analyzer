@@ -1,5 +1,6 @@
 using System.Drawing.Drawing2D;
 using vegetation_analyzer.DataClasses;
+using vegetation_analyzer.Properties;
 
 namespace vegetation_analyzer.Forms
 {
@@ -24,15 +25,15 @@ namespace vegetation_analyzer.Forms
         private void PopulateInfo()
         {
             infoTextBox.Text =
-                $"Имя: {_raster.Name}\r\n" +
-                $"Путь: {_raster.Path}\r\n" +
-                $"Ширина: {_raster.Width}\r\n" +
-                $"Высота: {_raster.Height}\r\n" +
-                $"Каналов: {_raster.BandsCount}\r\n" +
-                $"Проекция: {_raster.Projection}\r\n" +
-                $"GeoTransform: [{string.Join(", ", _raster.GeoTransform)}]\r\n" +
-                $"Игнорировать 0: {_raster.IgnoreZero}\r\n" +
-                $"\r\nКаналы:\r\n" +
+                $"{Resources.Name}: {_raster.Name}\r\n" +
+                $"{Resources.Path}: {_raster.Path}\r\n" +
+                $"{Resources.Width}: {_raster.Width}\r\n" +
+                $"{Resources.Height}: {_raster.Height}\r\n" +
+                $"{Resources.BandsCount}: {_raster.BandsCount}\r\n" +
+                $"{Resources.Projection}: {_raster.Projection}\r\n" +
+                $"{Resources.GeoTransform}: [{string.Join(", ", _raster.GeoTransform)}]\r\n" +
+                $"{Resources.IgnoreZero}: {_raster.IgnoreZero}\r\n" +
+                $"\r\n{Resources.Bands}:\r\n" +
                 string.Join("\r\n", _raster.GetBands().Select((b, i) => $"  [{i}] {b.Name}"));
 
             infoTextBox.SelectionStart = 0;
@@ -62,11 +63,11 @@ namespace vegetation_analyzer.Forms
         private void PopulateInterpolation()
         {
             interpolationComboBox.Items.Clear();
-            interpolationComboBox.Items.Add("Nearest Neighbor");
-            interpolationComboBox.Items.Add("Bilinear");
-            interpolationComboBox.Items.Add("Bicubic");
-            interpolationComboBox.Items.Add("High Quality Bilinear");
-            interpolationComboBox.Items.Add("High Quality Bicubic");
+            interpolationComboBox.Items.Add(Resources.NearestNeighbor);
+            interpolationComboBox.Items.Add(Resources.Bilinear);
+            interpolationComboBox.Items.Add(Resources.Bicubic);
+            interpolationComboBox.Items.Add(Resources.HighQualityBilinear);
+            interpolationComboBox.Items.Add(Resources.HighQualityBicubic);
 
             var mode = _raster.InterpolationMode;
             interpolationComboBox.SelectedIndex = mode switch
@@ -84,7 +85,7 @@ namespace vegetation_analyzer.Forms
         {
             if (redComboBox.SelectedIndex < 0 || greenComboBox.SelectedIndex < 0 || blueComboBox.SelectedIndex < 0)
             {
-                MessageBox.Show(this, "Выберите каналы для Red, Green и Blue.", "Ошибка",
+                MessageBox.Show(this, Resources.ErrorRGBBands, Resources.Error,
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }

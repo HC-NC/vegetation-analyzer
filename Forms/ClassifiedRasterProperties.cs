@@ -1,5 +1,6 @@
 using System.Drawing.Drawing2D;
 using vegetation_analyzer.DataClasses;
+using vegetation_analyzer.Properties;
 
 namespace vegetation_analyzer.Forms
 {
@@ -16,25 +17,25 @@ namespace vegetation_analyzer.Forms
         private void ClassifiedRasterProperties_Load(object sender, EventArgs e)
         {
             infoTextBox.Text =
-                $"Классификация: {_classified.Name}\r\n" +
-                $"Схема: {_classified.Scheme.Name}\r\n" +
-                $"Индекс: {IndexDefinition.GetName(_classified.SourceIndex.IndexType)}\r\n" +
-                $"Источник: {_classified.SourceIndex.SourceRaster}/{_classified.SourceIndex.Name}\r\n" +
-                $"Ширина: {_classified.Width}\r\n" +
-                $"Высота: {_classified.Height}\r\n" +
-                $"Классов: {_classified.Scheme.Classes.Count}\r\n" +
-                $"\r\nКлассы:\r\n" +
+                $"{Resources.Classification}: {_classified.Name}\r\n" +
+                $"{Resources.Scheme}: {_classified.Scheme.Name}\r\n" +
+                $"{Resources.Index}: {IndexDefinition.GetName(_classified.SourceIndex.IndexType)}\r\n" +
+                $"{Resources.Source}: {_classified.SourceIndex.SourceRaster}/{_classified.SourceIndex.Name}\r\n" +
+                $"{Resources.Width}: {_classified.Width}\r\n" +
+                $"{Resources.Height} : {_classified.Height}\r\n" +
+                $"{Resources.NumberClasses}: {_classified.Scheme.Classes.Count}\r\n" +
+                $"\r\n{Resources.Classes}:\r\n" +
                 string.Join("\r\n", _classified.Scheme.Classes.Select((c, i) => $"  {i + 1}. {c.Name} [{c.Min:F3} - {c.Max:F3}]"));
 
             infoTextBox.SelectionStart = 0;
             infoTextBox.ScrollToCaret();
 
             interpolationComboBox.Items.Clear();
-            interpolationComboBox.Items.Add("Nearest Neighbor");
-            interpolationComboBox.Items.Add("Bilinear");
-            interpolationComboBox.Items.Add("Bicubic");
-            interpolationComboBox.Items.Add("High Quality Bilinear");
-            interpolationComboBox.Items.Add("High Quality Bicubic");
+            interpolationComboBox.Items.Add(Resources.NearestNeighbor);
+            interpolationComboBox.Items.Add(Resources.Bilinear);
+            interpolationComboBox.Items.Add(Resources.Bicubic);
+            interpolationComboBox.Items.Add(Resources.HighQualityBilinear);
+            interpolationComboBox.Items.Add(Resources.HighQualityBicubic);
 
             var mode = _classified.InterpolationMode;
             interpolationComboBox.SelectedIndex = mode switch

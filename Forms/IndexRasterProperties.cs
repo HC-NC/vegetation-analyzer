@@ -1,5 +1,6 @@
 using System.Drawing.Drawing2D;
 using vegetation_analyzer.DataClasses;
+using vegetation_analyzer.Properties;
 
 namespace vegetation_analyzer.Forms
 {
@@ -16,15 +17,13 @@ namespace vegetation_analyzer.Forms
         private void IndexRasterProperties_Load(object sender, EventArgs e)
         {
             infoTextBox.Text =
-                $"Индекс: {IndexDefinition.GetName(_indexRaster.IndexType)}\r\n" +
-                $"Формула: {IndexDefinition.GetFormula(_indexRaster.IndexType)}\r\n" +
-                $"Источник: {_indexRaster.SourceRaster.Name}\r\n" +
-                $"Ширина: {_indexRaster.Width}\r\n" +
-                $"Высота: {_indexRaster.Height}\r\n" +
+                $"{Resources.Index}: {IndexDefinition.GetName(_indexRaster.IndexType)}\r\n" +
+                $"{Resources.Formula} {IndexDefinition.GetFormula(_indexRaster.IndexType)}\r\n" +
+                $"{Resources.Source}: {_indexRaster.SourceRaster.Name}\r\n" +
+                $"{Resources.Width}: {_indexRaster.Width}\r\n" +
+                $"{Resources.Height}: {_indexRaster.Height}\r\n" +
                 $"Min: {_indexRaster.Minimum:F4}\r\n" +
-                $"Max: {_indexRaster.Maximum:F4}\r\n" +
-                $"Display Min: {_indexRaster.DisplayMin:F4}\r\n" +
-                $"Display Max: {_indexRaster.DisplayMax:F4}";
+                $"Max: {_indexRaster.Maximum:F4}";
 
             infoTextBox.SelectionStart = 0;
             infoTextBox.ScrollToCaret();
@@ -33,11 +32,11 @@ namespace vegetation_analyzer.Forms
             maxNumericUpDown.Value = (decimal)_indexRaster.DisplayMax;
 
             interpolationComboBox.Items.Clear();
-            interpolationComboBox.Items.Add("Nearest Neighbor");
-            interpolationComboBox.Items.Add("Bilinear");
-            interpolationComboBox.Items.Add("Bicubic");
-            interpolationComboBox.Items.Add("High Quality Bilinear");
-            interpolationComboBox.Items.Add("High Quality Bicubic");
+            interpolationComboBox.Items.Add(Resources.NearestNeighbor);
+            interpolationComboBox.Items.Add(Resources.Bilinear);
+            interpolationComboBox.Items.Add(Resources.Bicubic);
+            interpolationComboBox.Items.Add(Resources.HighQualityBilinear);
+            interpolationComboBox.Items.Add(Resources.HighQualityBicubic);
 
             var mode = _indexRaster.InterpolationMode;
             interpolationComboBox.SelectedIndex = mode switch

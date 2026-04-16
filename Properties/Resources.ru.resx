@@ -117,8 +117,26 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Bands" xml:space="preserve">
+    <value>Каналы</value>
+  </data>
+  <data name="BandsCount" xml:space="preserve">
+    <value>Каналов</value>
+  </data>
+  <data name="Bicubic" xml:space="preserve">
+    <value>Бикубическая</value>
+  </data>
+  <data name="Bilinear" xml:space="preserve">
+    <value>Билинейная</value>
+  </data>
   <data name="Cancel" xml:space="preserve">
     <value>Отмена</value>
+  </data>
+  <data name="Classes" xml:space="preserve">
+    <value>Классы</value>
+  </data>
+  <data name="Classification" xml:space="preserve">
+    <value>Классификация</value>
   </data>
   <data name="ClassifiedToGTIFF" xml:space="preserve">
     <value>Экспорт классификации в GeoTIFF с палитрой</value>
@@ -156,23 +174,59 @@
   <data name="ErrorPresetExist" xml:space="preserve">
     <value>Пресет с именем "{0}" уже существует.</value>
   </data>
+  <data name="ErrorRGBBands" xml:space="preserve">
+    <value>Выберите каналы для красного, зеленого и синего.</value>
+  </data>
   <data name="ErrorTiffsFolder" xml:space="preserve">
     <value>В указанной папке не найдено TIFF файлов.</value>
   </data>
   <data name="Formula" xml:space="preserve">
     <value>Формула:</value>
   </data>
+  <data name="GeoTransform" xml:space="preserve">
+    <value>Геотрансформация</value>
+  </data>
+  <data name="Height" xml:space="preserve">
+    <value>Высота</value>
+  </data>
+  <data name="HighQualityBicubic" xml:space="preserve">
+    <value>Высококачественная бикубическая</value>
+  </data>
+  <data name="HighQualityBilinear" xml:space="preserve">
+    <value>Высококачественная билинейная</value>
+  </data>
+  <data name="IgnoreZero" xml:space="preserve">
+    <value>Игнорировать нули</value>
+  </data>
+  <data name="Index" xml:space="preserve">
+    <value>Индекс</value>
+  </data>
   <data name="IndexToGTIFF" xml:space="preserve">
     <value>Экспорт индекса в GeoTIFF (Float32 или Byte)</value>
   </data>
+  <data name="Name" xml:space="preserve">
+    <value>Имя</value>
+  </data>
+  <data name="NearestNeighbor" xml:space="preserve">
+    <value>Ближайший сосед</value>
+  </data>
   <data name="NewPreset" xml:space="preserve">
     <value>Новый пресет</value>
+  </data>
+  <data name="NumberClasses" xml:space="preserve">
+    <value>Классов</value>
+  </data>
+  <data name="Path" xml:space="preserve">
+    <value>Путь</value>
   </data>
   <data name="PresetName" xml:space="preserve">
     <value>Имя пресета:</value>
   </data>
   <data name="PresetSaved" xml:space="preserve">
     <value>Пресет "{0}" сохранён.</value>
+  </data>
+  <data name="Projection" xml:space="preserve">
+    <value>Проекция</value>
   </data>
   <data name="QReplacePresetName" xml:space="preserve">
     <value>Пресет с именем "{0}" уже существует. Заменить?</value>
@@ -189,7 +243,16 @@
   <data name="SavePreset" xml:space="preserve">
     <value>Сохранить пресет</value>
   </data>
+  <data name="Scheme" xml:space="preserve">
+    <value>Схема</value>
+  </data>
+  <data name="Source" xml:space="preserve">
+    <value>Источник</value>
+  </data>
   <data name="Warning" xml:space="preserve">
     <value>Внимание</value>
+  </data>
+  <data name="Width" xml:space="preserve">
+    <value>Ширина</value>
   </data>
 </root>
