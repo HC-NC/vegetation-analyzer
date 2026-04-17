@@ -32,9 +32,10 @@ namespace vegetation_analyzer.Forms
             savePresetButton = new Button();
             toolStrip2 = new ToolStrip();
             addClassToolStripButton = new ToolStripButton();
-            removeClassToolStripButton = new ToolStripButton();
             moveDownToolStripButton = new ToolStripButton();
             moveUpToolStripButton = new ToolStripButton();
+            toolStripSeparator1 = new ToolStripSeparator();
+            removeClassToolStripButton = new ToolStripButton();
             splitContainer1 = new SplitContainer();
             previewPictureBox = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)classTable).BeginInit();
@@ -140,6 +141,7 @@ namespace vegetation_analyzer.Forms
             // 
             // createEmptyButton
             // 
+            createEmptyButton.BackgroundImage = Properties.Resources.image_add;
             resources.ApplyResources(createEmptyButton, "createEmptyButton");
             createEmptyButton.Name = "createEmptyButton";
             createEmptyButton.UseVisualStyleBackColor = true;
@@ -147,6 +149,7 @@ namespace vegetation_analyzer.Forms
             // 
             // savePresetButton
             // 
+            savePresetButton.BackgroundImage = Properties.Resources.icon_disk;
             resources.ApplyResources(savePresetButton, "savePresetButton");
             savePresetButton.Name = "savePresetButton";
             savePresetButton.UseVisualStyleBackColor = true;
@@ -157,27 +160,22 @@ namespace vegetation_analyzer.Forms
             resources.ApplyResources(toolStrip2, "toolStrip2");
             toolStrip2.GripStyle = ToolStripGripStyle.Hidden;
             toolStrip2.ImageScalingSize = new Size(24, 24);
-            toolStrip2.Items.AddRange(new ToolStripItem[] { addClassToolStripButton, removeClassToolStripButton, moveDownToolStripButton, moveUpToolStripButton });
+            toolStrip2.Items.AddRange(new ToolStripItem[] { addClassToolStripButton, moveDownToolStripButton, moveUpToolStripButton, toolStripSeparator1, removeClassToolStripButton });
             toolStrip2.Name = "toolStrip2";
             // 
             // addClassToolStripButton
             // 
-            addClassToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Text;
+            addClassToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            addClassToolStripButton.Image = Properties.Resources.icon_plus;
             resources.ApplyResources(addClassToolStripButton, "addClassToolStripButton");
             addClassToolStripButton.Name = "addClassToolStripButton";
             addClassToolStripButton.Click += addClassButton_Click;
             // 
-            // removeClassToolStripButton
-            // 
-            removeClassToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Text;
-            resources.ApplyResources(removeClassToolStripButton, "removeClassToolStripButton");
-            removeClassToolStripButton.Name = "removeClassToolStripButton";
-            removeClassToolStripButton.Click += removeClassButton_Click;
-            // 
             // moveDownToolStripButton
             // 
             moveDownToolStripButton.Alignment = ToolStripItemAlignment.Right;
-            moveDownToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Text;
+            moveDownToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            moveDownToolStripButton.Image = Properties.Resources.icon_arrow_down;
             resources.ApplyResources(moveDownToolStripButton, "moveDownToolStripButton");
             moveDownToolStripButton.Name = "moveDownToolStripButton";
             moveDownToolStripButton.Click += moveDownButton_Click;
@@ -185,10 +183,24 @@ namespace vegetation_analyzer.Forms
             // moveUpToolStripButton
             // 
             moveUpToolStripButton.Alignment = ToolStripItemAlignment.Right;
-            moveUpToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Text;
+            moveUpToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            moveUpToolStripButton.Image = Properties.Resources.icon_arrow_up;
             resources.ApplyResources(moveUpToolStripButton, "moveUpToolStripButton");
             moveUpToolStripButton.Name = "moveUpToolStripButton";
             moveUpToolStripButton.Click += moveUpButton_Click;
+            // 
+            // toolStripSeparator1
+            // 
+            toolStripSeparator1.Name = "toolStripSeparator1";
+            resources.ApplyResources(toolStripSeparator1, "toolStripSeparator1");
+            // 
+            // removeClassToolStripButton
+            // 
+            removeClassToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            removeClassToolStripButton.Image = Properties.Resources.icon_minus;
+            resources.ApplyResources(removeClassToolStripButton, "removeClassToolStripButton");
+            removeClassToolStripButton.Name = "removeClassToolStripButton";
+            removeClassToolStripButton.Click += removeClassButton_Click;
             // 
             // splitContainer1
             // 
@@ -264,5 +276,6 @@ namespace vegetation_analyzer.Forms
         private Button savePresetButton;
         private SplitContainer splitContainer1;
         private PictureBox previewPictureBox;
+        private ToolStripSeparator toolStripSeparator1;
     }
 }

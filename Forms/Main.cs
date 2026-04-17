@@ -1,6 +1,7 @@
 using Histogram_Contrast_Corrector;
 using OSGeo.GDAL;
 using System.ComponentModel;
+using System.Xml.Linq;
 using vegetation_analyzer.DataClasses;
 using vegetation_analyzer.Properties;
 
@@ -19,6 +20,15 @@ namespace vegetation_analyzer.Forms
 
         private void Main_Load(object sender, EventArgs e)
         {
+            ImageList imageList = new ImageList
+            {
+                ImageSize = new Size(24, 24)
+            };
+            imageList.Images.Add(Resources.icon_picture);
+            imageList.Images.Add(Resources.icon_stats);
+            imageList.Images.Add(Resources.icon_layers);
+            treeView1.ImageList = imageList;
+
             toolStripStatusLabel1.Visible = false;
             toolStripProgressBar1.Visible = false;
         }
@@ -136,6 +146,7 @@ namespace vegetation_analyzer.Forms
 
             TreeNode node = new TreeNode(obj.ToString());
             node.Tag = obj;
+            node.ToolTipText = ((RasterData)obj).Path ?? "";
             treeView1.Nodes.Add(node);
             treeView1.SelectedNode = node;
         }
@@ -289,7 +300,9 @@ namespace vegetation_analyzer.Forms
             TreeNode classNode = new TreeNode(classified.ToString())
             {
                 Tag = classified,
-                ToolTipText = $"{classified.Scheme.Name} ({classified.Scheme.Classes.Count} {Resources.Classes})"
+                ToolTipText = $"{classified.Scheme.Name} ({classified.Scheme.Classes.Count} {Resources.Classes})",
+                ImageIndex = 2,
+                SelectedImageIndex = 2,
             };
             parentNode.Nodes.Add(classNode);
             treeView1.SelectedNode = classNode;
@@ -372,7 +385,9 @@ namespace vegetation_analyzer.Forms
                     TreeNode indexNode = new TreeNode(indexRaster.ToString())
                     {
                         Tag = indexRaster,
-                        ToolTipText = $"{IndexDefinition.GetName(indexRaster.IndexType)}: [{indexRaster.Minimum:F3} ... {indexRaster.Maximum:F3}]"
+                        ToolTipText = $"{IndexDefinition.GetName(indexRaster.IndexType)}: [{indexRaster.Minimum:F3} ... {indexRaster.Maximum:F3}]",
+                        ImageIndex = 1,
+                        SelectedImageIndex = 1,
                     };
                     node.Nodes.Add(indexNode);
                     treeView1.SelectedNode = indexNode;

@@ -73,68 +73,71 @@
             // 
             // splitContainer1.Panel1
             // 
-            resources.ApplyResources(splitContainer1.Panel1, "splitContainer1.Panel1");
             splitContainer1.Panel1.Controls.Add(treeView1);
             // 
             // splitContainer1.Panel2
             // 
-            resources.ApplyResources(splitContainer1.Panel2, "splitContainer1.Panel2");
             splitContainer1.Panel2.Controls.Add(viewport);
             // 
             // treeView1
             // 
-            resources.ApplyResources(treeView1, "treeView1");
             treeView1.ContextMenuStrip = contextMenuStrip1;
+            resources.ApplyResources(treeView1, "treeView1");
             treeView1.Name = "treeView1";
             treeView1.AfterSelect += treeView_AfterSelect;
             treeView1.NodeMouseClick += treeView1_NodeMouseClick;
             // 
             // contextMenuStrip1
             // 
-            resources.ApplyResources(contextMenuStrip1, "contextMenuStrip1");
             contextMenuStrip1.ImageScalingSize = new Size(24, 24);
             contextMenuStrip1.Items.AddRange(new ToolStripItem[] { computeIndexToolStripMenuItem, classifyToolStripMenuItem, exportToolStripMenuItem, toolStripSeparator2, propertiesToolStripMenuItem, toolStripSeparator3, removeToolStripMenuItem });
             contextMenuStrip1.Name = "contextMenuStrip1";
+            resources.ApplyResources(contextMenuStrip1, "contextMenuStrip1");
             contextMenuStrip1.Opening += contextMenuStrip1_Opening;
             // 
             // computeIndexToolStripMenuItem
             // 
-            resources.ApplyResources(computeIndexToolStripMenuItem, "computeIndexToolStripMenuItem");
+            computeIndexToolStripMenuItem.Image = Properties.Resources.icon_trees;
             computeIndexToolStripMenuItem.Name = "computeIndexToolStripMenuItem";
+            resources.ApplyResources(computeIndexToolStripMenuItem, "computeIndexToolStripMenuItem");
             computeIndexToolStripMenuItem.Click += computeIndexToolStripMenuItem_Click;
             // 
             // classifyToolStripMenuItem
             // 
-            resources.ApplyResources(classifyToolStripMenuItem, "classifyToolStripMenuItem");
+            classifyToolStripMenuItem.Image = Properties.Resources.icon_classification;
             classifyToolStripMenuItem.Name = "classifyToolStripMenuItem";
+            resources.ApplyResources(classifyToolStripMenuItem, "classifyToolStripMenuItem");
             classifyToolStripMenuItem.Click += classifyToolStripMenuItem_Click;
             // 
             // exportToolStripMenuItem
             // 
-            resources.ApplyResources(exportToolStripMenuItem, "exportToolStripMenuItem");
+            exportToolStripMenuItem.Image = Properties.Resources.icon_disk;
             exportToolStripMenuItem.Name = "exportToolStripMenuItem";
+            resources.ApplyResources(exportToolStripMenuItem, "exportToolStripMenuItem");
             exportToolStripMenuItem.Click += exportToolStripMenuItem_Click;
             // 
             // toolStripSeparator2
             // 
-            resources.ApplyResources(toolStripSeparator2, "toolStripSeparator2");
             toolStripSeparator2.Name = "toolStripSeparator2";
+            resources.ApplyResources(toolStripSeparator2, "toolStripSeparator2");
             // 
             // propertiesToolStripMenuItem
             // 
-            resources.ApplyResources(propertiesToolStripMenuItem, "propertiesToolStripMenuItem");
+            propertiesToolStripMenuItem.Image = Properties.Resources.icon_info;
             propertiesToolStripMenuItem.Name = "propertiesToolStripMenuItem";
+            resources.ApplyResources(propertiesToolStripMenuItem, "propertiesToolStripMenuItem");
             propertiesToolStripMenuItem.Click += propertiesToolStripMenuItem_Click;
             // 
             // toolStripSeparator3
             // 
-            resources.ApplyResources(toolStripSeparator3, "toolStripSeparator3");
             toolStripSeparator3.Name = "toolStripSeparator3";
+            resources.ApplyResources(toolStripSeparator3, "toolStripSeparator3");
             // 
             // removeToolStripMenuItem
             // 
-            resources.ApplyResources(removeToolStripMenuItem, "removeToolStripMenuItem");
+            removeToolStripMenuItem.Image = Properties.Resources.icon_trash;
             removeToolStripMenuItem.Name = "removeToolStripMenuItem";
+            resources.ApplyResources(removeToolStripMenuItem, "removeToolStripMenuItem");
             removeToolStripMenuItem.Click += removeToolStripMenuItem_Click;
             // 
             // viewport
@@ -144,70 +147,65 @@
             // 
             // menuStrip1
             // 
-            resources.ApplyResources(menuStrip1, "menuStrip1");
             menuStrip1.ImageScalingSize = new Size(24, 24);
             menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, aboutToolStripMenuItem });
+            resources.ApplyResources(menuStrip1, "menuStrip1");
             menuStrip1.Name = "menuStrip1";
             // 
             // fileToolStripMenuItem
             // 
-            resources.ApplyResources(fileToolStripMenuItem, "fileToolStripMenuItem");
             fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { openFileToolStripMenuItem, openFolderToolStripMenuItem, toolStripSeparator1, exitToolStripMenuItem });
             fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            resources.ApplyResources(fileToolStripMenuItem, "fileToolStripMenuItem");
             // 
             // openFileToolStripMenuItem
             // 
-            resources.ApplyResources(openFileToolStripMenuItem, "openFileToolStripMenuItem");
+            openFileToolStripMenuItem.Image = Properties.Resources.icon_add_image;
             openFileToolStripMenuItem.Name = "openFileToolStripMenuItem";
+            resources.ApplyResources(openFileToolStripMenuItem, "openFileToolStripMenuItem");
             openFileToolStripMenuItem.Click += openFileToolStripMenuItem_Click;
             // 
             // openFolderToolStripMenuItem
             // 
-            resources.ApplyResources(openFolderToolStripMenuItem, "openFolderToolStripMenuItem");
+            openFolderToolStripMenuItem.Image = Properties.Resources.icon_add_folder;
             openFolderToolStripMenuItem.Name = "openFolderToolStripMenuItem";
+            resources.ApplyResources(openFolderToolStripMenuItem, "openFolderToolStripMenuItem");
             openFolderToolStripMenuItem.Click += openFolderToolStripMenuItem_Click;
             // 
             // toolStripSeparator1
             // 
-            resources.ApplyResources(toolStripSeparator1, "toolStripSeparator1");
             toolStripSeparator1.Name = "toolStripSeparator1";
+            resources.ApplyResources(toolStripSeparator1, "toolStripSeparator1");
             // 
             // exitToolStripMenuItem
             // 
-            resources.ApplyResources(exitToolStripMenuItem, "exitToolStripMenuItem");
+            exitToolStripMenuItem.Image = Properties.Resources.icon_power;
             exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            resources.ApplyResources(exitToolStripMenuItem, "exitToolStripMenuItem");
             exitToolStripMenuItem.Click += exitToolStripMenuItem_Click;
             // 
             // aboutToolStripMenuItem
             // 
-            resources.ApplyResources(aboutToolStripMenuItem, "aboutToolStripMenuItem");
             aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            resources.ApplyResources(aboutToolStripMenuItem, "aboutToolStripMenuItem");
             aboutToolStripMenuItem.Click += aboutToolStripMenuItem_Click;
             // 
             // statusStrip1
             // 
-            resources.ApplyResources(statusStrip1, "statusStrip1");
             statusStrip1.ImageScalingSize = new Size(24, 24);
             statusStrip1.Items.AddRange(new ToolStripItem[] { toolStripStatusLabel1, toolStripProgressBar1 });
+            resources.ApplyResources(statusStrip1, "statusStrip1");
             statusStrip1.Name = "statusStrip1";
             // 
             // toolStripStatusLabel1
             // 
-            resources.ApplyResources(toolStripStatusLabel1, "toolStripStatusLabel1");
             toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            resources.ApplyResources(toolStripStatusLabel1, "toolStripStatusLabel1");
             // 
             // toolStripProgressBar1
             // 
-            resources.ApplyResources(toolStripProgressBar1, "toolStripProgressBar1");
             toolStripProgressBar1.Name = "toolStripProgressBar1";
-            // 
-            // openFileDialog1
-            // 
-            resources.ApplyResources(openFileDialog1, "openFileDialog1");
-            // 
-            // folderBrowserDialog1
-            // 
-            resources.ApplyResources(folderBrowserDialog1, "folderBrowserDialog1");
+            resources.ApplyResources(toolStripProgressBar1, "toolStripProgressBar1");
             // 
             // openBackgroundWorker
             // 
