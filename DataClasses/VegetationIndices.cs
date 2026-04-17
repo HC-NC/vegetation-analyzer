@@ -1,3 +1,5 @@
+using vegetation_analyzer.Properties;
+
 namespace vegetation_analyzer.DataClasses
 {
     /// <summary>
@@ -42,8 +44,8 @@ namespace vegetation_analyzer.DataClasses
             VegetationIndex.EVI => "EVI",
             VegetationIndex.EVI2 => "EVI2",
             VegetationIndex.SAVI => "SAVI",
-            VegetationIndex.NDWI_Water => "NDWI (Water)",
-            VegetationIndex.NDWI_Moisture => "NDWI (Moisture)",
+            VegetationIndex.NDWI_Water => $"NDWI ({Resources.Water})",
+            VegetationIndex.NDWI_Moisture => $"NDWI ({Resources.Moisture})",
             VegetationIndex.NDMI => "NDMI",
             VegetationIndex.GNDVI => "GNDVI",
             VegetationIndex.MSAVI => "MSAVI",
@@ -53,16 +55,16 @@ namespace vegetation_analyzer.DataClasses
 
         public static string GetDescription(VegetationIndex index) => index switch
         {
-            VegetationIndex.NDVI => "Normalized Difference Vegetation Index. Самый распространённый индекс для оценки плотности растительности.",
-            VegetationIndex.EVI => "Enhanced Vegetation Index. Улучшенный индекс с коррекцией атмосферного влияния и фона почвы.",
-            VegetationIndex.EVI2 => "EVI без синего канала. Требует только NIR и Red.",
-            VegetationIndex.SAVI => "Soil Adjusted Vegetation Index. Коррекция влияния яркости почвы (L=0.5).",
-            VegetationIndex.NDWI_Water => "Normalized Difference Water Index (McFeeters). Для выделения водных объектов.",
-            VegetationIndex.NDWI_Moisture => "NDWI влажности растительности (Gao). Для оценки содержания воды в растительности.",
-            VegetationIndex.NDMI => "Normalized Difference Moisture Index. Аналог NDWI для оценки влажности.",
-            VegetationIndex.GNDVI => "Green NDVI. Использует зелёный канал вместо красного, более чувствителен к хлорофиллу.",
-            VegetationIndex.MSAVI => "Modified SAVI. Автоматическая коррекция влияния почвы без параметра L.",
-            VegetationIndex.ARVI => "Atmospherically Resistant Vegetation Index. Устойчив к атмосферным влияниям.",
+            VegetationIndex.NDVI => Resources.Desc_NDVI,
+            VegetationIndex.EVI => Resources.Desc_EVI,
+            VegetationIndex.EVI2 => Resources.Desc_EVI2,
+            VegetationIndex.SAVI => Resources.Desc_SAVI,
+            VegetationIndex.NDWI_Water => Resources.Desc_NDWI_W,
+            VegetationIndex.NDWI_Moisture => Resources.Desc_NDWI_M,
+            VegetationIndex.NDMI => Resources.Desc_NDMI,
+            VegetationIndex.GNDVI => Resources.Desc_GNDVI,
+            VegetationIndex.MSAVI => Resources.Desc_MSAVI,
+            VegetationIndex.ARVI => Resources.Desc_ARVI,
             _ => ""
         };
 

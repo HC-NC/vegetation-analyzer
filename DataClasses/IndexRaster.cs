@@ -92,7 +92,7 @@ namespace vegetation_analyzer.DataClasses
             var definition = IndexDefinition.GetRequiredBands(indexType);
             foreach (var role in definition)
                 if (!bandMapping.ContainsKey(role))
-                    throw new ArgumentException($"Не указан канал для {role}");
+                    throw new ArgumentException($"No band specified for {role}");
 
             int width = sourceRaster.Width;
             int height = sourceRaster.Height;
@@ -106,11 +106,11 @@ namespace vegetation_analyzer.DataClasses
             {
                 var band = sourceRaster.GetBand(kvp.Value);
                 if (band == null)
-                    throw new ArgumentException($"Канал с индексом {kvp.Value} не найден");
+                    throw new ArgumentException($"Band with index {kvp.Value} not found");
 
                 float[]? bandValues = band.Values;
                 if (bandValues == null)
-                    throw new ArgumentException($"Не удалось загрузить данные канала {band.Name}");
+                    throw new ArgumentException($"Failed to load channel data for {band.Name}");
 
                 bandDatas[kvp.Key] = bandValues;
                 bandIgnoreZero[kvp.Key] = band.IgnoreZero;

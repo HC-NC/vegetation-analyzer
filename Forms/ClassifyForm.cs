@@ -84,6 +84,7 @@ namespace vegetation_analyzer.Forms
                 }
                 row.Cells["colColor"].Value = colorSwatch;
                 row.Cells["colClassName"].Value = cls.Name;
+                row.Cells["colClassName"].ToolTipText = cls.Description;
                 row.Cells["colMin"].Value = cls.Min;
                 row.Cells["colMax"].Value = cls.Max;
                 row.Tag = cls;

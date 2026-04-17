@@ -181,7 +181,7 @@ namespace vegetation_analyzer.DataClasses
                 // ===== NDVI =====
                 new ClassificationScheme
                 {
-                    Name = "NDVI — Standard (NASA/USGS)",
+                    Name = "NDVI_Standard (NASA-USGS)",
                     IndexType = VegetationIndex.NDVI,
                     Region = "Standard",
                     Classes = new List<ClassificationClass>
@@ -197,7 +197,7 @@ namespace vegetation_analyzer.DataClasses
                 },
                 new ClassificationScheme
                 {
-                    Name = "NDVI — Temperate",
+                    Name = "NDVI_Temperate",
                     IndexType = VegetationIndex.NDVI,
                     Region = "Temperate",
                     Classes = new List<ClassificationClass>
@@ -212,7 +212,7 @@ namespace vegetation_analyzer.DataClasses
                 },
                 new ClassificationScheme
                 {
-                    Name = "NDVI — Tropical",
+                    Name = "NDVI_Tropical",
                     IndexType = VegetationIndex.NDVI,
                     Region = "Tropical",
                     Classes = new List<ClassificationClass>
@@ -227,7 +227,7 @@ namespace vegetation_analyzer.DataClasses
                 },
                 new ClassificationScheme
                 {
-                    Name = "NDVI — Boreal/Taiga",
+                    Name = "NDVI_Boreal_Taiga",
                     IndexType = VegetationIndex.NDVI,
                     Region = "Boreal",
                     Classes = new List<ClassificationClass>
@@ -242,7 +242,7 @@ namespace vegetation_analyzer.DataClasses
                 },
                 new ClassificationScheme
                 {
-                    Name = "NDVI — Arid/Semi-Arid",
+                    Name = "NDVI_Arid_Semi-Arid",
                     IndexType = VegetationIndex.NDVI,
                     Region = "Arid",
                     Classes = new List<ClassificationClass>
@@ -259,7 +259,7 @@ namespace vegetation_analyzer.DataClasses
                 // ===== SAVI =====
                 new ClassificationScheme
                 {
-                    Name = "SAVI — Standard",
+                    Name = "SAVI_Standard",
                     IndexType = VegetationIndex.SAVI,
                     Region = "Standard",
                     Classes = new List<ClassificationClass>
@@ -275,7 +275,7 @@ namespace vegetation_analyzer.DataClasses
                 // ===== EVI =====
                 new ClassificationScheme
                 {
-                    Name = "EVI — Standard",
+                    Name = "EVI_Standard",
                     IndexType = VegetationIndex.EVI,
                     Region = "Standard",
                     Classes = new List<ClassificationClass>
@@ -290,7 +290,7 @@ namespace vegetation_analyzer.DataClasses
                 // ===== NDWI Water =====
                 new ClassificationScheme
                 {
-                    Name = "NDWI — Water Bodies",
+                    Name = "NDWI_Water Bodies",
                     IndexType = VegetationIndex.NDWI_Water,
                     Region = "Standard",
                     Classes = new List<ClassificationClass>
@@ -304,7 +304,7 @@ namespace vegetation_analyzer.DataClasses
                 // ===== NDWI Moisture =====
                 new ClassificationScheme
                 {
-                    Name = "NDWI — Vegetation Moisture",
+                    Name = "NDWI_Vegetation Moisture",
                     IndexType = VegetationIndex.NDWI_Moisture,
                     Region = "Standard",
                     Classes = new List<ClassificationClass>
@@ -319,7 +319,7 @@ namespace vegetation_analyzer.DataClasses
                 // ===== NDMI =====
                 new ClassificationScheme
                 {
-                    Name = "NDMI — Standard",
+                    Name = "NDMI_Standard",
                     IndexType = VegetationIndex.NDMI,
                     Region = "Standard",
                     Classes = new List<ClassificationClass>
@@ -335,7 +335,7 @@ namespace vegetation_analyzer.DataClasses
                 // ===== GNDVI =====
                 new ClassificationScheme
                 {
-                    Name = "GNDVI — Standard",
+                    Name = "GNDVI_Standard",
                     IndexType = VegetationIndex.GNDVI,
                     Region = "Standard",
                     Classes = new List<ClassificationClass>

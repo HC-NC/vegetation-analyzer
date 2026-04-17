@@ -205,6 +205,106 @@ namespace vegetation_analyzer.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Atmospherically Resistant Vegetation Index.
+        ///Resistant to atmospheric influences..
+        /// </summary>
+        internal static string Desc_ARVI {
+            get {
+                return ResourceManager.GetString("Desc_ARVI", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Enhanced Vegetation Index.
+        ///An improved index with correction for atmospheric influences and soil background..
+        /// </summary>
+        internal static string Desc_EVI {
+            get {
+                return ResourceManager.GetString("Desc_EVI", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на EVI without a blue channel.
+        ///Requires only NIR and Red..
+        /// </summary>
+        internal static string Desc_EVI2 {
+            get {
+                return ResourceManager.GetString("Desc_EVI2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Green NDVI.
+        ///Uses the green channel instead of the red one and is more sensitive to chlorophyll..
+        /// </summary>
+        internal static string Desc_GNDVI {
+            get {
+                return ResourceManager.GetString("Desc_GNDVI", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Modified SAVI.
+        ///Automatic soil correction without the L parameter..
+        /// </summary>
+        internal static string Desc_MSAVI {
+            get {
+                return ResourceManager.GetString("Desc_MSAVI", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Normalized Difference Moisture Index.
+        ///An NDWI analogue for moisture assessment..
+        /// </summary>
+        internal static string Desc_NDMI {
+            get {
+                return ResourceManager.GetString("Desc_NDMI", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Normalized Difference Vegetation Index.
+        ///The most common index for assessing vegetation density..
+        /// </summary>
+        internal static string Desc_NDVI {
+            get {
+                return ResourceManager.GetString("Desc_NDVI", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на NDWI of vegetation moisture (Gao).
+        ///For assessing water content in vegetation..
+        /// </summary>
+        internal static string Desc_NDWI_M {
+            get {
+                return ResourceManager.GetString("Desc_NDWI_M", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Normalized Difference Water Index (McFeeters).
+        ///For identifying water bodies..
+        /// </summary>
+        internal static string Desc_NDWI_W {
+            get {
+                return ResourceManager.GetString("Desc_NDWI_W", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Soil Adjusted Vegetation Index.
+        ///Correction for the effect of soil brightness (L=0.5)..
+        /// </summary>
+        internal static string Desc_SAVI {
+            get {
+                return ResourceManager.GetString("Desc_SAVI", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Error.
         /// </summary>
         internal static string Error {
@@ -421,6 +521,15 @@ namespace vegetation_analyzer.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Moisture.
+        /// </summary>
+        internal static string Moisture {
+            get {
+                return ResourceManager.GetString("Moisture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Name.
         /// </summary>
         internal static string Name {
@@ -570,6 +679,15 @@ namespace vegetation_analyzer.Properties {
         internal static string Warning {
             get {
                 return ResourceManager.GetString("Warning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Water.
+        /// </summary>
+        internal static string Water {
+            get {
+                return ResourceManager.GetString("Water", resourceCulture);
             }
         }
         

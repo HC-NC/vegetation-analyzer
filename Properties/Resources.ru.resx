@@ -165,6 +165,46 @@
   <data name="DeleteRaster" xml:space="preserve">
     <value>Удалить растр "{0}"?</value>
   </data>
+  <data name="Desc_ARVI" xml:space="preserve">
+    <value>Атмосфероустойчивый индекс растительности.
+Устойчивость к атмосферным воздействиям.</value>
+  </data>
+  <data name="Desc_EVI" xml:space="preserve">
+    <value>Усовершенствованный индекс растительности.
+Улучшенный индекс с поправкой на атмосферные воздействия и фоновый уровень почвы.</value>
+  </data>
+  <data name="Desc_EVI2" xml:space="preserve">
+    <value>EVI без синего канала.
+Требует только NIR и Red.</value>
+  </data>
+  <data name="Desc_GNDVI" xml:space="preserve">
+    <value>Зеленый NDVI.
+Использует зеленый канал вместо красного и более чувствителен к хлорофиллу.</value>
+  </data>
+  <data name="Desc_MSAVI" xml:space="preserve">
+    <value>Модифицированная версия SAVI.
+Автоматическая коррекция грунта без параметра L.</value>
+  </data>
+  <data name="Desc_NDMI" xml:space="preserve">
+    <value>Нормализованный разностный индекс влажности.
+Аналог NDWI для оценки влажности.</value>
+  </data>
+  <data name="Desc_NDVI" xml:space="preserve">
+    <value>Нормализованный относительный индекс растительности.
+Самый распространённый индекс для оценки плотности растительности.</value>
+  </data>
+  <data name="Desc_NDWI_M" xml:space="preserve">
+    <value>Индекс NDWI влажности растительности (Гао).
+Для оценки содержания воды в растительности.</value>
+  </data>
+  <data name="Desc_NDWI_W" xml:space="preserve">
+    <value>Нормализованный разностный водный индекс (Макфитерс).
+Для идентификации водных объектов.</value>
+  </data>
+  <data name="Desc_SAVI" xml:space="preserve">
+    <value>Индекс растительности, скорректированный с учетом состава почвы.
+Коррекция с учетом влияния яркости почвы (L=0,5).</value>
+  </data>
   <data name="Error" xml:space="preserve">
     <value>Ошибка</value>
   </data>
@@ -237,6 +277,9 @@
   <data name="IndexToGTIFF" xml:space="preserve">
     <value>Экспорт индекса в GeoTIFF (Float32 или Byte)</value>
   </data>
+  <data name="Moisture" xml:space="preserve">
+    <value>Влага</value>
+  </data>
   <data name="Name" xml:space="preserve">
     <value>Имя</value>
   </data>
@@ -287,6 +330,9 @@
   </data>
   <data name="Warning" xml:space="preserve">
     <value>Внимание</value>
+  </data>
+  <data name="Water" xml:space="preserve">
+    <value>Вода</value>
   </data>
   <data name="Width" xml:space="preserve">
     <value>Ширина</value>

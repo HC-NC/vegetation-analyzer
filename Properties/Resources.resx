@@ -165,6 +165,46 @@
   <data name="DeleteRaster" xml:space="preserve">
     <value>Delete raster "{0}"?</value>
   </data>
+  <data name="Desc_ARVI" xml:space="preserve">
+    <value>Atmospherically Resistant Vegetation Index.
+Resistant to atmospheric influences.</value>
+  </data>
+  <data name="Desc_EVI" xml:space="preserve">
+    <value>Enhanced Vegetation Index.
+An improved index with correction for atmospheric influences and soil background.</value>
+  </data>
+  <data name="Desc_EVI2" xml:space="preserve">
+    <value>EVI without a blue channel.
+Requires only NIR and Red.</value>
+  </data>
+  <data name="Desc_GNDVI" xml:space="preserve">
+    <value>Green NDVI.
+Uses the green channel instead of the red one and is more sensitive to chlorophyll.</value>
+  </data>
+  <data name="Desc_MSAVI" xml:space="preserve">
+    <value>Modified SAVI.
+Automatic soil correction without the L parameter.</value>
+  </data>
+  <data name="Desc_NDMI" xml:space="preserve">
+    <value>Normalized Difference Moisture Index.
+An NDWI analogue for moisture assessment.</value>
+  </data>
+  <data name="Desc_NDVI" xml:space="preserve">
+    <value>Normalized Difference Vegetation Index.
+The most common index for assessing vegetation density.</value>
+  </data>
+  <data name="Desc_NDWI_M" xml:space="preserve">
+    <value>NDWI of vegetation moisture (Gao).
+For assessing water content in vegetation.</value>
+  </data>
+  <data name="Desc_NDWI_W" xml:space="preserve">
+    <value>Normalized Difference Water Index (McFeeters).
+For identifying water bodies.</value>
+  </data>
+  <data name="Desc_SAVI" xml:space="preserve">
+    <value>Soil Adjusted Vegetation Index.
+Correction for the effect of soil brightness (L=0.5).</value>
+  </data>
   <data name="Error" xml:space="preserve">
     <value>Error</value>
   </data>
@@ -237,6 +277,9 @@
   <data name="IndexToGTIFF" xml:space="preserve">
     <value>Export index to GeoTIFF (Float32 or Byte)</value>
   </data>
+  <data name="Moisture" xml:space="preserve">
+    <value>Moisture</value>
+  </data>
   <data name="Name" xml:space="preserve">
     <value>Name</value>
   </data>
@@ -287,6 +330,9 @@
   </data>
   <data name="Warning" xml:space="preserve">
     <value>Warning</value>
+  </data>
+  <data name="Water" xml:space="preserve">
+    <value>Water</value>
   </data>
   <data name="Width" xml:space="preserve">
     <value>Width</value>
