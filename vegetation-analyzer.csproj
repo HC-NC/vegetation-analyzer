@@ -16,7 +16,12 @@
 
 		<DateSuffix>$([System.DateTime]::Now.ToString('yyMMdd'))</DateSuffix>
 		<MinVerBuildMetadata>$(DateSuffix)</MinVerBuildMetadata>
+		<ApplicationIcon>Resources\favicon.ico</ApplicationIcon>
 	</PropertyGroup>
+
+	<ItemGroup>
+	  <Content Include="Resources\favicon.ico" />
+	</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="MaxRev.Gdal.Core" Version="3.12.3.496" />
