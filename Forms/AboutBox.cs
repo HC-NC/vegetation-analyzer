@@ -1,9 +1,10 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Reflection;
 using System.Windows.Forms;
+using vegetation_analyzer.Properties;
 
 namespace vegetation_analyzer.Forms
 {
@@ -12,12 +13,15 @@ namespace vegetation_analyzer.Forms
         public AboutBox()
         {
             InitializeComponent();
-            this.Text = String.Format("О программе {0}", AssemblyTitle);
+            this.Text = string.Format(Resources.About_Title, AssemblyTitle);
             this.labelProductName.Text = AssemblyProduct;
-            this.labelVersion.Text = String.Format("Версия {0}", AssemblyFullVersion);
+            this.labelVersion.Text = string.Format(Resources.About_Version, AssemblyFullVersion);
             this.labelCopyright.Text = AssemblyCopyright;
             this.labelCompanyName.Text = AssemblyCompany;
-            this.textBoxDescription.Text = AssemblyDescription;
+            this.textBoxDescription.Text = Resources.About_Description;
+
+            this.labelCopyright.Visible = false;
+            this.labelCompanyName.Visible = false;
         }
 
         #region Методы доступа к атрибутам сборки

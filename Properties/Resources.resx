@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -382,6 +382,15 @@ Correction for the effect of soil brightness (L=0.5).</value>
   </data>
   <data name="Water" xml:space="preserve">
     <value>Water</value>
+  </data>
+  <data name="About_Title" xml:space="preserve">
+    <value>About {0}</value>
+  </data>
+  <data name="About_Version" xml:space="preserve">
+    <value>Version {0}</value>
+  </data>
+  <data name="About_Description" xml:space="preserve">
+    <value>Desktop application for processing multispectral remote sensing data. Compute vegetation indices, classify rasters, and export results.</value>
   </data>
   <data name="Width" xml:space="preserve">
     <value>Width</value>

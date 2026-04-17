@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -333,6 +333,15 @@
   </data>
   <data name="Water" xml:space="preserve">
     <value>Вода</value>
+  </data>
+  <data name="About_Title" xml:space="preserve">
+    <value>О программе {0}</value>
+  </data>
+  <data name="About_Version" xml:space="preserve">
+    <value>Версия {0}</value>
+  </data>
+  <data name="About_Description" xml:space="preserve">
+    <value>Десктопное приложение для обработки мультиспектральных данных дистанционного зондирования. Вычисление вегетационных индексов, классификация растров и экспорт результатов.</value>
   </data>
   <data name="Width" xml:space="preserve">
     <value>Ширина</value>
